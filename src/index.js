@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux'
+import rootReducer from './redux/Reducers'
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ComponentSample } from 'pages';
+
+const store = createStore(rootReducer);
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  
+  <Provider store={store}>
+    <BrowserRouter>
+      <h1>Covid-19-Review</h1>
+      <Routes>
+        <Route path={"/sample"} element={ComponentSample}/>
+      </Routes>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
 
