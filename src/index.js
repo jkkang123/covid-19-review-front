@@ -15,10 +15,13 @@ ReactDOM.render(
   
   <Provider store={store}>
     <BrowserRouter>
+      {/*
       <h1>Covid-19-Review</h1>
       <Routes>
         <Route path={"/sample"} element={ComponentSample}/>
       </Routes>
+      */}
+      <App />
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
