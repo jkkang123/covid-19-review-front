@@ -4,24 +4,61 @@ import { TextField, Button } from '@material-ui/core';
 import Signin from 'pages/Signin/Signin';
 
 import * as React from 'react';
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
 import Dialog from '@mui/material/Dialog';
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
-import Slide from '@mui/material/Slide';
+import Typography from '@mui/material/Typography';
 
-// dialog Transition
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
+const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+    '& .MuiDialogContent-root': {
+      padding: theme.spacing(2),
+    },
+    '& .MuiDialogActions-root': {
+      padding: theme.spacing(1),
+    },
+}));
+  
+const BootstrapDialogTitle = (props) => {
+    const { children, onClose, ...other } = props;
+  
+    return (
+      <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
+        {children}
+        {onClose ? (
+          <IconButton
+            aria-label="close"
+            onClick={onClose}
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        ) : null}
+      </DialogTitle>
+    );
+};
+  
+BootstrapDialogTitle.propTypes = {
+    children: PropTypes.node,
+    onClose: PropTypes.func.isRequired,
+};
 
+// Login Component
 export default function Login() {
 
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [LoginOpen, setLoginOpen] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
 
     // 텍스트 인풋 이벤트 핸들러
     const onIdHandler = (e) => {
@@ -50,45 +87,28 @@ export default function Login() {
     }
 
     // login dialog 여닫기
-    const loginHandleClickOpen = () => {
-        setLoginOpen(true);
+    const handleClickOpen = () => {
+        setOpen(true);
     };
-    const loginHandleClose = () => {
-        setLoginOpen(false);
+    const handleClose = () => {
+        setOpen(false);
     };
 
     return (
         <div className="login">
-            <Button variant="outlined" onClick={loginHandleClickOpen}>
+            <Button variant="outlined" onClick={handleClickOpen}>
                 Log in
             </Button>
 
-            <Dialog
-                fullScreen
-                open={LoginOpen}
-                onClose={loginHandleClose}
-                TransitionComponent={Transition}
+            <BootstrapDialog
+                onClose={handleClose}
+                aria-labelledby="customized-dialog-title"
+                open={open}
             >
-                <AppBar sx={{ position: 'relative' }}>
-                    <Toolbar>
-                        <IconButton
-                        edge="start"
-                        color="inherit"
-                        onClick={loginHandleClose}
-                        aria-label="close"
-                        >
-                        <CloseIcon />
-                        </IconButton>
-                        <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                            로그인
-                        </Typography>
-                        <Button autoFocus color="inherit" onClick={loginHandleClose}>
-                            save
-                        </Button>
-                    </Toolbar>
-                </AppBar>
-            
-                <div className="inner">
+                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                    Log in
+                </BootstrapDialogTitle>
+                <DialogContent dividers>
                     {/* 로고 박스 */}
                     <div className="logo_box">
                         <img src="https://img.icons8.com/external-flatart-icons-solid-flatarticons/128/000000/external-covid-19-coronavirus-covid19-flatart-icons-solid-flatarticons.png"/>
@@ -161,8 +181,14 @@ export default function Login() {
                             로그인
                         </Button>
                     </form>
-                </div>
-            </Dialog>
+                </DialogContent>
+
+                <DialogActions>
+                    <Button autoFocus onClick={handleClose}>
+                        Save changes
+                    </Button>
+                </DialogActions>
+            </BootstrapDialog>
         </div>
     )
 }

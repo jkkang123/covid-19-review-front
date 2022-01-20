@@ -4,21 +4,84 @@ import Signin from 'pages/Signin/Signin';
 import Login from 'pages/Login/Login';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import PropTypes from 'prop-types';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import ListItemText from '@mui/material/ListItemText';
+import DialogTitle from '@mui/material/DialogTitle';
+import Dialog from '@mui/material/Dialog';
+import PersonIcon from '@mui/icons-material/Person';
+import AddIcon from '@mui/icons-material/Add';
+import Typography from '@mui/material/Typography';
+import { blue } from '@mui/material/colors';
+
+const emails = ['username@gmail.com', 'user02@gmail.com'];
+
+function SimpleDialog(props) {
+    const { onClose, selectedValue, open } = props;
+  
+    const handleClose = () => {
+      onClose(selectedValue);
+    };
+  
+    const handleListItemClick = (value) => {
+      onClose(value);
+    };
+  
+    return (
+      <Dialog onClose={handleClose} open={open}>
+        <DialogTitle>Set backup account</DialogTitle>
+        <List sx={{ pt: 0 }}>
+          {emails.map((email) => (
+            <ListItem button onClick={() => handleListItemClick(email)} key={email}>
+              <ListItemAvatar>
+                <Avatar sx={{ bgcolor: blue[100], color: blue[600] }}>
+                  <PersonIcon />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary={email} />
+            </ListItem>
+          ))}
+  
+          <ListItem autoFocus button onClick={() => handleListItemClick('addAccount')}>
+            <ListItemAvatar>
+              <Avatar>
+                <AddIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Add account" />
+          </ListItem>
+        </List>
+      </Dialog>
+    );
+}
+  
+SimpleDialog.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+    selectedValue: PropTypes.string.isRequired,
+};
 
 export default function Header() {
 
-    const [login, setLogin] = React.useState(false);
-    const [age, setAge] = React.useState('');
+    const [login, setLogin] = React.useState(true);
     
+    const [open, setOpen] = React.useState(false);
+    const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+
     // bell 클릭 이벤트 리스너
-    const handleChange = (event) => {
-        setAge(event.target.value);
+    const handleClickOpen = () => {
+        setOpen(true);
     };
- 
+
+    const handleClose = (value) => {
+        setOpen(false);
+        setSelectedValue(value);
+    };
+
     return (
         <div className="header">
             <div className="inner">
@@ -34,23 +97,15 @@ export default function Header() {
                     ? /* bell & profile */
                     <ul className="bell_profile_box"> 
                         <li>
-                            <FormControl fullWidth>
-                                <InputLabel id="demo-simple-select-label">
-                                    <NotificationsIcon id="demo-simple-select-label"/>
-                                </InputLabel>
-
-                                <Select
-                                labelId="demo-simple-select-label"
-                                id="demo-simple-select"
-                                value={age}
-                                label="Age"
-                                onChange={handleChange}
-                                >
-                                    <MenuItem value={10}>Ten</MenuItem>
-                                    <MenuItem value={20}>Twenty</MenuItem>
-                                    <MenuItem value={30}>Thirty</MenuItem>
-                                </Select>
-                            </FormControl>
+                            <Button variant="none" onClick={handleClickOpen}>
+                                <NotificationsIcon/>
+                            </Button>
+                            
+                            <SimpleDialog
+                                selectedValue={selectedValue}
+                                open={open}
+                                onClose={handleClose}
+                            />
                         </li>
                         <li>
                             <AccountCircleIcon />
