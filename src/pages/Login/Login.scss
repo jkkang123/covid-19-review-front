@@ -1,3 +1,47 @@
 .login{
-    
+
+    .inner{
+        height:100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap:30px;
+
+        /* 폼 */
+        form{
+
+            /* 인풋 박스 */
+            .input_box{
+                display: flex;
+                flex-direction: column;
+                gap:10px;
+            }
+
+            /* 소셜 로그인 박스( kakao & google ) */
+            .social_box{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap:50px;
+
+                li{
+                    width:40px;
+
+                    img{
+                        width:100%;
+                    }
+                }
+            }
+
+            /* 비밀번호 찾기 & Signin */
+            .findPass_signin{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap:10px;
+                color:#888;
+            }
+        }
+    }
 }

@@ -1,0 +1,36 @@
+.header{
+    background:#f8f8f8;
+
+    .inner{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding:10px 0;
+
+        /* 로고 박스 */
+        .logo_box{
+            width:50px;
+
+            img{
+                width:100%;
+            }
+        }
+        /* bell & profile */
+        .bell_profile_box{
+            display: flex;
+            align-items: center;
+            gap:20px;
+        }
+
+        /* signin & login */
+        .signin_login_box{
+            display: flex;
+            align-items: center;
+            gap:20px;
+
+            li{
+
+            }
+        }
+    }
+}
