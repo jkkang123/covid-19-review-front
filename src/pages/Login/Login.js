@@ -1,7 +1,7 @@
 import './Login.scss';
 import { useState } from 'react';
 import { TextField, Button } from '@material-ui/core';
-import Signin from 'pages/Signin/Signin';
+import Signin from 'pages/Signup/Signup';
 
 import * as React from 'react';
 import PropTypes from 'prop-types';

@@ -5,7 +5,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding:10px 0;
+        padding:0;
 
         /* 로고 박스 */
         .logo_box{
@@ -23,7 +23,7 @@
         }
 
         /* signin & login */
-        .signin_login_box{
+        .signup_login_box{
             display: flex;
             align-items: center;
             gap:20px;

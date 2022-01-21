@@ -1,9 +1,8 @@
 import './Header.scss'
 import * as React from 'react';
-import Signin from 'pages/Signin/Signin';
+import Signup from 'pages/Signup/Signup';
 import Login from 'pages/Login/Login';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PropTypes from 'prop-types';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
@@ -17,6 +16,8 @@ import PersonIcon from '@mui/icons-material/Person';
 import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
+import Profile from 'Molecules/Profile';
+import { useState } from 'react';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -68,7 +69,6 @@ SimpleDialog.propTypes = {
 export default function Header() {
 
     const [login, setLogin] = React.useState(true);
-    
     const [open, setOpen] = React.useState(false);
     const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
@@ -76,7 +76,6 @@ export default function Header() {
     const handleClickOpen = () => {
         setOpen(true);
     };
-
     const handleClose = (value) => {
         setOpen(false);
         setSelectedValue(value);
@@ -100,7 +99,7 @@ export default function Header() {
                             <Button variant="none" onClick={handleClickOpen}>
                                 <NotificationsIcon/>
                             </Button>
-                            
+
                             <SimpleDialog
                                 selectedValue={selectedValue}
                                 open={open}
@@ -108,14 +107,15 @@ export default function Header() {
                             />
                         </li>
                         <li>
-                            <AccountCircleIcon />
+                            {/* 프로필 모듈 실험 */}
+                            <Profile nickName={ false } big={ true }/>
                         </li>
                     </ul>
 
                     : /* signin & login */
-                    <ul className="signin_login_box">
+                    <ul className="signup_login_box">
                         <li>
-                            <Signin />
+                            <Signup />
                         </li>
                         <li>
                             <Login />
