@@ -70,7 +70,7 @@ export default function Signup() {
     const fileInput = useRef(null);
     const [open, setOpen] = React.useState(false);
     const [signup, setSignup] = useState(false);
-    const [buttonState, setButtonState] = useState(true);
+    const [buttonState, setButtonState] = useState(false);
 
     // 이미지 인풋 이벤트 핸들러
     const onImageHandler = (e) => {
@@ -124,7 +124,7 @@ export default function Signup() {
 
     // 유효성 검사
     const nameValidation = (newValue) => {
-        let check = /[^가-힣a-zA-Z]/g; 
+        let check = /^[가-힣a-zA-Z]{1,16}$/; 
         if (!check.test(newValue)) {
             setNameValid(true);
         } else{
@@ -132,7 +132,7 @@ export default function Signup() {
         }
     }
     const nickNameValidation = (newValue) => {
-        let check = /[^가-힣a-zA-Z]/g; 
+        let check = /^[가-힣a-zA-Z]{1,16}$/; 
         if (!check.test(newValue)) {
             setNickNameValid(true);
         } else{
@@ -172,9 +172,9 @@ export default function Signup() {
     };
 
     const buttonDisabled = () => {
-        if( !nameValid && !nickNameValid && !idValid && !passwordValid && !passConfirmValid ){
+        if (open &&  !nameValid && !nickNameValid && !idValid && !passwordValid && !passConfirmValid && name && nickName && id && password && passConfirm ){
             setButtonState(false);
-        } else{
+        } else {
             setButtonState(true);
         }
     }
@@ -258,7 +258,7 @@ export default function Signup() {
                                         onChange={ onNameHandler } 
                                         required
                                         error={ nameValid }  
-                                        helperText={ nameValid ? "특수기호는 입력 하실 수 없습니다." : "" } 
+                                        helperText={ nameValid ? "이름은 한글과 영문으로 이루어져야 합니다.(최대 16자까지 입력가능)" : "" } 
                                     />
 
                                     {/* 닉네임 인풋 */}
@@ -271,7 +271,7 @@ export default function Signup() {
                                         onChange={ onNickNameHandler } 
                                         required
                                         error={ nickNameValid }  
-                                        helperText={ nickNameValid ? "특수기호는 입력 하실 수 없습니다.(최대 16자까지 입력가능)" : "" } 
+                                        helperText={ nickNameValid ? "닉네임은 한글과 영문으로 이루어져야 합니다.(최대 16자까지 입력가능)" : "" } 
                                     />
 
                                     {/* 아이디( 이메일 주소 ) 인풋 */}
@@ -284,7 +284,7 @@ export default function Signup() {
                                         onChange={ onIdHandler } 
                                         required
                                         error={ idValid }  
-                                        helperText={ idValid ? "이메일 주소를 입력하세요." : "" } 
+                                        helperText={ idValid ? "이메일 형식을 정확히 입력하세요.(user@email.com)" : "" } 
                                     />
 
                                     {/* 비밀번호 인풋 */}
