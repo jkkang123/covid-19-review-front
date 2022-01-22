@@ -5,8 +5,6 @@ import Login from './pages/Login/Login.js';
 import Header from './pages/Header/Header.js';
 import Profile from 'Molecules/Profile';
 import Dialogs from 'Molecules/Dialogs';
-import { useState } from 'react';
-import CommomMenu from 'components/common/commom-menu.js';
 
 function App() {
 
@@ -32,10 +30,6 @@ function App() {
         <Route 
           path="/login" 
           element = {<Login />} 
-        />
-        <Route
-          path="/menu"
-          element = {<CommomMenu/>}
         />
       </Routes>
     </div>

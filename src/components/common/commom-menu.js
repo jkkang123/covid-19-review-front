@@ -1,33 +1,27 @@
 import React, {useState, useEffect} from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { Button } from '@material-ui/core';
 
-const CommomMenu = ({ openMenu }) => {
-    const [anchorEl, setAnchorEl] = useState(null)
-    const open = Boolean(anchorEl);
-    const handleClose = () => {
-        setOpenState(false);
-    };
-
-    useEffect(() => {
-        setOpenState(openMenu);
-    }, [openMenu])
-
+const CommomMenu = ({openState, anchorEl, handleClick, handleClose, AnchorNode }) => {
     return (
-        <>
-            
+            <>  
+            {
+                AnchorNode ? 
+                AnchorNode 
+                : <Button onClick={handleClick}>메뉴</Button>
+            }
             <Menu 
+                anchorEl={anchorEl}
                 open={openState}
                 onClose={handleClose}
+                onClick={handleClose}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
         </>
-
-        
-
     )
 }
 
