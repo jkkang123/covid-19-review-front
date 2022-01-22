@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import CommomMenu from '../components/common/commom-menu';
 
 let Box = styled.div`
     display:flex;
@@ -8,12 +9,25 @@ let Box = styled.div`
     gap:10px;
 `;
 
+
 export default function Profile({ nickName, big }) {
 
     const [image, setImage] = useState(true);
+    const [openState, setOpenState] = useState(false)
+    const handleOpen = () => {
+        setOpenState(true)
+    }
 
     return (
-        <Box>
+        <>
+
+            <CommomMenu
+                openMenu={openState}
+            />
+        
+        <Box
+        onClick={handleOpen}
+        >
             {/* 프로필 사진 */}
             { 
                 image
@@ -53,9 +67,11 @@ export default function Profile({ nickName, big }) {
                 { nickName ? '닉네임' : null }
             </p>
         </Box>
+        </>
+        
     )
 }
 
 // 다음을 복붙하여 프로필 모듈을 사용합니다.
-// <Profile nickName={ false } big={ true }/> --> 닉네임 없음 / 큰 사진
-// <Profile nickName={ true } big={ false }/> --> 닉네임 있음 / 작은 사진
+// <Profile nickName={ false } big={ true }/> --> 닉네임 없음 / big 버전
+// <Profile nickName={ true } big={ false }/> --> 닉네임 있음 / small 버전
