@@ -1,5 +1,5 @@
 import './Signup.scss';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { TextField, Button, FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 
@@ -60,11 +60,17 @@ export default function Signup() {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [passConfirm, setPassConfirm] = useState("");
+    const [nameValid, setNameValid] = useState("");
+    const [nickNameValid, setNickNameValid] = useState("");
+    const [idValid, setIdValid] = useState("");
+    const [passwordValid, setPasswordValid] = useState("");
+    const [passConfirmValid, setPassConfirmValid] = useState("");
     const [image, setImage] = useState("");
     const [files, setFile] = useState([]);  
     const fileInput = useRef(null);
     const [open, setOpen] = React.useState(false);
     const [signup, setSignup] = useState(false);
+    const [buttonState, setButtonState] = useState(true);
 
     // 이미지 인풋 이벤트 핸들러
     const onImageHandler = (e) => {
@@ -92,59 +98,74 @@ export default function Signup() {
     // 텍스트 인풋 이벤트 핸들러
     const onNameHandler = (e) => {
         setName(e.target.value);
+        nameValidation();
+        buttonDisabled();
     }
     const onNickNameHandler = (e) => {
         setNickName(e.target.value);
+        nickNameValidation();
+        buttonDisabled();
     }
     const onIdHandler = (e) => {
         setId(e.target.value);
+        idValidation();
+        buttonDisabled();
     }
     const onPassHandler = (e) => {
         setPassword(e.target.value);
+        passValidation();
+        buttonDisabled();
     }
     const onPassConfirmHandler = (e) => {
         setPassConfirm(e.target.value);
+        passConfirmValidation();
+        buttonDisabled();
     }
 
     // 유효성 검사
     const nameValidation = () => {
         let check = /[^가-힣a-zA-Z]/g; 
         if( name === '' ){
-            return false;
-        } else{
-            return (check.test(name));
+            setNameValid(false);
+        } 
+
+        if (check.test(name)) {
+            setNameValid(true);
         }
     }
     const nickNameValidation = () => {
         let check = /[^가-힣a-zA-Z]/g; 
         if( nickName === '' ){
-            return false;
-        } else{
-            return (check.test(nickName));
+            setNickNameValid(false);
+        } 
+        if (check.test(nickName)) {
+            setNickNameValid(true);
         }
     }
     const idValidation = () => {
         let check = /^(?=[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$).{1,80}$/; // 이메일
         if( id === '' ){
-            return false;
-        } else{
-            return !(check.test(id));
+            setIdValid(false);
+        } 
+        if (!check.test(id)) {
+            setIdValid(true);
         }
     }
     const passValidation = () => {
         let check = /^(?:(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])).{8,16}$/; 
         if( password === '' ){
-            return false;
-        } else{
-            return !(check.test(password));
+            setPasswordValid(false);
+        } 
+        if (!check.test(password)) {
+            setPasswordValid(true);
         }
     }
     const passConfirmValidation = () => {
         if( passConfirm === '' ){
-            return false;
-        }
-        if( password !== passConfirm ){
-            return true;
+            setPassConfirmValid(false);
+        } 
+        if (password !== passConfirm) {
+            setPassConfirmValid(true);
         }
     }
     
@@ -156,6 +177,22 @@ export default function Signup() {
         setOpen(false);
     };
 
+    const buttonDisabled = () => {
+        if( !nameValid && !nickNameValid && !idValid && !passwordValid && !passConfirmValid ){
+            setButtonState(true);
+        } else{
+            setButtonState(false);
+        }
+    }
+
+    console.log(nameValidation());
+    console.log(nickNameValidation());
+    /*
+    console.log(idValidation);
+    console.log(passValidation);
+    console.log(passConfirmValidation);
+    */
+    
     return (
         <div className="signin">
             <Button variant="outlined" onClick={handleClickOpen}>
@@ -230,8 +267,8 @@ export default function Signup() {
                                         value={ name } 
                                         onChange={ onNameHandler } 
                                         required
-                                        error={ nameValidation() }  
-                                        helperText={ nameValidation() ? "특수기호는 입력 하실 수 없습니다." : "" } 
+                                        error={ nameValid }  
+                                        helperText={ nameValid ? "특수기호는 입력 하실 수 없습니다." : "" } 
                                     />
 
                                     {/* 닉네임 인풋 */}
@@ -243,8 +280,8 @@ export default function Signup() {
                                         value={ nickName } 
                                         onChange={ onNickNameHandler } 
                                         required
-                                        error={ nickNameValidation() }  
-                                        helperText={ nickNameValidation() ? "특수기호는 입력 하실 수 없습니다.(최대 16자까지 입력가능)" : "" } 
+                                        error={ nickNameValid }  
+                                        helperText={ nickNameValid ? "특수기호는 입력 하실 수 없습니다.(최대 16자까지 입력가능)" : "" } 
                                     />
 
                                     {/* 아이디( 이메일 주소 ) 인풋 */}
@@ -256,8 +293,8 @@ export default function Signup() {
                                         value={ id } 
                                         onChange={ onIdHandler } 
                                         required
-                                        error={ idValidation() }  
-                                        helperText={ idValidation() ? "이메일 주소를 입력하세요." : "" } 
+                                        error={ idValid }  
+                                        helperText={ idValid ? "이메일 주소를 입력하세요." : "" } 
                                     />
 
                                     {/* 비밀번호 인풋 */}
@@ -269,8 +306,8 @@ export default function Signup() {
                                         value={ password } 
                                         onChange={ onPassHandler } 
                                         required
-                                        error={ passValidation() } 
-                                        helperText={ passValidation() ? "최소 9자 이상 최대 16자까지 입력 • 특수문자 1개 이상 대문자 1개 이상 필수 입력" : "" } 
+                                        error={ passwordValid } 
+                                        helperText={ passwordValid ? "최소 9자 이상 최대 16자까지 입력 • 특수문자 1개 이상 대문자 1개 이상 필수 입력" : "" } 
                                     />
 
                                     {/* 비밀번호 확인 인풋 */}
@@ -282,8 +319,8 @@ export default function Signup() {
                                         value={ passConfirm } 
                                         onChange={ onPassConfirmHandler } 
                                         required
-                                        error={ passConfirmValidation() }  
-                                        helperText={ passConfirmValidation() ? "비밀번호와 다릅니다." : "" } 
+                                        error={ passConfirmValid }  
+                                        helperText={ passConfirmValid ? "비밀번호와 다릅니다." : "" } 
                                     />
 
                                     {/* 백신 정보 인증 버튼 */}
@@ -309,10 +346,10 @@ export default function Signup() {
                                 variant="contained"
                                 color="primary"
                                 size="large"
+                                disabled={ buttonState }
                                 style={{
                                     marginTop:50,
                                 }}
-                                onClick={() => { setSignup(true) }}
                             >
                                 회원가입
                             </Button>
