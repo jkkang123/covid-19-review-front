@@ -60,11 +60,11 @@ export default function Signup() {
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
     const [passConfirm, setPassConfirm] = useState("");
-    const [nameValid, setNameValid] = useState("");
-    const [nickNameValid, setNickNameValid] = useState("");
-    const [idValid, setIdValid] = useState("");
-    const [passwordValid, setPasswordValid] = useState("");
-    const [passConfirmValid, setPassConfirmValid] = useState("");
+    const [nameValid, setNameValid] = useState(false);
+    const [nickNameValid, setNickNameValid] = useState(false);
+    const [idValid, setIdValid] = useState(false);
+    const [passwordValid, setPasswordValid] = useState(false);
+    const [passConfirmValid, setPassConfirmValid] = useState(false);
     const [image, setImage] = useState("");
     const [files, setFile] = useState([]);  
     const fileInput = useRef(null);
@@ -97,75 +97,69 @@ export default function Signup() {
 
     // 텍스트 인풋 이벤트 핸들러
     const onNameHandler = (e) => {
-        setName(e.target.value);
-        nameValidation();
-        buttonDisabled();
+        const newValue = e.target.value
+        setName(newValue);
+        nameValidation(newValue);
     }
     const onNickNameHandler = (e) => {
-        setNickName(e.target.value);
-        nickNameValidation();
-        buttonDisabled();
+        const newValue = e.target.value
+        setNickName(newValue);
+        nickNameValidation(newValue);
     }
     const onIdHandler = (e) => {
-        setId(e.target.value);
-        idValidation();
-        buttonDisabled();
+        const newValue = e.target.value
+        setId(newValue);
+        idValidation(newValue);
     }
     const onPassHandler = (e) => {
-        setPassword(e.target.value);
-        passValidation();
-        buttonDisabled();
+        const newValue = e.target.value
+        setPassword(newValue);
+        passValidation(newValue);
     }
     const onPassConfirmHandler = (e) => {
+        const newValue = e.target.value
         setPassConfirm(e.target.value);
-        passConfirmValidation();
-        buttonDisabled();
+        passConfirmValidation(newValue);
     }
 
     // 유효성 검사
-    const nameValidation = () => {
+    const nameValidation = (newValue) => {
         let check = /[^가-힣a-zA-Z]/g; 
-        if( name === '' ){
-            setNameValid(false);
-        } 
-
-        if (check.test(name)) {
+        if (!check.test(newValue)) {
             setNameValid(true);
+        } else{
+            setNameValid(false);
         }
     }
-    const nickNameValidation = () => {
+    const nickNameValidation = (newValue) => {
         let check = /[^가-힣a-zA-Z]/g; 
-        if( nickName === '' ){
-            setNickNameValid(false);
-        } 
-        if (check.test(nickName)) {
+        if (!check.test(newValue)) {
             setNickNameValid(true);
+        } else{
+            setNickNameValid(false);
         }
     }
-    const idValidation = () => {
+    const idValidation = (newValue) => {
         let check = /^(?=[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$).{1,80}$/; // 이메일
-        if( id === '' ){
-            setIdValid(false);
-        } 
-        if (!check.test(id)) {
+        if (!check.test(newValue)) {
             setIdValid(true);
+        } else{
+            setIdValid(false);
         }
     }
-    const passValidation = () => {
+    const passValidation = (newValue) => {
         let check = /^(?:(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])).{8,16}$/; 
-        if( password === '' ){
-            setPasswordValid(false);
-        } 
-        if (!check.test(password)) {
+        if (!check.test(newValue)) {
             setPasswordValid(true);
+        } else{
+            setPasswordValid(false);
         }
     }
-    const passConfirmValidation = () => {
-        if( passConfirm === '' ){
-            setPassConfirmValid(false);
-        } 
-        if (password !== passConfirm) {
+    const passConfirmValidation = (newValue) => {
+        if (password !== newValue) {
             setPassConfirmValid(true);
+        } else{
+            setPassConfirmValid(false);
         }
     }
     
@@ -179,19 +173,15 @@ export default function Signup() {
 
     const buttonDisabled = () => {
         if( !nameValid && !nickNameValid && !idValid && !passwordValid && !passConfirmValid ){
-            setButtonState(true);
-        } else{
             setButtonState(false);
+        } else{
+            setButtonState(true);
         }
     }
 
-    console.log(nameValidation());
-    console.log(nickNameValidation());
-    /*
-    console.log(idValidation);
-    console.log(passValidation);
-    console.log(passConfirmValidation);
-    */
+    useEffect(()=> {
+        buttonDisabled()
+    },[nameValid,nickNameValid,idValid,passwordValid,passConfirmValid])
     
     return (
         <div className="signin">
