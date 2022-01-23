@@ -5,6 +5,7 @@ import Login from './pages/Login/Login.js';
 import Header from './pages/Header/Header.js';
 import Profile from 'Molecules/Profile';
 import Dialogs from 'Molecules/Dialogs';
+import DoughnutChart from 'Molecules/Chart';
 
 function App() {
 
@@ -30,6 +31,10 @@ function App() {
         <Route 
           path="/login" 
           element = {<Login />} 
+        />
+        <Route 
+          path="/chart"
+          element= {<DoughnutChart/>}
         />
       </Routes>
     </div>
