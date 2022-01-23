@@ -13,6 +13,7 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import GoogleLogin from 'react-google-login';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -52,6 +53,9 @@ BootstrapDialogTitle.propTypes = {
     onClose: PropTypes.func.isRequired,
 };
 
+const clientId = "583476879577-qlv0nlc974o6t99d94c6k5q3dp0qqgq8.apps.googleusercontent.com";
+const clientSecret = "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";
+
 // Login Component
 export default function Login() {
 
@@ -59,6 +63,23 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [LoginOpen, setLoginOpen] = React.useState(false);
     const [open, setOpen] = React.useState(false);
+
+    const onSuccess = async(response) => {
+    	console.log(response);
+    
+        const { googleId, profileObj : { email, name } } = response;
+        
+        // await onSocial({
+        //     socialId : googleId,
+        //     socialType : 'google',
+        //     email,
+        //     nickname : name
+        // });
+    }
+
+    const onFailure = (error) => {
+        console.log(error);
+    }
 
     // 텍스트 인풋 이벤트 핸들러
     const onIdHandler = (e) => {
@@ -180,6 +201,12 @@ export default function Login() {
                         >
                             로그인
                         </Button>
+
+                        <GoogleLogin
+                            clientId={clientId}
+                            responseType={"id_token"}
+                            onSuccess={onSuccess}
+                            onFailure={onFailure}/>
                     </form>
                 </DialogContent>
 
@@ -189,6 +216,7 @@ export default function Login() {
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
+
         </div>
     )
 }
