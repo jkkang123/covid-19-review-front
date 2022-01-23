@@ -70,7 +70,7 @@ export default function Signup() {
     const fileInput = useRef(null);
     const [open, setOpen] = React.useState(false);
     const [signup, setSignup] = useState(false);
-    const [buttonState, setButtonState] = useState(false);
+    const [buttonState, setButtonState] = useState(true);
 
     // 이미지 인풋 이벤트 핸들러
     const onImageHandler = (e) => {
@@ -99,7 +99,7 @@ export default function Signup() {
     const onNameHandler = (e) => {
         const newValue = e.target.value
         setName(newValue);
-        nameValidation(newValue);
+        nameValidation(name);
     }
     const onNickNameHandler = (e) => {
         const newValue = e.target.value
@@ -125,41 +125,41 @@ export default function Signup() {
     // 유효성 검사
     const nameValidation = (newValue) => {
         let check = /^[가-힣a-zA-Z]{1,16}$/; 
-        if (!check.test(newValue)) {
-            setNameValid(true);
-        } else{
+        if (check.test(newValue)) {
             setNameValid(false);
+        } else{
+            setNameValid(true);
         }
     }
     const nickNameValidation = (newValue) => {
         let check = /^[가-힣a-zA-Z]{1,16}$/; 
-        if (!check.test(newValue)) {
-            setNickNameValid(true);
-        } else{
+        if (check.test(newValue)) {
             setNickNameValid(false);
+        } else{
+            setNickNameValid(true);
         }
     }
     const idValidation = (newValue) => {
         let check = /^(?=[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,3}$).{1,80}$/; // 이메일
-        if (!check.test(newValue)) {
-            setIdValid(true);
-        } else{
+        if (check.test(newValue)) {
             setIdValid(false);
+        } else{
+            setIdValid(true);
         }
     }
     const passValidation = (newValue) => {
         let check = /^(?:(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])).{8,16}$/; 
-        if (!check.test(newValue)) {
-            setPasswordValid(true);
-        } else{
+        if (check.test(newValue)) {
             setPasswordValid(false);
+        } else{
+            setPasswordValid(true);
         }
     }
     const passConfirmValidation = (newValue) => {
-        if (password !== newValue) {
-            setPassConfirmValid(true);
-        } else{
+        if (password === newValue) {
             setPassConfirmValid(false);
+        } else{
+            setPassConfirmValid(true);
         }
     }
     
@@ -172,7 +172,7 @@ export default function Signup() {
     };
 
     const buttonDisabled = () => {
-        if (open &&  !nameValid && !nickNameValid && !idValid && !passwordValid && !passConfirmValid && name && nickName && id && password && passConfirm ){
+        if( !nameValid && !nickNameValid && !idValid && !passwordValid && !passConfirmValid && name && nickName && id && password && passConfirm ){
             setButtonState(false);
         } else {
             setButtonState(true);
