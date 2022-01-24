@@ -1,12 +1,55 @@
+import { useState, useEffect } from 'react';
 import React from 'react'
 import { Doughnut } from 'react-chartjs-2'
 import 'chart.js/auto';
 
 const DoughnutChart = () => {
 
-    const chartData1 = [20, 80];
-    const chartData2 = [30, 80];
-    const chartData3 = [50, 80];
+    {/* 백신 누적 접종자 수 */}
+    const[totalFirstCnt, setTotalFirstCnt] = useState('');
+    const[totalSecondCnt, setTotalSecondCnt] = useState('');
+    const[totalThirdCnt, setTotalThirdCnt] = useState('');
+
+    {/* 백신 신규 접종자 수 */}
+    const[firstCnt, setFirstCnt] = useState('');
+    const[secondCnt, setSecondCnt] = useState('');
+    const[thirdCnt, setThirdCnt] = useState('');
+
+    {/* 백신 접종자 현황 api */}
+    const getData = async() => {
+        {/* 오늘의 연도, 월, 일 */}
+        let today = new Date();     
+        let year = today.getFullYear();   
+        let month = today.getMonth() + 1;  // 월
+        let date = today.getDate();  // 날짜
+        let format = year+"-"+(("00"+month.toString()).slice(-2))+"-"+(("00"+date.toString()).slice(-2)); // 2022-01-24 이런식
+
+        const response = await fetch(
+          `https://api.odcloud.kr/api/15077756/v1/vaccine-stat?page=1&perPage=10&returnType=JSON&serviceKey=ncMhlOzEE8Q%2FpSEqd1XItWoN%2FBsvypkNC1vzjYNRRGcABDkRcAXcQd9wOxSfX2G6%2BPULf5YtcyON%2FFzAZrfdpg%3D%3D&cond%5BbaseDate::GT%5D=${format}`
+        );
+        const json = await response.json();
+
+        setTotalFirstCnt(json.data[0].totalFirstCnt);
+        setTotalSecondCnt(json.data[0].totalSecondCnt);
+        setTotalThirdCnt(json.data[0].totalThirdCnt);
+
+        setFirstCnt(json.data[0].firstCnt);
+        setSecondCnt(json.data[0].secondCnt);
+        setThirdCnt(json.data[0].thirdCnt);
+    }
+
+    useEffect(() => {
+        getData();
+    }, [])
+
+    {/* 누적 접종자 퍼센테이지 */}
+    const totalFirstCntPercent = Math.round((totalFirstCnt / 51780000) * 100);
+    const totalSecondCntPercent = Math.round((totalSecondCnt / 51780000) * 100);
+    const totalThirdCntPercent = Math.round((totalThirdCnt / 51780000) * 100);
+
+    const chartData1 = [totalFirstCntPercent, 100 - totalFirstCntPercent];
+    const chartData2 = [totalSecondCntPercent, 100 - totalSecondCntPercent];
+    const chartData3 = [totalThirdCntPercent, 100 - totalThirdCntPercent];
 
     // const showData = chartData1[0] + "%";
 
@@ -82,9 +125,24 @@ const DoughnutChart = () => {
 
     return (
         <div>
-          <Doughnut data={data1} options={options} height={250} />
-          <Doughnut data={data2} options={options} height={250} />
-          <Doughnut data={data3} options={options} height={250} />
+          <div>
+            <h1>국내 1차 접종 현황</h1>
+            <Doughnut data={data1} options={options} height={250} />
+            <p>누적 {totalFirstCnt}</p>
+            <p>신규 {firstCnt}</p>
+          </div>
+          <div>
+            <h1>국내 2차 접종 현황</h1>
+            <Doughnut data={data2} options={options} height={250} />
+            <p>누적 {totalSecondCnt}</p>
+            <p>신규 {secondCnt}</p>
+          </div>
+          <div>
+            <h1>국내 3차 접종 현황</h1>
+            <Doughnut data={data3} options={options} height={250} />
+            <p>누적 {totalThirdCnt}</p>
+            <p>신규 {thirdCnt}</p>
+          </div>
         </div>
     )
 }

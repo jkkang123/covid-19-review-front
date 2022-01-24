@@ -30,7 +30,7 @@ function App() {
         />
         <Route 
           path="/chart"
-          element= {<BarLineChart/>}
+          element= {<DoughnutChart/>}
         />
       </Routes>
     </div>
