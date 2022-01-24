@@ -7,6 +7,7 @@ import Header from './pages/Header/Header.js';
 import Profile from 'Molecules/Profile';
 import Dialogs from 'Molecules/Dialogs';
 import DoughnutChart from 'Molecules/DoughnutChart';
+import BarLineChart from 'Molecules/BarLineChart';
 
 function App() {
 
@@ -29,7 +30,7 @@ function App() {
         />
         <Route 
           path="/chart"
-          element= {<DoughnutChart/>}
+          element= {<BarLineChart/>}
         />
       </Routes>
     </div>
