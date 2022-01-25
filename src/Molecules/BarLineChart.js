@@ -81,7 +81,10 @@ const BarLineChart = () => {
     };
 
     return(
-        <Bar data={data} options={options}/>
+        <div>
+          <h1>국내 신규 확진자</h1>
+          <Bar data={data} options={options}/>
+        </div>
     )
 
 }

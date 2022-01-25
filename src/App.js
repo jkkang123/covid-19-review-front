@@ -8,6 +8,8 @@ import Profile from 'Molecules/Profile';
 import Dialogs from 'Molecules/Dialogs';
 import DoughnutChart from 'Molecules/DoughnutChart';
 import BarLineChart from 'Molecules/BarLineChart';
+import SelectBox from 'components/common/common-select';
+import Drawer from 'components/common/Drawer';
 
 function App() {
 
@@ -15,6 +17,11 @@ function App() {
     <div className="App">
       {/* 헤더 */}
       <Header />
+
+      <SelectBox vaccine={true}/>
+      <SelectBox vaccine={false}/>
+
+      <Drawer />
 
       <Routes>
         {/* 회원가입 페이지 */}
