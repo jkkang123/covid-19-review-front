@@ -17,12 +17,9 @@ const DoughnutChart = () => {
 
     {/* 백신 접종자 현황 api */}
     const getData = async() => {
-        {/* 오늘의 연도, 월, 일 */}
-        let today = new Date();     
-        let year = today.getFullYear();   
-        let month = today.getMonth() + 1;  // 월
-        let date = today.getDate();  // 날짜
-        let format = year+"-"+(("00"+month.toString()).slice(-2))+"-"+(("00"+date.toString()).slice(-2)); // 2022-01-24 이런식
+        const moment = require('moment');
+        const today = moment();
+        const format = today.format('YYYY-MM-DD');
 
         const response = await fetch(
           `https://api.odcloud.kr/api/15077756/v1/vaccine-stat?page=1&perPage=10&returnType=JSON&serviceKey=ncMhlOzEE8Q%2FpSEqd1XItWoN%2FBsvypkNC1vzjYNRRGcABDkRcAXcQd9wOxSfX2G6%2BPULf5YtcyON%2FFzAZrfdpg%3D%3D&cond%5BbaseDate::GT%5D=${format}`
@@ -46,7 +43,7 @@ const DoughnutChart = () => {
     const totalFirstCntPercent = Math.round((totalFirstCnt / 51780000) * 100);
     const totalSecondCntPercent = Math.round((totalSecondCnt / 51780000) * 100);
     const totalThirdCntPercent = Math.round((totalThirdCnt / 51780000) * 100);
-
+    
     const chartData1 = [totalFirstCntPercent, 100 - totalFirstCntPercent];
     const chartData2 = [totalSecondCntPercent, 100 - totalSecondCntPercent];
     const chartData3 = [totalThirdCntPercent, 100 - totalThirdCntPercent];
@@ -131,6 +128,7 @@ const DoughnutChart = () => {
             <p>누적 {totalFirstCnt}</p>
             <p>신규 {firstCnt}</p>
           </div>
+
           <div>
             <h1>국내 2차 접종 현황</h1>
             <Doughnut data={data2} options={options} height={250} />
@@ -138,6 +136,7 @@ const DoughnutChart = () => {
             <p>신규 {secondCnt}</p>
           </div>
           <div>
+
             <h1>국내 3차 접종 현황</h1>
             <Doughnut data={data3} options={options} height={250} />
             <p>누적 {totalThirdCnt}</p>

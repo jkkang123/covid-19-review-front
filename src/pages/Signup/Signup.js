@@ -184,7 +184,7 @@ export default function Signup() {
     },[nameValid,nickNameValid,idValid,passwordValid,passConfirmValid])
     
     return (
-        <div className="signin">
+        <form className="signin">
             <Button variant="outlined" onClick={handleClickOpen}>
                 Sign up
             </Button>
@@ -208,151 +208,143 @@ export default function Signup() {
 
                     : /* 회원가입 인풋창 */
                     <DialogContent dividers>
-                        {/* 폼 */}
-                        <form>
-                            <div className="profile_input_wrap">
-                                {/* 프로필 박스 */}
-                                <div className="profile_box">
-                                    {/* 이미지 박스 */}
-                                    <div className="img_box">
-                                        <img 
-                                            src={ 
-                                                image === ''
-                                                ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
-                                                : image
-                                            } 
-                                            onClick={ () => fileInput.current.click() }
-                                            alt="프로필" 
-                                        />
-                                    </div>
-                                    
-                                    {/* 프로필 인풋 */}
-                                    <input 
-                                        type='file' 
-                                        style={{display:'none'}}
-                                        accept='image/jpg,impge/png,image/jpeg' 
-                                        name='profile_img'
-                                        id="profile"
-                                        onChange={ onImageHandler }
-                                        ref={ fileInput }
+                        <div className="profile_input_wrap">
+                            {/* 프로필 박스 */}
+                            <div className="profile_box">
+                                {/* 이미지 박스 */}
+                                <div className="img_box">
+                                    <img 
+                                        src={ 
+                                            image === ''
+                                            ? "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
+                                            : image
+                                        } 
+                                        onClick={ () => fileInput.current.click() }
+                                        alt="프로필" 
                                     />
-
-                                    {/* 포토 아이콘 ( 라벨 ) */}
-                                    <label htmlFor="profile">
-                                        <AddAPhotoIcon 
-                                            color="primary" 
-                                            style={{fontSize:40}}
-                                        />
-                                    </label>
                                 </div>
+                                
+                                {/* 프로필 인풋 */}
+                                <input 
+                                    type='file' 
+                                    style={{display:'none'}}
+                                    accept='image/jpg,impge/png,image/jpeg' 
+                                    name='profile_img'
+                                    id="profile"
+                                    onChange={ onImageHandler }
+                                    ref={ fileInput }
+                                />
 
-                                {/* 오른쪽 */}
-                                <div className="right_box">
-                                    {/* 이름 인풋 */}
-                                    <TextField 
-                                        label="이름" 
-                                        type="text" 
-                                        name="name" 
-                                        variant="outlined"
-                                        value={ name } 
-                                        onChange={ onNameHandler } 
-                                        required
-                                        error={ nameValid }  
-                                        helperText={ nameValid ? "이름은 한글과 영문으로 이루어져야 합니다.(최대 16자까지 입력가능)" : "" } 
+                                {/* 포토 아이콘 ( 라벨 ) */}
+                                <label htmlFor="profile">
+                                    <AddAPhotoIcon 
+                                        color="primary" 
+                                        style={{fontSize:40}}
                                     />
-
-                                    {/* 닉네임 인풋 */}
-                                    <TextField 
-                                        label="닉네임" 
-                                        type="text" 
-                                        name="validation" 
-                                        variant="outlined"
-                                        value={ nickName } 
-                                        onChange={ onNickNameHandler } 
-                                        required
-                                        error={ nickNameValid }  
-                                        helperText={ nickNameValid ? "닉네임은 한글과 영문으로 이루어져야 합니다.(최대 16자까지 입력가능)" : "" } 
-                                    />
-
-                                    {/* 아이디( 이메일 주소 ) 인풋 */}
-                                    <TextField 
-                                        label="아이디" 
-                                        type="text" 
-                                        name="validation" 
-                                        variant="outlined"
-                                        value={ id } 
-                                        onChange={ onIdHandler } 
-                                        required
-                                        error={ idValid }  
-                                        helperText={ idValid ? "이메일 형식을 정확히 입력하세요.(user@email.com)" : "" } 
-                                    />
-
-                                    {/* 비밀번호 인풋 */}
-                                    <TextField 
-                                        label="비밀번호" 
-                                        type="password" 
-                                        name="validation" 
-                                        variant="outlined"
-                                        value={ password } 
-                                        onChange={ onPassHandler } 
-                                        required
-                                        error={ passwordValid } 
-                                        helperText={ passwordValid ? "최소 9자 이상 최대 16자까지 입력 • 특수문자 1개 이상 대문자 1개 이상 필수 입력" : "" } 
-                                    />
-
-                                    {/* 비밀번호 확인 인풋 */}
-                                    <TextField 
-                                        label="비밀번호 확인" 
-                                        type="password" 
-                                        name="validation" 
-                                        variant="outlined"
-                                        value={ passConfirm } 
-                                        onChange={ onPassConfirmHandler } 
-                                        required
-                                        error={ passConfirmValid }  
-                                        helperText={ passConfirmValid ? "비밀번호와 다릅니다." : "" } 
-                                    />
-
-                                    {/* 백신 정보 인증 버튼 */}
-                                    <Button
-                                        href="#"
-                                        variant="contained"
-                                        color="primary"
-                                        size="large"
-                                    >
-                                        백신 정보 인증
-                                    </Button>
-
-                                    {/* 이메일 수신 동의 체크박스 */}
-                                    <FormGroup>
-                                        <FormControlLabel control={<Checkbox defaultChecked />} label="이메일 수신 동의" />
-                                    </FormGroup>
-                                </div>
+                                </label>
                             </div>
 
-                            {/* 회원가입 버튼 */}
-                            <Button
-                                href="#"
-                                variant="contained"
-                                color="primary"
-                                size="large"
-                                disabled={ buttonState }
-                                style={{
-                                    marginTop:50,
-                                }}
-                            >
-                                회원가입
-                            </Button>
-                        </form>
+                            {/* 오른쪽 */}
+                            <div className="right_box">
+                                {/* 이름 인풋 */}
+                                <TextField 
+                                    label="이름" 
+                                    type="text" 
+                                    name="name" 
+                                    variant="outlined"
+                                    value={ name } 
+                                    onChange={ onNameHandler } 
+                                    required
+                                    error={ nameValid }  
+                                    helperText={ nameValid ? "이름은 한글과 영문으로 이루어져야 합니다.(최대 16자까지 입력가능)" : "" } 
+                                />
+
+                                {/* 닉네임 인풋 */}
+                                <TextField 
+                                    label="닉네임" 
+                                    type="text" 
+                                    name="validation" 
+                                    variant="outlined"
+                                    value={ nickName } 
+                                    onChange={ onNickNameHandler } 
+                                    required
+                                    error={ nickNameValid }  
+                                    helperText={ nickNameValid ? "닉네임은 한글과 영문으로 이루어져야 합니다.(최대 16자까지 입력가능)" : "" } 
+                                />
+
+                                {/* 아이디( 이메일 주소 ) 인풋 */}
+                                <TextField 
+                                    label="아이디" 
+                                    type="text" 
+                                    name="validation" 
+                                    variant="outlined"
+                                    value={ id } 
+                                    onChange={ onIdHandler } 
+                                    required
+                                    error={ idValid }  
+                                    helperText={ idValid ? "이메일 형식을 정확히 입력하세요.(user@email.com)" : "" } 
+                                />
+
+                                {/* 비밀번호 인풋 */}
+                                <TextField 
+                                    label="비밀번호" 
+                                    type="password" 
+                                    name="validation" 
+                                    variant="outlined"
+                                    value={ password } 
+                                    onChange={ onPassHandler } 
+                                    required
+                                    error={ passwordValid } 
+                                    helperText={ passwordValid ? "최소 9자 이상 최대 16자까지 입력 • 특수문자 1개 이상 대문자 1개 이상 필수 입력" : "" } 
+                                />
+
+                                {/* 비밀번호 확인 인풋 */}
+                                <TextField 
+                                    label="비밀번호 확인" 
+                                    type="password" 
+                                    name="validation" 
+                                    variant="outlined"
+                                    value={ passConfirm } 
+                                    onChange={ onPassConfirmHandler } 
+                                    required
+                                    error={ passConfirmValid }  
+                                    helperText={ passConfirmValid ? "비밀번호와 다릅니다." : "" } 
+                                />
+
+                                {/* 백신 정보 인증 버튼 */}
+                                <Button
+                                    href="#"
+                                    variant="contained"
+                                    color="primary"
+                                    size="large"
+                                >
+                                    백신 정보 인증
+                                </Button>
+
+                                {/* 이메일 수신 동의 체크박스 */}
+                                <FormGroup>
+                                    <FormControlLabel control={<Checkbox defaultChecked />} label="이메일 수신 동의" />
+                                </FormGroup>
+                            </div>
+                        </div>
                     </DialogContent>
                 }
-
+                
+                {/* 회원가입 버튼 */}
                 <DialogActions>
-                    <Button autoFocus onClick={handleClose}>
-                        Save changes
+                    <Button 
+                        autoFocus 
+                        onClick={handleClose}
+                        href="#"
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        disabled={ buttonState }
+                    >
+                        회원가입
                     </Button>
                 </DialogActions>
             </BootstrapDialog>
-        </div>
+        </form>
     )
 }
