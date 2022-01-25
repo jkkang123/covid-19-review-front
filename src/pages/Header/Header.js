@@ -18,6 +18,7 @@ import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import Profile from 'Molecules/Profile';
 import { useState } from 'react';
+import Drawer from 'components/common/Drawer';
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -68,7 +69,7 @@ SimpleDialog.propTypes = {
 
 export default function Header() {
 
-    const [login, setLogin] = React.useState(false);
+    const [login, setLogin] = React.useState(true);
     const [open, setOpen] = React.useState(false);
     const [selectedValue, setSelectedValue] = React.useState(emails[1]);
 
@@ -90,38 +91,43 @@ export default function Header() {
                 </div>
 
                 {/* 헤더 오른쪽 */}
-                {
-                    login === true
+                <div className="header_right_box">
+                  {
+                      login === true
 
-                    ? /* bell & profile */
-                    <ul className="bell_profile_box"> 
-                        <li>
-                            <Button variant="none" onClick={handleClickOpen}>
-                                <NotificationsIcon/>
-                            </Button>
+                      ? /* bell & profile */
+                      <ul className="bell_profile_box"> 
+                          <li>
+                              <Button variant="none" onClick={handleClickOpen}>
+                                  <NotificationsIcon/>
+                              </Button>
 
-                            <SimpleDialog
-                                selectedValue={selectedValue}
-                                open={open}
-                                onClose={handleClose}
-                            />
-                        </li>
-                        <li>
-                            {/* 프로필 모듈 실험 */}
-                            <Profile nickName={ false } big={ true }/>
-                        </li>
-                    </ul>
+                              <SimpleDialog
+                                  selectedValue={selectedValue}
+                                  open={open}
+                                  onClose={handleClose}
+                              />
+                          </li>
+                          <li>
+                              {/* 프로필 모듈 실험 */}
+                              <Profile nickName={ false } big={ true }/>
+                          </li>
+                      </ul>
 
-                    : /* signin & login */
-                    <ul className="signup_login_box">
-                        <li>
-                            <Signup />
-                        </li>
-                        <li>
-                            <Login />
-                        </li>
-                    </ul>
-                }
+                      : /* signin & login */
+                      <ul className="signup_login_box">
+                          <li>
+                              <Signup />
+                          </li>
+                          <li>
+                              <Login />
+                          </li>
+                      </ul>
+                  }
+
+                  {/* 네비게이션 바 */}
+                  <Drawer />
+                </div>
             </div>
         </div>
     )

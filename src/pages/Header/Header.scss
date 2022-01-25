@@ -15,21 +15,28 @@
                 width:100%;
             }
         }
-        /* bell & profile */
-        .bell_profile_box{
+
+        .header_right_box{
             display: flex;
             align-items: center;
             gap:20px;
-        }
+            
+            /* bell & profile */
+            .bell_profile_box{
+                display: flex;
+                align-items: center;
+                gap:20px;
+            }
 
-        /* signin & login */
-        .signup_login_box{
-            display: flex;
-            align-items: center;
-            gap:20px;
+            /* signin & login */
+            .signup_login_box{
+                display: flex;
+                align-items: center;
+                gap:20px;
 
-            li{
+                li{
 
+                }
             }
         }
     }

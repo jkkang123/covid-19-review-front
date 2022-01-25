@@ -23,10 +23,10 @@ const BarLineChart = () => {
       var url = 'http://openapi.data.go.kr/openapi/service/rest/Covid19/getCovid19InfStateJson'; /*URL*/
       // 일반 인증키(Encoding) ncMhlOzEE8Q%2FpSEqd1XItWoN%2FBsvypkNC1vzjYNRRGcABDkRcAXcQd9wOxSfX2G6%2BPULf5YtcyON%2FFzAZrfdpg%3D%3D
       // 일반 인증키(Decoding) ncMhlOzEE8Q/pSEqd1XItWoN/BsvypkNC1vzjYNRRGcABDkRcAXcQd9wOxSfX2G6+PULf5YtcyON/FzAZrfdpg==
-      var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'ncMhlOzEE8Q%2FpSEqd1XItWoN%2FBsvypkNC1vzjYNRRGcABDkRcAXcQd9wOxSfX2G6%2BPULf5YtcyON%2FFzAZrfdpg%3D%3D'; /*Service Key*/
+      var queryParams = '?' + encodeURIComponent('serviceKey') + '='+'ncMhlOzEE8Q/pSEqd1XItWoN/BsvypkNC1vzjYNRRGcABDkRcAXcQd9wOxSfX2G6+PULf5YtcyON/FzAZrfdpg=='; /*Service Key*/
       queryParams += '&' + encodeURIComponent('pageNo') + '=' + encodeURIComponent('1'); /**/
       queryParams += '&' + encodeURIComponent('numOfRows') + '=' + encodeURIComponent('10'); /**/
-      queryParams += '&' + encodeURIComponent('startCreateDt') + '=' + encodeURIComponent('20210110'); /**/
+      queryParams += '&' + encodeURIComponent('startCreateDt') + '=' + encodeURIComponent('20220110'); /**/
       queryParams += '&' + encodeURIComponent('endCreateDt') + '=' + encodeURIComponent('20220110'); /**/
       xhr.open('GET', url + queryParams);
       xhr.onreadystatechange = function () {

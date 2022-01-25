@@ -12,6 +12,7 @@ import RateReviewRoundedIcon from '@mui/icons-material/RateReviewRounded';
 import ArticleRoundedIcon from '@mui/icons-material/ArticleRounded';
 import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
 import LiveHelpRoundedIcon from '@mui/icons-material/LiveHelpRounded';
+import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
@@ -76,7 +77,11 @@ export default function TemporaryDrawer() {
     <div>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+          <Button onClick={toggleDrawer(anchor, true)}>
+            <MenuRoundedIcon 
+              color="primary"
+            />
+          </Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}

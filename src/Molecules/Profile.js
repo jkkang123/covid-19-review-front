@@ -27,59 +27,57 @@ export default function Profile({ nickName, big }) {
     };
 
     return (
-        <>
+        <Box>
             <CommomMenu 
                 AnchorNode={
-                    <Button onClick={handleClick}>프로필</Button>
+                    <Button onClick={handleClick}>
+                        {/* 프로필 사진 */}
+                        { 
+                            image
+
+                            ? /* 프로필 사진이 있을 때 */
+                            <div style={{
+                                width: big ? 50 : 40,
+                                height: big ? 50 : 40
+                            }}>
+                                <img 
+                                    src="img/profile.jpg" 
+                                    alt=''
+                                    style={{ 
+                                        width:'100%',
+                                        height:'100%',
+                                        objectFit:'cover',
+                                        borderRadius:'50%', 
+                                    }}
+                                />
+                            </div>
+
+                            : /* 프로필 사진이 없을 때 */
+                            <AccountCircleIcon 
+                                style={{
+                                    width: big ? 50 : 40,
+                                    height: big ? 50 : 40
+                                }}
+                            />
+                        }
+                    </Button>
                 }
                 anchorEl={anchorEl}
                 openState={open}
                 handleClick={handleClick}
                 handleClose={handleClose}
             />
-            <Box>
-                {/* 프로필 사진 */}
-                { 
-                    image
 
-                    ? /* 프로필 사진이 있을 때 */
-                    <div style={{
-                        width: big ? 50 : 40,
-                        height: big ? 50 : 40
-                    }}>
-                        <img 
-                            src="img/profile.jpg" 
-                            alt=''
-                            style={{ 
-                                width:'100%',
-                                height:'100%',
-                                objectFit:'cover',
-                                borderRadius:'50%', 
-                            }}
-                        />
-                    </div>
-
-                    : /* 프로필 사진이 없을 때 */
-                    <AccountCircleIcon 
-                        style={{
-                            width: big ? 50 : 40,
-                            height: big ? 50 : 40
-                        }}
-                    />
-                }
-
-                {/* 닉네임 */}
-                <p
-                    style={{
-                        fontSize: big ? 18 : 16,
-                        color:'#333'
-                    }}
-                >
-                    { nickName ? '닉네임' : null }
-                </p>
-            </Box>
-        </>
-        
+            {/* 닉네임 */}
+            <p
+                style={{
+                    fontSize: big ? 18 : 16,
+                    color:'#333'
+                }}
+            >
+                { nickName ? '닉네임' : null }
+            </p>
+        </Box>  
     )
 }
 
