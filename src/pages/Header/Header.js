@@ -1,5 +1,5 @@
 import './Header.scss'
-import * as React from 'react';
+import { useState, useEffect } from 'react';
 import Signup from 'pages/Signup/Signup';
 import Login from 'pages/Login/Login';
 import NotificationsIcon from '@mui/icons-material/Notifications';
@@ -17,8 +17,8 @@ import AddIcon from '@mui/icons-material/Add';
 import Typography from '@mui/material/Typography';
 import { blue } from '@mui/material/colors';
 import Profile from 'Molecules/Profile';
-import { useState } from 'react';
 import Drawer from 'components/common/Drawer';
+import { isLogined } from "../../components/core/util";
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 
@@ -68,10 +68,9 @@ SimpleDialog.propTypes = {
 };
 
 export default function Header() {
-
-    const [login, setLogin] = React.useState(true);
-    const [open, setOpen] = React.useState(false);
-    const [selectedValue, setSelectedValue] = React.useState(emails[1]);
+    const [login, setLogin] = useState(true);
+    const [open, setOpen] = useState(false);
+    const [selectedValue, setSelectedValue] = useState(emails[1]);
 
     // bell 클릭 이벤트 리스너
     const handleClickOpen = () => {
@@ -81,6 +80,14 @@ export default function Header() {
         setOpen(false);
         setSelectedValue(value);
     };
+
+    useEffect(() => {
+      if (isLogined()) {
+        setLogin(true)
+      } else {
+        setLogin(false)
+      }
+    }, [])
 
     return (
         <div className="header">
