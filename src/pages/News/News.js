@@ -13,16 +13,16 @@ export default function News() {
         var client_id = 'hWTkdXKVzGYiHCarA5br';
         var client_secret = 'hojxkLdOG0';
         var request_body = {
-            "query": "vaccine",
-            "display": "10",
-            "start": "2",
-            "sort": "date"
+            query: "백신",
+            display: "10",
+            start: "2",
+            sort: "date"
         };
         
 
         try{
-            const response = await axios.get('https://openapi.naver.com/v1/search/news.json', {
-                params: JSON.stringify(request_body),
+            const response = await axios.get('api/v1/search/news.json', {
+                params: request_body,
                 headers:{
                     'X-Naver-Client-Id': client_id,
                     'X-Naver-Client-Secret': client_secret,
