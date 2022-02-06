@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import GoogleLogin from 'react-google-login';
+import axios from '../../plugins/axios';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
     '& .MuiDialogContent-root': {
@@ -136,6 +137,20 @@ export default function Login() {
         setOpen(false);
     };
 
+    const clickLoginBtn = async () => {
+        const body = {
+            email: id,
+            loginProvider: "ORIGINAL",
+            password: password
+        }
+        try {
+            const { data } = await axios.post('http://ec2-13-124-162-173.ap-northeast-2.compute.amazonaws.com/login', body);
+            // window.localStorage.setItem('accesstoken', data.accesstoken)
+        } catch (e) {
+            console.log(e.response); 
+        }
+    }
+
     return (
         <form className="login">
             <Button variant="outlined" onClick={handleClickOpen}>
@@ -216,7 +231,7 @@ export default function Login() {
                 <DialogActions>
                     <Button 
                         autoFocus 
-                        onClick={handleClose}
+                        onClick={clickLoginBtn}
                         href="#"
                         variant="contained"
                         color="primary"
