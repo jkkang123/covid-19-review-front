@@ -2,6 +2,7 @@ import './Signup.scss';
 import { useState, useRef, useEffect } from 'react';
 import { TextField, Button, FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
+import axios from '../../plugins/axios';
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
@@ -32,6 +33,26 @@ export default function Signup() {
     const [open, setOpen] = React.useState(false);
     const [signup, setSignup] = useState(false);
     const [buttonState, setButtonState] = useState(true);
+
+    const clickSignupBtn = async () => {
+        const formdata = new FormData();
+        const mulitpartFile = files
+        const joinReqeust = {
+            email: id,
+            loginProvider: "ORIGINAL",
+            nickname: nickName,
+            password: password
+        }
+        formdata.append("joinReqeust", JSON.stringify(joinReqeust));
+        formdata.append('multipartFile', mulitpartFile)
+
+        try { // statusCode === 200 
+            const { data } = await axios.post('/join', formdata);
+             
+        } catch (e) {
+            console.log(e.response); 
+        }
+    }
 
     // 이미지 인풋 이벤트 핸들러
     const onImageHandler = (e) => {
@@ -161,7 +182,7 @@ export default function Signup() {
 
                     ? /* 회원가입을 축하합니다 */
                     <DialogContent dividers>
-                        회원가입을 축하합니다.
+     ㅊ                   회원가입을 축하합니다.
                     </DialogContent>
 
                     : /* 회원가입 인풋창 */
@@ -292,7 +313,7 @@ export default function Signup() {
                 <DialogActions>
                     <Button 
                         autoFocus 
-                        onClick={handleClose}
+                        onClick={clickSignupBtn}
                         href="#"
                         variant="contained"
                         color="primary"
