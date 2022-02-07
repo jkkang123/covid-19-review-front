@@ -3,6 +3,7 @@ import React from 'react'
 import axios from 'axios';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import Tags from '../../components/common/common-practice'
 
 // pagination의 숫자를 클릭하면 자동으로 색상이 들어옴, 그런데 selectBox를 Change했을 때 pagination만 변하지 않는다. 연동하는 방법은 ?
 // <Pagination page={ page } /> --> 실패. 왜??
@@ -80,6 +81,7 @@ export default function News() {
                 <option value="모더나">모더나</option>
                 <option value="부스터샷">부스터샷</option>
             </select>
+            <Tags/>
 
             {
                 news.map((item, i) => {
