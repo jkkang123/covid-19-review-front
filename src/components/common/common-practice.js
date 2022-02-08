@@ -26,8 +26,8 @@ export default function Tags() {
           renderTags={(value, getTagProps) =>
             value.map((option, index) => (
               <Chip
-                style={{backgroundColor: 'blue', color: '#fff'}}
-                color="success"
+                style={{backgroundColor: 'lightpink', color: '#fff', borderRadius:20}}
+                color="primary"
                 variant="filled"
                 label={option.title}
                 {...getTagProps({ index })}

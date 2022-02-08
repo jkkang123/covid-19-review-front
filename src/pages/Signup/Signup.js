@@ -312,7 +312,7 @@ export default function Signup() {
                 <DialogActions>
                     <Button 
                         autoFocus 
-                        onClick={clickSignupBtn}
+                        onClick={ clickSignupBtn }
                         href="#"
                         variant="contained"
                         color="primary"

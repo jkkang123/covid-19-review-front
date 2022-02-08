@@ -16,7 +16,7 @@ import Profile from 'Molecules/Profile';
 import Dialogs from 'Molecules/Dialogs';
 import DoughnutChart from 'Molecules/DoughnutChart';
 import BarLineChart from 'Molecules/BarLineChart';
-import SelectBox from 'components/common/common-select';
+import Select from 'components/common/common-practice';
 import './App.scss';
 
 
@@ -25,10 +25,9 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Header />
-      {/* 셀렉트 박스 
-      <SelectBox vaccine={true}/>
-      <SelectBox vaccine={false}/>
-      */}
+      
+      {/* 셀렉트 박스 */}
+      <Select />
 
       <Routes>
         <Route 

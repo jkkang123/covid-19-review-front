@@ -13,7 +13,7 @@ if (process.env.NODE_ENV === 'development') {
   BASE_URL = `https://${HOST}/api/v1`;
 }
 
-const DEFAULT_ACCEPT_TYPE = 'application/json;charset=UTF-8';
+const DEFAULT_ACCEPT_TYPE = 'application/json';
 
 const axiosInstance = axios.create();
 axiosInstance.defaults.baseURL = BASE_URL;

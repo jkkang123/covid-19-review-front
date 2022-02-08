@@ -15,44 +15,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import GoogleLogin from 'react-google-login';
 import axios from '../../plugins/axios';
-
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-    '& .MuiDialogContent-root': {
-      padding: theme.spacing(2),
-    },
-    '& .MuiDialogActions-root': {
-      padding: theme.spacing(1),
-    },
-}));
-  
-const BootstrapDialogTitle = (props) => {
-    const { children, onClose, ...other } = props;
-  
-    return (
-      <DialogTitle sx={{ m: 0, p: 2 }} {...other}>
-        {children}
-        {onClose ? (
-          <IconButton
-            aria-label="close"
-            onClick={onClose}
-            sx={{
-              position: 'absolute',
-              right: 8,
-              top: 8,
-              color: (theme) => theme.palette.grey[500],
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        ) : null}
-      </DialogTitle>
-    );
-};
-  
-BootstrapDialogTitle.propTypes = {
-    children: PropTypes.node,
-    onClose: PropTypes.func.isRequired,
-};
+import CommonDialog from 'components/common/common-dialog';
 
 const clientId = "583476879577-qlv0nlc974o6t99d94c6k5q3dp0qqgq8.apps.googleusercontent.com";
 const clientSecret = "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";
@@ -145,6 +108,7 @@ export default function Login() {
         }
         try {
             const data = await axios.get('/login', {params: model});
+            const { data } = await axios.post('/login', body);
             // window.localStorage.setItem('accesstoken', data.accesstoken)
             console.log(data)
         } catch (e) {
@@ -158,14 +122,13 @@ export default function Login() {
                 Log in
             </Button>
 
-            <BootstrapDialog
-                onClose={handleClose}
-                aria-labelledby="customized-dialog-title"
-                open={open}
+            <CommonDialog
+                handleClose={handleClose}
+                openState={open}
             >
-                <BootstrapDialogTitle id="customized-dialog-title" onClose={handleClose}>
+                <DialogTitle id="customized-dialog-title" onClose={handleClose}>
                     Log in
-                </BootstrapDialogTitle>
+                </DialogTitle>
                 
                 <DialogContent dividers>
                     {/* 로고 박스 */}
@@ -247,7 +210,7 @@ export default function Login() {
                         로그인
                     </Button>
                 </DialogActions>
-            </BootstrapDialog>
+            </CommonDialog>
         </form>
     )
 }
