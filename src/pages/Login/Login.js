@@ -138,14 +138,15 @@ export default function Login() {
     };
 
     const clickLoginBtn = async () => {
-        const body = {
+        const model = {
             email: id,
             loginProvider: "ORIGINAL",
             password: password
         }
         try {
-            const { data } = await axios.post('http://ec2-13-124-162-173.ap-northeast-2.compute.amazonaws.com/login', body);
+            const data = await axios.get('/login', {params: model});
             // window.localStorage.setItem('accesstoken', data.accesstoken)
+            console.log(data)
         } catch (e) {
             console.log(e.response); 
         }

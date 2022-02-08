@@ -36,18 +36,17 @@ export default function Signup() {
 
     const clickSignupBtn = async () => {
         const formdata = new FormData();
-        const mulitpartFile = files
-        const joinReqeust = {
+        formdata.append('multipartFile', files)
+        const body = {
             email: id,
             loginProvider: "ORIGINAL",
             nickname: nickName,
             password: password
         }
-        formdata.append("joinReqeust", JSON.stringify(joinReqeust));
-        formdata.append('multipartFile', mulitpartFile)
 
         try { // statusCode === 200 
-            const { data } = await axios.post('/join', formdata);
+            const { data } = await axios.post('/user' + `?email=${id}&loginProvider=ORIGINAL&nickname=${nickName}&password=${password}`, formdata);
+            console.log(data)
              
         } catch (e) {
             console.log(e.response); 
