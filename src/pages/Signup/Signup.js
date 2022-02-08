@@ -46,10 +46,13 @@ export default function Signup() {
 
         try { // statusCode === 200 
             const { data } = await axios.post('/user' + `?email=${id}&loginProvider=ORIGINAL&nickname=${nickName}&password=${password}`, formdata);
-            console.log(data)
-             
+            setSignup(true);
         } catch (e) {
             console.log(e.response); 
+            // 중복가입 경고창
+            if(e.response.data.code === "402"){
+                alert(e.response.data.message);
+            }
         }
     }
 
@@ -150,6 +153,12 @@ export default function Signup() {
     };
     const handleClose = () => {
         setOpen(false);
+        setName('');
+        setNickName('');
+        setId('');
+        setPassword('');
+        setPassConfirm('');
+        setImage('');
     };
 
     const buttonDisabled = () => {
@@ -181,10 +190,11 @@ export default function Signup() {
 
                     ? /* 회원가입을 축하합니다 */
                     <DialogContent dividers>
-     ㅊ                   회원가입을 축하합니다.
+                        회원가입을 축하합니다.
                     </DialogContent>
 
                     : /* 회원가입 인풋창 */
+                    <>
                     <DialogContent dividers>
                         <div className="profile_input_wrap">
                             {/* 프로필 박스 */}
@@ -306,22 +316,22 @@ export default function Signup() {
                             </div>
                         </div>
                     </DialogContent>
-                }
                 
-                {/* 회원가입 버튼 */}
-                <DialogActions>
-                    <Button 
-                        autoFocus 
-                        onClick={ clickSignupBtn }
-                        href="#"
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        disabled={ buttonState }
-                    >
-                        회원가입
-                    </Button>
-                </DialogActions>
+                    {/* 회원가입 버튼 */}
+                    <DialogActions>
+                        <Button 
+                            autoFocus 
+                            onClick={ clickSignupBtn }
+                            href="#"
+                            variant="contained"
+                            color="primary"
+                            size="large"
+                            disabled={ buttonState }
+                        >
+                            회원가입
+                        </Button>
+                    </DialogActions>
+                </>}
             </CommonDialog>
         </form>
     )

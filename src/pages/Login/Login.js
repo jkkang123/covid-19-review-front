@@ -27,6 +27,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [idValid, setIdValid] = useState(false);
     const [passwordValid, setPasswordValid] = useState(false);
+    const [login, setLogin] = useState(false);
     const [disabled, setDisabled] = useState(true);
     const [LoginOpen, setLoginOpen] = React.useState(false);
     const [open, setOpen] = React.useState(false);
@@ -98,6 +99,8 @@ export default function Login() {
     };
     const handleClose = () => {
         setOpen(false);
+        setId('');
+        setPassword('');
     };
 
     const clickLoginBtn = async () => {
@@ -108,9 +111,8 @@ export default function Login() {
         }
         try {
             const data = await axios.get('/login', {params: model});
-            const { data } = await axios.post('/login', body);
             // window.localStorage.setItem('accesstoken', data.accesstoken)
-            console.log(data)
+            setLogin(true);
         } catch (e) {
             console.log(e.response); 
         }
@@ -130,6 +132,8 @@ export default function Login() {
                     Log in
                 </DialogTitle>
                 
+                { login
+                ?
                 <DialogContent dividers>
                     {/* 로고 박스 */}
                     <div className="logo_box">
@@ -190,6 +194,8 @@ export default function Login() {
                         </li>
                     </ul>
                 </DialogContent>
+                : '로그인이 완료되었습니다.'
+                }
 
                 {/* 로그인 버튼 */}
                 <DialogActions>
