@@ -17,11 +17,8 @@ import GoogleLogin from 'react-google-login';
 import axios from '../../plugins/axios';
 import CommonDialog from 'components/common/common-dialog';
 
-const clientId = "583476879577-qlv0nlc974o6t99d94c6k5q3dp0qqgq8.apps.googleusercontent.com";
-const clientSecret = "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";
-
 // Login Component
-export default function Login() {
+export default function Login({ onGoogleLogin }) {
 
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -32,23 +29,30 @@ export default function Login() {
     const [LoginOpen, setLoginOpen] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
-    // 구글 소셜로그인
-    const onSuccess = async(response) => {
-    	console.log(response);
-    
-        const { googleId, profileObj : { email, name } } = response;
-        
-        // await onSocial({
-        //     socialId : googleId,
-        //     socialType : 'google',
-        //     email,
-        //     nickname : name
-        // });
-    }
+    // ===== 구글 소셜 로그인 start ===== //
+    // 구글 클라이언트 ID / Secret
+    const clientId = "170940140867-b15rp1p69ahh1pu4ju1su2cb3s8pj5rv.apps.googleusercontent.com"; // 이건 tori@ryanlab.kr 로 받은 거
+    // const clientSecret = "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"; 구글 시크릿은 필요없는 듯. 이건 재규가 받은 거
 
+    // 구글 로그인 성공시
+    const onSuccess = async(response) => {
+        const { googleId, profileObj : { email, name } } = response;
+        setLogin(true);
+        console.log(response);
+
+        await onGoogleLogin({
+            // 구글 로그인 성공시 서버에 전달할 데이터
+            socialId : googleId,
+            socialType : 'google',
+            email,
+            nickname : name
+        });
+    }
+    // 구글 로그인 실패시
     const onFailure = (error) => {
         console.log(error);
     }
+    // ===== 구글 소셜 로그인 end ===== //
 
     // 텍스트 인풋 이벤트 핸들러
     const onIdHandler = (e) => {
@@ -118,6 +122,10 @@ export default function Login() {
         }
     }
 
+    const clickLogoutBtn = () => {
+        setLogin(false);
+    }
+
     return (
         <form className="login">
             <Button variant="outlined" onClick={handleClickOpen}>
@@ -132,8 +140,8 @@ export default function Login() {
                     Log in
                 </DialogTitle>
                 
-                { login
-                ?
+                { login === false
+                ? // 로그인 성공시
                 <DialogContent dividers>
                     {/* 로고 박스 */}
                     <div className="logo_box">
@@ -194,7 +202,26 @@ export default function Login() {
                         </li>
                     </ul>
                 </DialogContent>
-                : '로그인이 완료되었습니다.'
+                : // 로그인 실패시
+                <div>
+                    <p>로그인이 완료되었습니다.</p>
+
+                    {/* 로그아웃 버튼 */}
+                    <Button 
+                        autoFocus 
+                        onClick={clickLogoutBtn}
+                        variant="contained"
+                        color="primary"
+                        size="large"
+                        type="submit"
+                        style={{
+                            width:'100%',
+                            textAlign:'center',
+                        }}
+                    >
+                        로그아웃
+                    </Button>
+                </div>
                 }
 
                 {/* 로그인 버튼 */}
