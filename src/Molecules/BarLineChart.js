@@ -15,13 +15,14 @@ const BarLineChart = () => {
     const format = today.format('YYYYMMDD');
     const sevenDaysAgoFormat = moment().subtract(7, 'days').format('YYYYMMDD');
 
-    const todayFormat = today.format('MM.DD');
+    
     const oneDayAgo = moment().subtract(1, 'days').format('MM.DD');
     const twoDaysAgo = moment().subtract(2, 'days').format('MM.DD');
     const threeDaysAgo = moment().subtract(3, 'days').format('MM.DD');
     const fourDaysAgo = moment().subtract(4, 'days').format('MM.DD');
     const fiveDaysAgo = moment().subtract(5, 'days').format('MM.DD');
     const sixDaysAgo = moment().subtract(6, 'days').format('MM.DD');
+    const sevenDaysAgo = moment().subtract(7, 'days').format('MM.DD');
 
     {/* 백신 확진자 현황 api - api호출을 여러번 할 수 없나?? */}
     const getData = () => {
@@ -42,8 +43,8 @@ const BarLineChart = () => {
                 let deathCntArr = [];
                 let newDecideCntArr = [];
                 for(let i=0; i<8; i++){
-                  decideCntArr.unshift(xml.children[1].children[0].children[i].children[3].value);
-                  deathCntArr.unshift(xml.children[1].children[0].children[i].children[2].value);
+                  decideCntArr.unshift(xml.children[1].children[0].children[i].children[2].value);
+                  deathCntArr.unshift(xml.children[1].children[0].children[i].children[1].value);
                 }
                 for(let i=0; i<decideCntArr.length-1; i++){
                   newDecideCntArr.push(decideCntArr[i+1] - decideCntArr[i])
@@ -61,13 +62,13 @@ const BarLineChart = () => {
 
     const data = {
         labels: [
+          sevenDaysAgo,
           sixDaysAgo,
           fiveDaysAgo,
           fourDaysAgo,
           threeDaysAgo,
           twoDaysAgo,
           oneDayAgo,
-          todayFormat
         ],
         datasets: [{
           type: 'bar',
