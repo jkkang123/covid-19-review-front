@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import React from 'react'
 import { Doughnut } from 'react-chartjs-2'
 import 'chart.js/auto';
+import './DoughnutChart.scss';
+import Paper from '@mui/material/Paper';
 
 const DoughnutChart = () => {
 
@@ -67,7 +69,7 @@ const DoughnutChart = () => {
         
         var fontSize = (height / 114).toFixed(2);
         ctx.font = fontSize + "em sans-serif";
-        ctx.fillStyle = "#333";
+        ctx.fillStyle = "#888";
         ctx.textBaseline = "middle";
 
         var text = chart.config.data.datasets[0].data[0] + '%',
@@ -84,7 +86,7 @@ const DoughnutChart = () => {
       datasets: [
         {
           data: chartData1,
-          backgroundColor: ["red", "gray"]
+          backgroundColor: ["#E9ACE3", "#fafafa"]
         }
       ],
       // text: showData
@@ -95,7 +97,7 @@ const DoughnutChart = () => {
       datasets: [
         {
           data: chartData2,
-          backgroundColor: ["Yellow", "gray"]
+          backgroundColor: ["#C6ACE9", "#fafafa"]
         }
       ],
       // text: showData
@@ -106,7 +108,7 @@ const DoughnutChart = () => {
       datasets: [
         {
           data: chartData3,
-          backgroundColor: ["orange", "gray"]
+          backgroundColor: ["#ACBDE9", "#fafafa"]
         }
       ],
       // text: showData
@@ -121,27 +123,27 @@ const DoughnutChart = () => {
     };
 
     return (
-        <div>
-          <div>
-            <h1>국내 1차 접종 현황</h1>
-            <Doughnut data={data1} options={options} height={250} />
-            <p>누적 {totalFirstCnt}</p>
-            <p>신규 {firstCnt}</p>
-          </div>
+        <div className="doughnutCharts">
+          <Paper className="chart paper" elevation={2}>
+            <h1 className="subtitle">국내 1차 접종 현황</h1>
+            <Doughnut data={data1} options={options} height={250}/>
+            <p className="body">누적 {totalFirstCnt}</p>
+            <p className="body">신규 {firstCnt}</p>
+          </Paper>
 
-          <div>
-            <h1>국내 2차 접종 현황</h1>
+          <Paper className="chart paper" elevation={2}>
+            <h1 className="subtitle">국내 2차 접종 현황</h1>
             <Doughnut data={data2} options={options} height={250} />
-            <p>누적 {totalSecondCnt}</p>
-            <p>신규 {secondCnt}</p>
-          </div>
-          <div>
+            <p className="body">누적 {totalSecondCnt}</p>
+            <p className="body">신규 {secondCnt}</p>
+          </Paper>
 
-            <h1>국내 3차 접종 현황</h1>
+          <Paper className="chart paper" elevation={2}>
+            <h1 className="subtitle">국내 3차 접종 현황</h1>
             <Doughnut data={data3} options={options} height={250} />
-            <p>누적 {totalThirdCnt}</p>
-            <p>신규 {thirdCnt}</p>
-          </div>
+            <p className="body">누적 {totalThirdCnt}</p>
+            <p className="body">신규 {thirdCnt}</p>
+          </Paper>
         </div>
     )
 }

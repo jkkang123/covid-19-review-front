@@ -31,7 +31,7 @@ export default function Login({ onGoogleLogin }) {
 
     // ===== 구글 소셜 로그인 start ===== //
     // 구글 클라이언트 ID / Secret
-    const clientId = "170940140867-b15rp1p69ahh1pu4ju1su2cb3s8pj5rv.apps.googleusercontent.com"; // 이건 tori@ryanlab.kr 로 받은 거
+    const clientId = "676913540874-m3q98gj12mqu4ubak3noj6s1juqj4sha.apps.googleusercontent.com"; // 이건 tori@ryanlab.kr 로 받은 거
     // const clientSecret = "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"; 구글 시크릿은 필요없는 듯. 이건 재규가 받은 거
 
     // 구글 로그인 성공시

@@ -1,0 +1,22 @@
+.home{
+    margin-top:20px;
+
+    .popular_barLine{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap:20px;
+
+        .popular{
+            width:100%;
+        }
+
+        .barLine{
+            width:100%;
+        }
+    }
+
+    .doughnuts{
+        
+    }
+}

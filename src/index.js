@@ -8,14 +8,11 @@ import { Provider } from 'react-redux'
 import rootReducer from './redux/Reducers'
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import Signup from './pages/Signup/Signup.js';
-import Login from './pages/Login/Login.js';
 import Header from './pages/Header/Header.js';
 import News from './pages/News/News.js';
+import Home from './pages/Home/Home.js';
 import Profile from 'Molecules/Profile';
 import Dialogs from 'Molecules/Dialogs';
-import DoughnutChart from 'Molecules/DoughnutChart';
-import BarLineChart from 'Molecules/BarLineChart';
 import Select from 'components/common/common-practice';
 import './App.scss';
 
@@ -26,29 +23,24 @@ ReactDOM.render(
     <BrowserRouter>
       <Header />
       
-      {/* 셀렉트 박스 */}
+      {/* 셀렉트 박스 
       <Select />
+       */} 
 
       <Routes>
+        <Route 
+          path="/" 
+          element = {<Home />} 
+        />
+
         <Route 
           path="/news" 
           element = {<News />} 
         />
 
-        {/* 회원가입 페이지 */}
         <Route 
-          path="/signup" 
-          element = {<Signup />} 
-        />
-
-        {/* 로그인 페이지 */}
-        <Route 
-          path="/login" 
-          element = {<Login />} 
-        />
-        <Route 
-          path="/chart"
-          element= {<BarLineChart/>}
+          path="/news" 
+          element = {<News />} 
         />
       </Routes>
       <App />
