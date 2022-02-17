@@ -1,10 +1,11 @@
 /* ===== color ===== */
-$black:#4a4646;
+$black:#2a2a2a;
 $main:#1976d2;
 $pink:#E9ACE3;
 $purple:#C6ACE9;
 $lightBlue:#ACBDE9;
-$darkGray:#666;
+$darkGray:#4d4d4d;
+$lightGray:#888;
 
 /* ===== reset ===== */
 ul{
@@ -12,10 +13,29 @@ ul{
   list-style: none;
 }
 
+.link, a{
+  color: inherit;
+  text-decoration: none;;
+}
+
 /* ===== body & html ===== */
+html{
+  font-size:14px;
+}
+@media(min-width:480px){
+  html{
+    font-size:15px;
+  }
+}
+@media(min-width:760px){
+  html{
+    font-size:16px;
+  }
+}
 body{
   width:100%;
   overflow-x: hidden;
+  background:#fafafa;
 }
 
 /* ===== inner ===== */
@@ -26,21 +46,34 @@ body{
 
 /* ===== paper ===== */
 .paper{
-  padding:25px 35px;
+  padding:1.5em 1.8em;
 }
 
 /* ====== font ====== */
 .subtitle{
-  margin:0 0 15px;
-  font-size: 22px;
-  text-align: center;
+  margin:0 0 10px;
+  font-size: 1.2rem;
   font-weight: 700;
   color:$black;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .body{
   margin:8px 0;
-  font-size: 16px;
-  text-align: center;
+  font-size: 1rem;
   color:$darkGray;
+  line-height: 1.5em;
+}
+
+.date{
+  font-size: 0.8rem;
+  color:$lightGray;
+}
+
+/* 페이지네이션 가운데 정렬 --> stylus로 할 수 있는 방법?? */
+.css-wjh20t-MuiPagination-ul{
+  justify-content: center;
 }

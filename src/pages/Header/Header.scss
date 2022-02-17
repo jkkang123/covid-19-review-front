@@ -1,5 +1,7 @@
+@import '../../App.scss';
+
 .header{
-    background:#f8f8f8;
+    background:$main;
 
     .inner{
         display: flex;

@@ -22,20 +22,11 @@ ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
       <Header />
-      
-      {/* 셀렉트 박스 
-      <Select />
-       */} 
 
       <Routes>
         <Route 
           path="/" 
           element = {<Home />} 
-        />
-
-        <Route 
-          path="/news" 
-          element = {<News />} 
         />
 
         <Route 

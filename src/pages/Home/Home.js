@@ -1,28 +1,34 @@
-import './Home.scss';
 import BarLineChart from 'Molecules/BarLineChart';
 import DoughnutChart from 'Molecules/DoughnutChart';
+import Popular from 'Molecules/Popular';
 import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 export default function Home() {
     return (
         <div className="home">
-            <div className="inner">
-                {/* 인기글 & 국내 신규 확진자 */}
-                <div className="popular_barLine">
-                    {/* 인기글 */}
-                    <Paper className="popular paper" elevation={2}>
-                        인기글
-                    </Paper>
+            <Box sx={{ maxWidth:1200, margin:'20px auto' }}>
+                <Grid container spacing={2}>
+                    {/* 인기글 & 국내 신규 확진자 */}
+                    <Grid item xs={12} lg={6}>
+                        <Paper className="popular paper" elevation={2}>
+                            <Popular />
+                        </Paper>
+                    </Grid>
 
-                    {/* 국내 신규 확진자 */}
-                    <Paper className="barLine paper" elevation={2}>
-                        <BarLineChart />
-                    </Paper>
-                </div>
+                    <Grid item xs={12} lg={6}>
+                        <Paper className="barLine paper" elevation={2}>
+                            <BarLineChart />
+                        </Paper>
+                    </Grid>
 
-                {/* 국내 백신 접종 현황 */}
-                <DoughnutChart />
-            </div>
+                    {/* 국내 백신 접종 현황 */}
+                    <Grid item xs={12}>
+                        <DoughnutChart />
+                    </Grid>
+                </Grid>
+            </Box>
         </div>
     )
 }

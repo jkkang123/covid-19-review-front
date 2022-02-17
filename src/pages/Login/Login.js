@@ -16,6 +16,9 @@ import Typography from '@mui/material/Typography';
 import GoogleLogin from 'react-google-login';
 import axios from '../../plugins/axios';
 import CommonDialog from 'components/common/common-dialog';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
 
 // Login Component
 export default function Login({ onGoogleLogin }) {
@@ -137,25 +140,42 @@ export default function Login({ onGoogleLogin }) {
                 openState={open}
             >
                 <DialogTitle id="customized-dialog-title" onClose={handleClose}>
-                    Log in
+                    <Stack 
+                        direction="row" 
+                        spacing={1} 
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        {/* 로고 박스 */}
+                        <Box sx={{ width:33 }}>
+                            <img 
+                                src="https://img.icons8.com/external-flatart-icons-solid-flatarticons/128/000000/external-covid-19-coronavirus-covid19-flatart-icons-solid-flatarticons.png"
+                                style={{ width:'100%' }}
+                            />
+                        </Box>
+                        <h1 className="subtitle">Log in</h1>
+                    </Stack>
                 </DialogTitle>
                 
                 { login === false
                 ? // 로그인 성공시
                 <DialogContent dividers>
-                    {/* 로고 박스 */}
-                    <div className="logo_box">
-                        <img src="https://img.icons8.com/external-flatart-icons-solid-flatarticons/128/000000/external-covid-19-coronavirus-covid19-flatart-icons-solid-flatarticons.png"/>
-                    </div>
-
-                    {/* 인풋 박스 */}
-                    <div className="input_box">
+                    {/* 아이디 & 비밀번호 */}
+                    <Stack
+                        direction="column" 
+                        spacing={2} 
+                        alignItems="center"
+                        justifyContent="center"
+                        sx={{
+                            '& > :not(style)': { width: '30ch', borderColor:'#1976d2' },
+                        }}
+                    >
                         {/* 아이디 인풋 */}
                         <TextField 
                             label="아이디" 
                             type="email" 
                             name="id" 
-                            variant="outlined"
+                            variant="standard"
                             value={ id } 
                             onChange={ onIdHandler } 
                             required
@@ -168,14 +188,14 @@ export default function Login({ onGoogleLogin }) {
                             label="비밀번호" 
                             type="password" 
                             name="password" 
-                            variant="outlined"
+                            variant="standard"
                             value={ password } 
                             onChange={ onPassHandler } 
                             required
                             error={ passwordValid } 
                             helperText={ passwordValid ? "최소 9자 이상 최대 16자까지 입력 • 특수문자 1개 이상 대문자 1개 이상 필수 입력" : "" } 
                         />
-                    </div>
+                    </Stack>
 
                     {/* 소셜 로그인 박스( kakao & google ) */}
                     <ul className="social_box">

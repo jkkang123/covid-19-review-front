@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import React from 'react'
 import { Doughnut } from 'react-chartjs-2'
 import 'chart.js/auto';
-import './DoughnutChart.scss';
 import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 const DoughnutChart = () => {
 
@@ -82,7 +83,7 @@ const DoughnutChart = () => {
     });
 
     const data1 = {
-      labels: ["Red", "gray"],
+      labels: ["1차 접종자", "1차 미접종자"],
       datasets: [
         {
           data: chartData1,
@@ -93,7 +94,7 @@ const DoughnutChart = () => {
     };
 
     const data2 = {
-      labels: ["Yellow", "gray"],
+      labels: ["2차 접종자", "2차 미접종자"],
       datasets: [
         {
           data: chartData2,
@@ -104,7 +105,7 @@ const DoughnutChart = () => {
     };
 
     const data3 = {
-      labels: ["orange", "gray"],
+      labels: ["3차 접종자", "3차 미접종자"],
       datasets: [
         {
           data: chartData3,
@@ -124,26 +125,39 @@ const DoughnutChart = () => {
 
     return (
         <div className="doughnutCharts">
-          <Paper className="chart paper" elevation={2}>
-            <h1 className="subtitle">국내 1차 접종 현황</h1>
-            <Doughnut data={data1} options={options} height={250}/>
-            <p className="body">누적 {totalFirstCnt}</p>
-            <p className="body">신규 {firstCnt}</p>
-          </Paper>
+          <Box sx={{ maxWidth:1200, margin:'0px auto' }}>
+              <Grid container spacing={2}>
+                  {/* 국내 1차 접종 현황 */}
+                  <Grid item xs={12} sm={4}>
+                    <Paper className="chart paper" elevation={2}>
+                      <h1 className="subtitle">국내 1차 접종 현황</h1>
+                      <Doughnut data={data1} options={options} height={250}/>
+                      <p className="body">누적 {totalFirstCnt}</p>
+                      <p className="body">신규 {firstCnt}</p>
+                    </Paper>
+                  </Grid>
 
-          <Paper className="chart paper" elevation={2}>
-            <h1 className="subtitle">국내 2차 접종 현황</h1>
-            <Doughnut data={data2} options={options} height={250} />
-            <p className="body">누적 {totalSecondCnt}</p>
-            <p className="body">신규 {secondCnt}</p>
-          </Paper>
+                  {/* 국내 2차 접종 현황 */}
+                  <Grid item xs={12} sm={4}>
+                    <Paper className="chart paper" elevation={2}>
+                      <h1 className="subtitle">국내 2차 접종 현황</h1>
+                      <Doughnut data={data2} options={options} height={250} />
+                      <p className="body">누적 {totalSecondCnt}</p>
+                      <p className="body">신규 {secondCnt}</p>
+                    </Paper>
+                  </Grid>
 
-          <Paper className="chart paper" elevation={2}>
-            <h1 className="subtitle">국내 3차 접종 현황</h1>
-            <Doughnut data={data3} options={options} height={250} />
-            <p className="body">누적 {totalThirdCnt}</p>
-            <p className="body">신규 {thirdCnt}</p>
-          </Paper>
+                  {/* 국내 3차 접종 현황 */}
+                  <Grid item xs={12} sm={4}>
+                    <Paper className="chart paper" elevation={2}>
+                      <h1 className="subtitle">국내 3차 접종 현황</h1>
+                      <Doughnut data={data3} options={options} height={250} />
+                      <p className="body">누적 {totalThirdCnt}</p>
+                      <p className="body">신규 {thirdCnt}</p>
+                    </Paper>
+                  </Grid>
+              </Grid>
+          </Box>
         </div>
     )
 }

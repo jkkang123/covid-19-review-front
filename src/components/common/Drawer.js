@@ -13,6 +13,7 @@ import ArticleRoundedIcon from '@mui/icons-material/ArticleRounded';
 import ChatBubbleRoundedIcon from '@mui/icons-material/ChatBubbleRounded';
 import LiveHelpRoundedIcon from '@mui/icons-material/LiveHelpRounded';
 import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
+import { Link, Route, Routes } from 'react-router-dom';
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
@@ -27,6 +28,38 @@ export default function TemporaryDrawer() {
     setState({ ...state, [anchor]: open });
   };
 
+  // 리스트 링크 셀렉터 linkToSelector
+  const linkToSelector = (text) => {
+    switch (text) {
+      case '홈':
+        return '/'
+      case '접종 후기':
+        return '/review'
+      case '뉴스':
+        return '/news'
+      case '채팅':
+        return '/chat'
+      case '백신패스 Q & A':
+        return '/faq'
+    }
+  }
+
+  // 리스트 아이템 아이콘 셀렉터 iconSelector
+  const iconSelector = (text) => {
+    switch (text) {
+      case '홈':
+        return <HomeRoundedIcon color="primary"/> 
+      case '접종 후기':
+        return <RateReviewRoundedIcon color="primary"/>
+      case '뉴스':
+        return <ArticleRoundedIcon color="primary"/>
+      case '채팅':
+        return <ChatBubbleRoundedIcon color="primary"/>
+      case '백신패스 Q & A':
+        return <LiveHelpRoundedIcon color="primary"/>
+    }
+  }
+
   const list = (anchor) => (
     <Box
       sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
@@ -36,40 +69,16 @@ export default function TemporaryDrawer() {
     >
       <List>
         {['홈', '접종 후기', '뉴스', '채팅', '백신패스 Q & A'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {(() => {
-                switch (text) {
-                  case '홈':
-                    return <HomeRoundedIcon color="primary"/> 
-                  case '접종 후기':
-                    return <RateReviewRoundedIcon color="primary"/>
-                  case '뉴스':
-                    return <ArticleRoundedIcon color="primary"/>
-                  case '채팅':
-                    return <ChatBubbleRoundedIcon color="primary"/>
-                  case '백신패스 Q & A':
-                    return <LiveHelpRoundedIcon color="primary"/>
-                }
-              })()}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+          <Link to={ linkToSelector(text) } className="link">
+            <ListItem button key={text}>
+              <ListItemIcon>
+                { iconSelector(text) }
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          </Link>
         ))}
       </List>
-      {/* 
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      */}
     </Box>
   );
 
@@ -79,7 +88,7 @@ export default function TemporaryDrawer() {
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
             <MenuRoundedIcon 
-              color="primary"
+              color="info"
             />
           </Button>
           <Drawer

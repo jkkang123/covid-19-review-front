@@ -36,22 +36,6 @@ const names2 = [
     '인기순',
 ];
 
-/*
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight:
-      personName.indexOf(name) === -1
-        ? theme.typography.fontWeightRegular
-        : theme.typography.fontWeightMedium,
-  };
-}
-*/
-
-/* 
-chip 배경색상 바꾸기 어떻게 하는지 모르겠다~~! 
-https://codesandbox.io/s/material-ui-chips-jeooi?from-embed=&file=/StatusChip.js 참고
-*/
-
 export default function SelectBox({ vaccine, status }) {
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
@@ -103,11 +87,6 @@ export default function SelectBox({ vaccine, status }) {
               key={name}
               value={name}
               onClick={ColorHandler}
-              /*
-              style={
-                getStyles(name, personName, theme)
-              }
-              */
             >
               {name}
             </MenuItem>

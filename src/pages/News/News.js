@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import React from 'react'
 import axios from 'axios';
 import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
 import Tags from '../../components/common/common-practice'
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
-// pagination의 숫자를 클릭하면 자동으로 색상이 들어옴, 그런데 selectBox를 Change했을 때 pagination만 변하지 않는다. 연동하는 방법은 ?
-// <Pagination page={ page } /> --> 실패. 왜??
+
+
 export default function News() {
 
     const [news, setNews] = useState([]);
@@ -67,6 +69,7 @@ export default function News() {
         .replace(/<b>/g, "")
         .replace(/&quot;/g, "")
         .replace(/<\/b>/gi, "")
+        .replace(/&gt;/gi, "")
     }
    
     useEffect(() => {
@@ -76,35 +79,46 @@ export default function News() {
 
     return (
         <div>
-            <select onChange = { e => { querySelector(e); jumpFirst(); } }>
-                <option value="화이자">화이자</option>
-                <option value="모더나">모더나</option>
-                <option value="부스터샷">부스터샷</option>
-            </select>
-            <Tags/>
+            <Box sx={{ maxWidth:1200, margin:'20px auto' }}>
+                {/* 백신 셀렉트 박스 */}
+                <select onChange = { e => { querySelector(e); jumpFirst(); } }>
+                    <option value="화이자">화이자</option>
+                    <option value="모더나">모더나</option>
+                    <option value="부스터샷">부스터샷</option>
+                </select>
 
-            {
-                news.map((item, i) => {
-                    return(
-                        <div key={i}>
-                            <h1>{ cleanString(item.title) }</h1>
-                            <p>{ cleanString(item.description) }</p>
-                            <span>{ moment(item.pubDate).format('YYYY. MM. DD.') }</span>
-                            
-                            <hr/>
-                        </div>
-                    )
-                })
-            }
+                <Tags/>
 
-            <Stack spacing={2}>
-                <Pagination 
-                    onChange={ (e,value) => {setPage(value)} } 
-                    count={ pageCounts } 
-                    color="primary" 
-                    page={ page }
-                />
-            </Stack>
+                {/* 뉴스 */}
+                <Grid container spacing={2}>
+                    {
+                        news.map((item, i) => {
+                            return(
+                                <Grid item xs={12} lg={6} key={i}>
+                                    <a href={ item.link }>
+                                        <Paper className="popular paper" elevation={2}>
+                                            <h1 className="subtitle">{ cleanString(item.title) }</h1>
+                                            <p className="body">{ cleanString(item.description) }</p>
+                                            <span className="date">{ moment(item.pubDate).format('YYYY. MM. DD.') }</span>
+                                        </Paper>
+                                    </a>
+                                </Grid>
+                            )
+                        })
+                    }
+                </Grid>
+                
+                {/* 페이지네이션 */}
+                <Box sx={{ margin: '30px auto' }}>
+                    <Pagination 
+                        onChange={ (e,value) => {setPage(value)} } 
+                        count={ pageCounts } 
+                        color="primary" 
+                        page={ page }
+                        sx={{ justifyContent: 'center' }}
+                    />
+                </Box>
+            </Box>
         </div>
     )
 }

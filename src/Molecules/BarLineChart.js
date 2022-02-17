@@ -1,8 +1,7 @@
 import { Bar, Chart } from 'react-chartjs-2'
 import 'chart.js/auto'; 
 import { useState, useEffect } from 'react'
-import axios from 'axios';
-import XMLParser from 'react-xml-parser';
+import Box from '@mui/material/Box';
 
 const BarLineChart = () => {
 
@@ -99,8 +98,12 @@ const BarLineChart = () => {
 
     return(
         <div>
-          <h1>국내 신규 확진자</h1>
-          <Bar data={data} options={options}/>
+          <h1 className="subtitle">국내 신규 확진자</h1>
+          <Box
+            
+          >
+            <Bar data={data} options={options} height="210rem" />
+          </Box>
         </div>
     )
 
