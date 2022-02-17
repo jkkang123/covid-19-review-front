@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const DEV_URL = 'http://ec2-13-124-162-173.ap-northeast-2.compute.amazonaws.com';
+const DEV_URL = 'http://ec2-3-36-239-6.ap-northeast-2.compute.amazonaws.com';
 const DEV_TEST_URL = 'http://192.168.50.103:5010/api/v1/';
 
 const HOST = window.location.hostname;

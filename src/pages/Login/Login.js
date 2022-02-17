@@ -2,6 +2,8 @@ import './Login.scss';
 import { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
 import Signin from 'pages/Signup/Signup';
+import { useDispatch } from "react-redux";
+import { saveUser } from 'redux/Actions';
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
@@ -31,6 +33,7 @@ export default function Login({ onGoogleLogin }) {
     const [disabled, setDisabled] = useState(true);
     const [LoginOpen, setLoginOpen] = React.useState(false);
     const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch()
 
     // ===== 구글 소셜 로그인 start ===== //
     // 구글 클라이언트 ID / Secret
@@ -117,8 +120,13 @@ export default function Login({ onGoogleLogin }) {
             password: password
         }
         try {
-            const data = await axios.get('/login', {params: model});
+            const {data} = await axios.get('/login', {params: model});
             // window.localStorage.setItem('accesstoken', data.accesstoken)
+            console.log(data)
+             dispatch(saveUser({
+                nickname: data.nickname,
+                profileImageUrl: data.profileImageUrl
+            }));
             setLogin(true);
         } catch (e) {
             console.log(e.response); 

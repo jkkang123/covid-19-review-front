@@ -5,8 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux'
-import rootReducer from './redux/Reducers'
+import { persistor, store } from './redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { PersistGate } from "redux-persist/integration/react";
 
 import Header from './pages/Header/Header.js';
 import News from './pages/News/News.js';
@@ -16,26 +17,26 @@ import Dialogs from 'Molecules/Dialogs';
 import Select from 'components/common/common-practice';
 import './App.scss';
 
-
-const store = createStore(rootReducer);
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
-      <Header />
+    <PersistGate persistor={persistor}>
+      <BrowserRouter>
+        <Header />
 
-      <Routes>
-        <Route 
-          path="/" 
-          element = {<Home />} 
-        />
+        <Routes>
+          <Route 
+            path="/" 
+            element = {<Home />} 
+          />
 
-        <Route 
-          path="/news" 
-          element = {<News />} 
-        />
-      </Routes>
-      <App />
-    </BrowserRouter>
+          <Route 
+            path="/news" 
+            element = {<News />} 
+          />
+        </Routes>
+        <App />
+      </BrowserRouter>
+    </PersistGate>
   </Provider>,
   document.getElementById('root')
 );
