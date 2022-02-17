@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from 'redux-thunk'
-import reducers from './reducers'
+import reducers from './Reducers'
 import { createLogger } from "redux-logger";
 import { persistStore } from "redux-persist";
 
