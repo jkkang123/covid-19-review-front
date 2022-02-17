@@ -28,6 +28,18 @@ ReactDOM.render(
             path="/" 
             element = {<Home />} 
           />
+          {/* 셀렉트 박스 S
+          <Select />
+          */} 
+          <Route 
+            path="/" 
+            element = {<Home />} 
+          />
+
+          <Route 
+            path="/news" 
+            element = {<News />} 
+          />
 
           <Route 
             path="/news" 
