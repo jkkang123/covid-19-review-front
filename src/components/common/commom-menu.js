@@ -1,9 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { Button } from '@material-ui/core';
 
-const CommomMenu = ({openState, anchorEl, handleClick, handleClose, AnchorNode }) => {
+const CommomMenu = ({openState, anchorEl, handleClick, handleClose, AnchorNode, children }) => {
     return (
             <>  
             {
@@ -17,9 +16,7 @@ const CommomMenu = ({openState, anchorEl, handleClick, handleClose, AnchorNode }
                 onClose={handleClose}
                 onClick={handleClose}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                {children}
             </Menu>
         </>
     )

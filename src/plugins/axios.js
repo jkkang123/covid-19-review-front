@@ -21,7 +21,7 @@ axiosInstance.defaults.headers['Content-Type'] = DEFAULT_ACCEPT_TYPE;
 
 axiosInstance.interceptors.request.use((config) => {
   if (window.localStorage.getItem('accessToken')) {
-    config.headers.Authorization = 'Bearer ' + window.localStorage.getItem('accessToken');
+    config.headers.Authorization = window.localStorage.getItem('accessToken');
   }
 
   return config

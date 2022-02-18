@@ -69,7 +69,7 @@ export default function TemporaryDrawer() {
     >
       <List>
         {['홈', '접종 후기', '뉴스', '채팅', '백신패스 Q & A'].map((text, index) => (
-          <Link to={ linkToSelector(text) } className="link">
+          <Link to={ linkToSelector(text) } key={index} className="link">
             <ListItem button key={text}>
               <ListItemIcon>
                 { iconSelector(text) }

@@ -4,6 +4,7 @@ import { TextField, Button } from '@material-ui/core';
 import Signin from 'pages/Signup/Signup';
 import { useDispatch } from "react-redux";
 import { saveUser } from 'redux/Actions';
+import { useNavigate } from 'react-router-dom';
 
 import * as React from 'react';
 import PropTypes from 'prop-types';
@@ -23,7 +24,7 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
 // Login Component
-export default function Login({ onGoogleLogin }) {
+export default function Login() {
 
     const [id, setId] = useState("");
     const [password, setPassword] = useState("");
@@ -34,6 +35,7 @@ export default function Login({ onGoogleLogin }) {
     const [LoginOpen, setLoginOpen] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     // ===== 구글 소셜 로그인 start ===== //
     // 구글 클라이언트 ID / Secret
@@ -42,17 +44,17 @@ export default function Login({ onGoogleLogin }) {
 
     // 구글 로그인 성공시
     const onSuccess = async(response) => {
-        const { googleId, profileObj : { email, name } } = response;
+        const { code } = response;
         setLogin(true);
         console.log(response);
-
-        await onGoogleLogin({
-            // 구글 로그인 성공시 서버에 전달할 데이터
-            socialId : googleId,
-            socialType : 'google',
-            email,
-            nickname : name
-        });
+        const { data } = await axios.get(`/login/GOOGLE/callback?code=${code}`)
+        window.localStorage.setItem('accessToken', data.accessToken)
+        dispatch(saveUser({
+            nickname: data.nickname,
+            profileImageUrl: data.profileImageUrl
+        }));
+        setLogin(true);
+        navigate(0)
     }
     // 구글 로그인 실패시
     const onFailure = (error) => {
@@ -121,13 +123,13 @@ export default function Login({ onGoogleLogin }) {
         }
         try {
             const {data} = await axios.get('/login', {params: model});
-            // window.localStorage.setItem('accesstoken', data.accesstoken)
-            console.log(data)
+            window.localStorage.setItem('accessToken', data.accessToken)
              dispatch(saveUser({
                 nickname: data.nickname,
                 profileImageUrl: data.profileImageUrl
             }));
             setLogin(true);
+            navigate(0)
         } catch (e) {
             console.log(e.response); 
         }
@@ -213,7 +215,7 @@ export default function Login({ onGoogleLogin }) {
                         <li>
                             <GoogleLogin
                                 clientId={clientId}
-                                responseType={"id_token"}
+                                responseType={"code"}
                                 onSuccess={onSuccess}
                                 onFailure={onFailure}
                             />

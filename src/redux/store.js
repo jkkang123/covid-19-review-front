@@ -17,5 +17,3 @@ if (env !== 'development') {
 export const store = tempStore;
 
 export const persistor = persistStore(store);
-
-export default { store, persistor };

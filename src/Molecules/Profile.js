@@ -1,8 +1,13 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CommomMenu from '../components/common/commom-menu';
 import { Button } from '@material-ui/core';
+import MenuItem from '@mui/material/MenuItem';
+import { useDispatch } from "react-redux";
+import { logout } from 'redux/Actions';
+import { useNavigate } from 'react-router-dom';
+
 
 let Box = styled.div`
     display:flex;
@@ -10,13 +15,13 @@ let Box = styled.div`
     gap:10px;
 `;
 
-
-export default function Profile({ nickName, big }) {
+export default function Profile({ nickName, size, profileImage }) {
 
     const [image, setImage] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null)
-
     const open = Boolean(anchorEl);
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -26,6 +31,17 @@ export default function Profile({ nickName, big }) {
         setAnchorEl(null);
     };
 
+    const clickLogout = () => {
+        dispatch(logout())
+        navigate(0)
+    }
+
+    useEffect(() => {
+        if (profileImage) {
+            setImage(profileImage)
+        }
+    },[])
+
     return (
         <Box>
             <CommomMenu 
@@ -34,14 +50,13 @@ export default function Profile({ nickName, big }) {
                         {/* 프로필 사진 */}
                         { 
                             image
-
                             ? /* 프로필 사진이 있을 때 */
                             <div style={{
-                                width: big ? 50 : 40,
-                                height: big ? 50 : 40
+                                width: size === 'big' ? 50 : 40,
+                                height: size === 'big' ? 50 : 40
                             }}>
                                 <img 
-                                    src="img/profile.jpg" 
+                                    src={image} 
                                     alt=''
                                     style={{ 
                                         width:'100%',
@@ -51,12 +66,11 @@ export default function Profile({ nickName, big }) {
                                     }}
                                 />
                             </div>
-
                             : /* 프로필 사진이 없을 때 */
                             <AccountCircleIcon 
                                 style={{
-                                    width: big ? 50 : 40,
-                                    height: big ? 50 : 40
+                                    width: size === 'big' ? 50 : 40,
+                                    height: size === 'big' ? 50 : 40
                                 }}
                             />
                         }
@@ -66,16 +80,20 @@ export default function Profile({ nickName, big }) {
                 openState={open}
                 handleClick={handleClick}
                 handleClose={handleClose}
-            />
+            >
+                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={clickLogout}>Logout</MenuItem>
+            </CommomMenu>
 
             {/* 닉네임 */}
             <p
                 style={{
-                    fontSize: big ? 18 : 16,
+                    fontSize: size === 'big' ? 18 : 16,
                     color:'#333'
                 }}
             >
-                { nickName ? '닉네임' : null }
+                { nickName ? nickName : null }
             </p>
         </Box>  
     )
