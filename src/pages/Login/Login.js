@@ -1,7 +1,7 @@
 import './Login.scss';
 import { useState, useEffect } from 'react';
 import { TextField, Button } from '@material-ui/core';
-import Signin from 'pages/Signup/Signup';
+import Signin from 'pages/signup/Signup';
 import { useDispatch } from "react-redux";
 import { saveUser } from 'redux/Actions';
 import { useNavigate } from 'react-router-dom';

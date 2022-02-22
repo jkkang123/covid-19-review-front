@@ -9,9 +9,10 @@ import { persistor, store } from './redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PersistGate } from "redux-persist/integration/react";
 
-import Header from './pages/Header/Header.js';
-import News from './pages/News/News.js';
-import Home from './pages/Home/Home.js';
+import Header from './pages/header/Header.js';
+import News from './pages/news/News.js';
+import Home from './pages/home/Home.js';
+import Review from 'pages/board/Review';
 import Profile from 'Molecules/Profile';
 import Dialogs from 'Molecules/Dialogs';
 import Select from 'components/common/common-practice';
@@ -44,6 +45,10 @@ ReactDOM.render(
           <Route 
             path="/news" 
             element = {<News />} 
+          />
+          <Route
+            path="/review"
+            element= {<Review/>}
           />
         </Routes>
         <App />

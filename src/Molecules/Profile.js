@@ -17,7 +17,6 @@ let Box = styled.div`
 
 export default function Profile({ nickName, size, profileImage }) {
 
-    const [image, setImage] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null)
     const open = Boolean(anchorEl);
     const dispatch = useDispatch()
@@ -36,12 +35,6 @@ export default function Profile({ nickName, size, profileImage }) {
         navigate(0)
     }
 
-    useEffect(() => {
-        if (profileImage) {
-            setImage(profileImage)
-        }
-    },[])
-
     return (
         <Box>
             <CommomMenu 
@@ -49,14 +42,14 @@ export default function Profile({ nickName, size, profileImage }) {
                     <Button onClick={handleClick}>
                         {/* 프로필 사진 */}
                         { 
-                            image
+                            profileImage
                             ? /* 프로필 사진이 있을 때 */
                             <div style={{
                                 width: size === 'big' ? 50 : 40,
                                 height: size === 'big' ? 50 : 40
                             }}>
                                 <img 
-                                    src={image} 
+                                    src={profileImage} 
                                     alt=''
                                     style={{ 
                                         width:'100%',
