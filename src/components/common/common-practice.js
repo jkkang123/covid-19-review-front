@@ -5,7 +5,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { makeStyles } from '@material-ui/core/styles';
 
-export default function Tags() {
+export default function Tags({ onChange, onDelete }) {
     // 백신 옵션
     const [selectedVal, setSelectedVal] = useState([])
     const VaccineOptions = [
@@ -23,6 +23,7 @@ export default function Tags() {
           defaultValue={[VaccineOptions[0]]}
           isOptionEqualToValue={(option, value) => option.title === value.title}
           filterSelectedOptions
+          onChange = {onChange}
           renderTags={(value, getTagProps) =>
             value.map((option, index) => (
               <Chip
@@ -31,6 +32,7 @@ export default function Tags() {
                 variant="filled"
                 label={option.title}
                 {...getTagProps({ index })}
+                onDelete={onDelete}
               />
             ))
           }

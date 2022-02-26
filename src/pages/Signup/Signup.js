@@ -13,6 +13,8 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import CommonDialog from 'components/common/common-dialog';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 
 // Signup Component
 export default function Signup() {
@@ -196,11 +198,36 @@ export default function Signup() {
                     : /* 회원가입 인풋창 */
                     <>
                     <DialogContent dividers>
-                        <div className="profile_input_wrap">
+                        <Grid container>
                             {/* 프로필 박스 */}
-                            <div className="profile_box">
+                            <Grid 
+                                item  
+                                xs={12}
+                                sx={{
+                                    position:'relative',
+                                    display:'flex',
+                                    alignItem:'center',
+                                    justifyContent:'center',
+                                    ' & > label ':{
+                                        position:'absolute',
+                                        bottom:0,
+                                        right:'35%',
+                                    }
+                                }}    
+                            >
                                 {/* 이미지 박스 */}
-                                <div className="img_box">
+                                <Box
+                                    sx={{
+                                        width:150,
+                                        height:150,
+                                        ' & > * ': {
+                                          width:'100%',
+                                          height:'100%',
+                                          objectFit:'cover',
+                                          borderRadius:'50%',
+                                        },
+                                    }}    
+                                >
                                     <img 
                                         src={ 
                                             image === ''
@@ -208,9 +235,9 @@ export default function Signup() {
                                             : image
                                         } 
                                         onClick={ () => fileInput.current.click() }
-                                        alt="프로필" 
+                                        alt="프로필"
                                     />
-                                </div>
+                                </Box>
                                 
                                 {/* 프로필 인풋 */}
                                 <input 
@@ -225,21 +252,27 @@ export default function Signup() {
 
                                 {/* 포토 아이콘 ( 라벨 ) */}
                                 <label htmlFor="profile">
-                                    <AddAPhotoIcon 
-                                        color="primary" 
-                                        style={{fontSize:40}}
-                                    />
+                                    <AddAPhotoIcon color="primary"/>
                                 </label>
-                            </div>
+                            </Grid>
 
                             {/* 오른쪽 */}
-                            <div className="right_box">
+                            <Grid 
+                                item 
+                                xs={12}
+                                sx={{
+                                    '& > *':{
+                                        display:'block',
+                                        width:'100%',
+                                    }
+                                }}
+                            >
                                 {/* 이름 인풋 */}
                                 <TextField 
                                     label="이름" 
                                     type="text" 
                                     name="name" 
-                                    variant="outlined"
+                                    variant="standard"
                                     value={ name } 
                                     onChange={ onNameHandler } 
                                     required
@@ -252,7 +285,7 @@ export default function Signup() {
                                     label="닉네임" 
                                     type="text" 
                                     name="validation" 
-                                    variant="outlined"
+                                    variant="standard"
                                     value={ nickName } 
                                     onChange={ onNickNameHandler } 
                                     required
@@ -265,7 +298,7 @@ export default function Signup() {
                                     label="아이디" 
                                     type="text" 
                                     name="validation" 
-                                    variant="outlined"
+                                    variant="standard"
                                     value={ id } 
                                     onChange={ onIdHandler } 
                                     required
@@ -278,7 +311,7 @@ export default function Signup() {
                                     label="비밀번호" 
                                     type="password" 
                                     name="validation" 
-                                    variant="outlined"
+                                    variant="standard"
                                     value={ password } 
                                     onChange={ onPassHandler } 
                                     required
@@ -291,7 +324,7 @@ export default function Signup() {
                                     label="비밀번호 확인" 
                                     type="password" 
                                     name="validation" 
-                                    variant="outlined"
+                                    variant="standard"
                                     value={ passConfirm } 
                                     onChange={ onPassConfirmHandler } 
                                     required
@@ -305,6 +338,9 @@ export default function Signup() {
                                     variant="contained"
                                     color="primary"
                                     size="large"
+                                    style={{
+                                        marginTop:'20px',
+                                    }}
                                 >
                                     백신 정보 인증
                                 </Button>
@@ -313,8 +349,8 @@ export default function Signup() {
                                 <FormGroup>
                                     <FormControlLabel control={<Checkbox defaultChecked />} label="이메일 수신 동의" />
                                 </FormGroup>
-                            </div>
-                        </div>
+                            </Grid>
+                        </Grid>
                     </DialogContent>
                 
                     {/* 회원가입 버튼 */}
