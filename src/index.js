@@ -13,7 +13,7 @@ import Header from './pages/header/Header.js';
 import News from './pages/news/News.js';
 import Home from './pages/home/Home.js';
 import Review from 'pages/board/Review';
-import Profile from 'Molecules/Profile';
+import Profile from 'pages/board/Profile';
 import Dialogs from 'Molecules/Dialogs';
 import './App.scss';
 
@@ -28,26 +28,20 @@ ReactDOM.render(
             path="/" 
             element = {<Home />} 
           />
-          {/* 셀렉트 박스 S
-          <Select />
-          */} 
-          <Route 
-            path="/" 
-            element = {<Home />} 
-          />
 
           <Route 
             path="/news" 
             element = {<News />} 
           />
 
-          <Route 
-            path="/news" 
-            element = {<News />} 
-          />
           <Route
             path="/review"
             element= {<Review/>}
+          />
+
+          <Route
+            path="/profile"
+            element= {<Profile/>}
           />
         </Routes>
         <App />

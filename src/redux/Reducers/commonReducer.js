@@ -3,7 +3,7 @@ import produce from 'immer'
 const initialState = {
   user: {
     nickname: '',
-    profileImageUrl: ''
+    profileImageUrl: '',
   }
 }
 
