@@ -15,7 +15,6 @@ import Home from './pages/home/Home.js';
 import Review from 'pages/board/Review';
 import Profile from 'Molecules/Profile';
 import Dialogs from 'Molecules/Dialogs';
-import Select from 'components/common/common-practice';
 import './App.scss';
 
 ReactDOM.render(
