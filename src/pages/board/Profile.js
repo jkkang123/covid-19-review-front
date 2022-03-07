@@ -261,7 +261,6 @@ export default function Profile() {
             {/* 이메일인증 버튼 */}
             <Button 
                 autoFocus 
-                onClick={ (e) => { submitHandler(e); }}
                 variant="contained"
                 color="primary"
                 size="large"

@@ -7,11 +7,4 @@ module.exports = function (app) {
             '^/api/': '/'
         }
     }));
-    app.use(
-        '/mail',
-        createProxyMiddleware({
-            target: 'http://localhost:5000',
-            changeOrigin: true,
-        })
-    );
 };
