@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Menu from '@mui/material/Menu';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 const CommomMenu = ({openState, anchorEl, handleClick, handleClose, AnchorNode, children }) => {
     return (

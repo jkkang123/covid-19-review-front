@@ -14,6 +14,8 @@ const CommonDialog = ({ openState, handleClose, children }) => {
     <Dialog
         onClose={handleClose}
         open={open}
+        fullWidth
+        className='commmon-dialog'
     >
         {children}
     </Dialog>

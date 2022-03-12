@@ -3,3 +3,9 @@
 .review-page{
     display: flex;
 }
+
+.common-dialog{
+    .MuiDialog-paper{
+        width: 600px
+    }
+}

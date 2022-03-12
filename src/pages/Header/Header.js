@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Signup from 'pages/signup/Signup';
 import Login from 'pages/login/Login';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import Button from '@mui/material/Button';
+import {Button} from '@mui/material';
 import Profile from 'Molecules/Profile';
 import Drawer from 'components/common/Drawer';
 import {useSelector} from "react-redux"

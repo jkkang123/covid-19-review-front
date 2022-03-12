@@ -1,6 +1,6 @@
 import './Signup.scss';
 import { useState, useRef, useEffect } from 'react';
-import { TextField, Button, FormGroup, FormControlLabel, Checkbox } from '@material-ui/core';
+import { TextField, Button, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import axios from '../../plugins/axios';
 
@@ -177,7 +177,7 @@ export default function Signup() {
     
     return (
         <form className="signin">
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" style={{color: "#fff"}} onClick={handleClickOpen}>
                 Sign up
             </Button>
 

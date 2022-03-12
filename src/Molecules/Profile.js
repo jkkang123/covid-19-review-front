@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CommomMenu from '../components/common/commom-menu';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import { useDispatch } from "react-redux";
 import { logout } from 'redux/Actions';

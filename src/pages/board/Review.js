@@ -1,6 +1,17 @@
-import React from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import ReviewCard from './components/ReviewCard'
 import './Review.scss'
+import axios from '../../plugins/axios'
+import qs from 'qs'
+import Button from '@mui/material/Button';
+import DialogTitle from '@mui/material/DialogTitle';
+import CommonDialog from 'components/common/common-dialog';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 
 const MockData = [
     {
@@ -29,18 +40,198 @@ const MockData = [
     }
 ]
 
+const MockPostData = [
+  {
+    id: 0,
+    likeCount: 0,
+    ordinalNumber: 1,
+    thisUserLike: true,
+    title: '모더나 접종 후기글1',
+    vaccineType: 'MODERNA',
+    viewCount: 0,
+    writer: '강재규1'
+  },
+  {
+    id: 0,
+    likeCount: 0,
+    ordinalNumber: 1,
+    thisUserLike: true,
+    title: '모더나 접종 후기글2',
+    vaccineType: 'MODERNA',
+    viewCount: 0,
+    writer: '강재규2'
+  },
+  {
+    id: 0,
+    likeCount: 0,
+    ordinalNumber: 1,
+    thisUserLike: true,
+    title: '모더나 접종 후기글3',
+    vaccineType: 'MODERNA',
+    viewCount: 0,
+    writer: '강재규3'
+  },
+  {
+    id: 0,
+    likeCount: 0,
+    ordinalNumber: 1,
+    thisUserLike: true,
+    title: '모더나 접종 후기글4',
+    vaccineType: 'MODERNA',
+    viewCount: 0,
+    writer: '강재규4'
+  },
+  {
+    id: 0,
+    likeCount: 0,
+    ordinalNumber: 1,
+    thisUserLike: true,
+    title: '모더나 접종 후기글5',
+    vaccineType: 'MODERNA',
+    viewCount: 0,
+    writer: '강재규5'
+  }
+]
+
 const Review = () => {
+  const [isOpenDialog, setIsOpenDialog] = useState(false)
+  const [vaccineValue, setVaccineValue] = useState('')
+  const [titleValue, setTitleValue] = useState('')
+  const [contentValue, setContentValue] = useState('')
+  const [files, setFile] = useState([]);
+  const [image, setImage] = useState([]);
+  const fileInput = useRef(null);
+
+  const getPost = async () => {
+    try {
+      const { data } = await axios.get('/post')
+      console.log(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const onCilckVaccine = (e) => {
+    setVaccineValue(e.target.value)
+  }
+
+  const openPostDialog = () => {
+    setIsOpenDialog(true)
+  }
+
+  const closePostDialog = () => {
+    setIsOpenDialog(false)
+  }
+
+  const onImageHandler = (e) => {
+    if(e.target.files.length !== 0){
+      setFile(e.target.files)
+    } else{  
+      return
+    }
+    const files = Array.from(e.target.files);
+    Promise.all(files.map(file => {
+      return (new Promise((resolve,reject) => {
+          const reader = new FileReader();
+          reader.addEventListener('load', (ev) => {
+              resolve(ev.target.result);
+          });
+          reader.addEventListener('error', reject);
+          reader.readAsDataURL(file);
+      }));
+    }))
+    .then(images => {
+        /* Once all promises are resolved, update state with image URI array */
+        setImage(images)
+    }, error => {        
+        console.error(error);
+    });
+
+  }
+
+  const onClickSavePost = async () => {
+    const formdata = new FormData();
+    if (image.length !== 0) {
+      for (let i = 0; i < image.length; i++) {
+        formdata.append('multipartFile', image[i])
+      }
+    }
+    const model = {
+      content: contentValue,
+      title: titleValue,
+      vaccineType: vaccineValue,
+      ordinalNumber: 1
+    }
+    const params = qs.stringify(model)
+    try {
+      const { data } = await axios.post(`/post?${params}`, formdata)
+      console.log(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  useEffect(()=> {
+    getPost()
+  }, [])
   return (
     <div className='review-page'>
         {MockData.map((elem, index) => 
-            <ReviewCard
-                key={index}
-                title={elem.title}
-                vaccine={elem.vaccine}
-                previewImage={elem.previewImage}
-                contents={elem.contents}
-            />
+          <ReviewCard
+            key={index}
+            title={elem.title}
+            vaccine={elem.vaccine}
+            previewImage={elem.previewImage}
+            contents={elem.contents}
+          />
         )}
+        <Button variant="contained" onClick={openPostDialog}>글쓰기</Button>
+        <CommonDialog openState={isOpenDialog} handleClose={closePostDialog}>
+          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="vaccine-select-label">백신</InputLabel>
+            <Select
+              labelId="백신 선택"
+              id="vaccine-select"
+              value={vaccineValue}
+              label="백신"
+              defaultValue={''}
+              onChange={onCilckVaccine}
+            >
+              <MenuItem value={'ASTRAZENECA'}>아스트라제네카</MenuItem>
+              <MenuItem value={'JANSSEN'}>얀센</MenuItem>
+              <MenuItem value={'MODERNA'}>모더나</MenuItem>
+              <MenuItem value={'PFIZER'}>화이자</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField id="post-title" label="제목" placeholder='제목을 입력해 주세요' variant="outlined" value={titleValue} onChange={(e) => setTitleValue(e.target.value)}/>
+          <TextField id="post-content" label="접종후기" placeholder='내용을 입력해 주세요' multiline rows={10} value={contentValue} onChange={(e) => setContentValue(e.target.value)}/>
+          <Box
+            sx={{width:150,height:150,
+                ' & > * ': {
+                  width:'100%',
+                  height:'100%',
+                  objectFit:'cover'
+                },
+            }}    
+          >
+            <img 
+              src={ "https://upload.wikimedia.org/wikipedia/commons/9/9e/Plus_symbol.svg"} 
+              onClick={ () => fileInput.current.click() }
+              alt="프로필"
+            />
+          { image.map((item, index) => (
+              <img 
+                key={index}
+                src={item} 
+                onClick={ () => fileInput.current.click() }
+                alt="프로필"
+              />
+            ))
+          }
+          </Box>
+          <input type='file' style={{display:'none'}} accept='image/jpg,impge/png,image/jpeg' name='profile_img' id="profile" multiple onChange={ onImageHandler } ref={ fileInput }/>
+          <Button variant="contained" onClick={onClickSavePost}>저장</Button>
+        </CommonDialog>
     </div>
   )
 }

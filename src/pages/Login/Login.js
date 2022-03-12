@@ -1,6 +1,6 @@
 import './Login.scss';
 import { useState, useEffect } from 'react';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button } from '@mui/material';
 import Signin from 'pages/signup/Signup';
 import { useDispatch } from "react-redux";
 import { saveUser } from 'redux/Actions';
@@ -141,7 +141,7 @@ export default function Login() {
 
     return (
         <form className="login">
-            <Button variant="outlined" onClick={handleClickOpen}>
+            <Button variant="outlined" style={{color: "#fff"}} onClick={handleClickOpen}>
                 Log in
             </Button>
 

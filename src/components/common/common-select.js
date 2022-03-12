@@ -3,7 +3,6 @@ import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
-import { makeStyles } from '@material-ui/core/styles';
 
 export default function Tags({ onChange }) {
     // 백신 옵션
