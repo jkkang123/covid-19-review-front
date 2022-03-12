@@ -6,3 +6,4 @@ export const saveUser = user => ({
 export const logout = () => ({
   type : "LOGOUT"
 }) 
+

@@ -2,7 +2,7 @@
     "compilerOptions": {
         "baseUrl": "src"
     },
-    "include": ["src"],
+    "include": ["src", "server"],
     "paths": {
         "@assets/*": [
             "./src/assets/*"
