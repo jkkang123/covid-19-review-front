@@ -125,7 +125,22 @@ const Review = () => {
   }
 
   const closePostDialog = () => {
-    resetPostDialog()
+    if (titleValue || contentValue || image.length !== 0){
+      if (window.confirm("저장 되지 않은 내용이 있습니다 정말 나가겠습니까?")) {
+        alert("삭제되었습니다.");
+        resetPostDialog()
+      } 
+    } else {
+      setIsOpenDialog(false)
+    }
+  }
+
+  const resetPostDialog = () => {
+    setVaccineValue('')
+    setTitleValue('')
+    setContentValue('')
+    setImage([])
+    setIsOpenDialog(false)
   }
 
   const onImageHandler = (e) => {
@@ -169,33 +184,17 @@ const Review = () => {
     }
     const params = qs.stringify(model)
     try {
-      const { data } = await axios.post(`/post?${params}`, formdata)
-      console.log(data)
+      await axios.post(`/post?${params}`, formdata)
       resetPostDialog()
+      getPost()
     } catch (error) {
       console.error(error)
-    }
-  }
-
-  const resetPostDialog = () => {
-    if (titleValue || contentValue || image.length !== 0){
-      if (window.confirm("저장 되지 않은 내용이 있습니다 정말 나가겠습니까?")) {
-        alert("삭제되었습니다.");
-        setVaccineValue('')
-        setTitleValue('')
-        setContentValue('')
-        setImage([])
-        setIsOpenDialog(false)
-      } 
-    } else {
-      setIsOpenDialog(false)
     }
   }
 
   useEffect(()=> {
     getPost()
   }, [])
-
 
   return (
     <div className='review-page'>
