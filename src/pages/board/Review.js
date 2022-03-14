@@ -11,7 +11,10 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import TextField from '@mui/material/TextField';
+import CreateIcon from '@mui/icons-material/Create';
 import Box from '@mui/material/Box';
+import { SpeedDial } from '@mui/material';
+import { useBeforeunload } from 'react-beforeunload';
 
 const MockData = [
     {
@@ -94,6 +97,7 @@ const MockPostData = [
 ]
 
 const Review = () => {
+  const [postData, setPostData] = useState([])
   const [isOpenDialog, setIsOpenDialog] = useState(false)
   const [vaccineValue, setVaccineValue] = useState('')
   const [titleValue, setTitleValue] = useState('')
@@ -105,6 +109,7 @@ const Review = () => {
   const getPost = async () => {
     try {
       const { data } = await axios.get('/post')
+      setPostData(data?.pagingPostList)
       console.log(data)
     } catch (error) {
       console.error(error)
@@ -120,7 +125,7 @@ const Review = () => {
   }
 
   const closePostDialog = () => {
-    setIsOpenDialog(false)
+    resetPostDialog()
   }
 
   const onImageHandler = (e) => {
@@ -166,72 +171,93 @@ const Review = () => {
     try {
       const { data } = await axios.post(`/post?${params}`, formdata)
       console.log(data)
+      resetPostDialog()
     } catch (error) {
       console.error(error)
+    }
+  }
+
+  const resetPostDialog = () => {
+    if (titleValue || contentValue || image.length !== 0){
+      if (window.confirm("저장 되지 않은 내용이 있습니다 정말 나가겠습니까?")) {
+        alert("삭제되었습니다.");
+        setVaccineValue('')
+        setTitleValue('')
+        setContentValue('')
+        setImage([])
+        setIsOpenDialog(false)
+      } 
+    } else {
+      setIsOpenDialog(false)
     }
   }
 
   useEffect(()=> {
     getPost()
   }, [])
+
+
   return (
     <div className='review-page'>
-        {MockData.map((elem, index) => 
+      <div className='review-card-list'>
+        {postData.map((elem, index) => 
           <ReviewCard
             key={index}
+            nickname={elem.writer}
             title={elem.title}
-            vaccine={elem.vaccine}
+            vaccine={elem.vaccineType}
             previewImage={elem.previewImage}
-            contents={elem.contents}
           />
         )}
-        <Button variant="contained" onClick={openPostDialog}>글쓰기</Button>
-        <CommonDialog openState={isOpenDialog} handleClose={closePostDialog}>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="vaccine-select-label">백신</InputLabel>
-            <Select
-              labelId="백신 선택"
-              id="vaccine-select"
-              value={vaccineValue}
-              label="백신"
-              defaultValue={''}
-              onChange={onCilckVaccine}
-            >
-              <MenuItem value={'ASTRAZENECA'}>아스트라제네카</MenuItem>
-              <MenuItem value={'JANSSEN'}>얀센</MenuItem>
-              <MenuItem value={'MODERNA'}>모더나</MenuItem>
-              <MenuItem value={'PFIZER'}>화이자</MenuItem>
-            </Select>
-          </FormControl>
-          <TextField id="post-title" label="제목" placeholder='제목을 입력해 주세요' variant="outlined" value={titleValue} onChange={(e) => setTitleValue(e.target.value)}/>
-          <TextField id="post-content" label="접종후기" placeholder='내용을 입력해 주세요' multiline rows={10} value={contentValue} onChange={(e) => setContentValue(e.target.value)}/>
-          <Box
-            sx={{width:150,height:150,
-                ' & > * ': {
-                  width:'100%',
-                  height:'100%',
-                  objectFit:'cover'
-                },
-            }}    
+      </div>
+      <CommonDialog openState={isOpenDialog} handleClose={closePostDialog}>
+        <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <InputLabel id="vaccine-select-label">백신</InputLabel>
+          <Select
+            labelId="백신 선택"
+            id="vaccine-select"
+            value={vaccineValue}
+            label="백신"
+            defaultValue={''}
+            onChange={onCilckVaccine}
           >
+            <MenuItem value={'ASTRAZENECA'}>아스트라제네카</MenuItem>
+            <MenuItem value={'JANSSEN'}>얀센</MenuItem>
+            <MenuItem value={'MODERNA'}>모더나</MenuItem>
+            <MenuItem value={'PFIZER'}>화이자</MenuItem>
+          </Select>
+        </FormControl>
+        <TextField id="post-title" label="제목" placeholder='제목을 입력해 주세요' variant="outlined" value={titleValue} onChange={(e) => setTitleValue(e.target.value)}/>
+        <TextField id="post-content" label="접종후기" placeholder='내용을 입력해 주세요' multiline rows={10} value={contentValue} onChange={(e) => setContentValue(e.target.value)}/>
+        <Box
+          sx={{width:150,height:150, display:'flex',
+              ' & > * ': {
+                width:'100%',
+                height:'100%',
+                objectFit:'cover'
+              },
+          }}    
+        >
+          <img 
+            src={ "https://upload.wikimedia.org/wikipedia/commons/9/9e/Plus_symbol.svg"} 
+            onClick={ () => fileInput.current.click() }
+            alt="프로필"
+          />
+        { image.map((item, index) => (
             <img 
-              src={ "https://upload.wikimedia.org/wikipedia/commons/9/9e/Plus_symbol.svg"} 
+              key={index}
+              src={item} 
               onClick={ () => fileInput.current.click() }
               alt="프로필"
             />
-          { image.map((item, index) => (
-              <img 
-                key={index}
-                src={item} 
-                onClick={ () => fileInput.current.click() }
-                alt="프로필"
-              />
-            ))
-          }
-          </Box>
-          <input type='file' style={{display:'none'}} accept='image/jpg,impge/png,image/jpeg' name='profile_img' id="profile" multiple onChange={ onImageHandler } ref={ fileInput }/>
-          <Button variant="contained" onClick={onClickSavePost}>저장</Button>
-        </CommonDialog>
+          ))
+        }
+        </Box>
+        <input type='file' style={{display:'none'}} accept='image/jpg,impge/png,image/jpeg' name='profile_img' id="profile" multiple onChange={ onImageHandler } ref={ fileInput }/>
+        <Button variant="contained" onClick={onClickSavePost}>저장</Button>
+      </CommonDialog>
+      {/* <Button variant="contained" onClick={openPostDialog}>글쓰기</Button> */}
+      <SpeedDial ariaLabel="open-post-speed-dial" sx={{ position: 'absolute', bottom: 50, right: 50 }} icon={<CreateIcon/>} onClick={openPostDialog}/>
     </div>
   )
 }

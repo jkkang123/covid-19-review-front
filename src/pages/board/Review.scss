@@ -1,7 +1,10 @@
 @import '../../App.scss';
 
 .review-page{
-    display: flex;
+    height: calc(100% - 94px);
+    .review-card-list{
+        display: flex;
+    }
 }
 
 .common-dialog{

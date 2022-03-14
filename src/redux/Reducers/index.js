@@ -10,13 +10,15 @@ const persistConfig = {
   key: "root",
   storage: new CookieStorage(Cookies),
   transform: [transformCircular],
-  blacklist: ['common']
+  blacklist: ['common'],
+  timeout: null
 };
 
 const commonPersistConfig = {
   key: "common",
   storage: new CookieStorage(Cookies),
-  transform: [transformCircular]
+  transform: [transformCircular],
+  timeout: null
 };
 
 const reducers = combineReducers({

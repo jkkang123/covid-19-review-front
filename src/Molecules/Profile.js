@@ -23,7 +23,11 @@ export default function Profile({ nickName, size, profileImage }) {
     const navigate = useNavigate()
     
     const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
+        if (size === 'big') {  
+            setAnchorEl(event.currentTarget);
+        } else {
+            setAnchorEl(null);
+        }
     };
 
     const handleClose = () => {

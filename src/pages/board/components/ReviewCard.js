@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -14,23 +14,34 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import {useSelector} from "react-redux"
 import Profile from 'Molecules/Profile';
 
+import './ReviewCard.scss'
 
-const ReviewCard = ({title, vaccine, previewImage, contents}) => {
-  const userData = useSelector((state) => state.common.user)
 
+const ReviewCard = ({nickname, profileImageUrl, title, vaccine, previewImage, contents}) => {
+  const [vaccineType, setVaccineType] = useState()
+  useEffect(() => {
+    if (vaccine === 'ASTRAZENECA'){
+      setVaccineType('아스트라제네카')
+    } else if (vaccine === 'JANSSEN') {
+      setVaccineType('얀센')
+    } else if (vaccine === 'MODERNA') {
+      setVaccineType('모더나')
+    } else {
+      setVaccineType('화이자')
+    }
+    
+  },[])
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <div>{vaccine ?? vaccine}</div>
+    <Card sx={{ width: 345 }} className='review-card'>
       <CardHeader
+        style={{display: 'block'}}
+        subheader={
+          <div>{'백신 : ' + vaccineType}</div>
+        }
         avatar={
-          <Profile nickName={ userData.nickname } size={ 'small' } profileImage={userData.profileImageUrl}/>
+          <Profile nickName={ nickname } size={ 'small' } profileImage={profileImageUrl}/>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-        title={title}
+        title={'제목 : ' + title}
       />
       {
         previewImage ? 
@@ -43,7 +54,7 @@ const ReviewCard = ({title, vaccine, previewImage, contents}) => {
         : 
         <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
       }
-      <CardContent>
+      {/* <CardContent>
         {
         contents ? 
           <Typography variant="body2" color="text.secondary">
@@ -56,7 +67,7 @@ const ReviewCard = ({title, vaccine, previewImage, contents}) => {
             if you like.
           </Typography>
         }
-      </CardContent>
+      </CardContent> */}
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
