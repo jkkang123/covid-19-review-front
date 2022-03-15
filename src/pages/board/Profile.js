@@ -69,6 +69,7 @@ export default function Profile() {
     const [buttonState, setButtonState] = useState(true);
     const [disabledLookUp, setDisabledLookUp] = useState(true);
     const [wantToChangeProfileImage, setWantToChangeProfileImage] = useState(true);
+    const [whatIPost, setWhatIPost] = useState('');
 
     const [Name, setName] = useState('이지은');
     const [Email, setEmail] = useState('tori@ryanlab.kr');
@@ -106,7 +107,16 @@ export default function Profile() {
         }
     }
 
-    console.log(userData)
+    const getPost = async () => {
+        try {
+            const {data} = await axios.get('/post');
+            const whatIPost = data.pagingPostList.filter(el => el.writer === nickName)
+            setWhatIPost(whatIPost)
+            console.log(whatIPost)
+        } catch (e) {
+            console.log(e.response); 
+        }
+    }
 
     /*
     const clickLookUpBtn = async (e) => {
@@ -245,6 +255,10 @@ export default function Profile() {
     useEffect(()=> {
         changeDisabledLookUp()
     },[idValid])
+
+    useEffect(()=> {
+        getPost()
+    },[])
 
     return (
            <Box sx={{ width: '100%', typography: 'body1' }}>
@@ -460,11 +474,12 @@ export default function Profile() {
                             margin:'0 auto'
                         }}
                     >
-                        {MockData.map((elem, index) => 
+                        {/* MockData --> whatIPost 이 순서로 넣으면 정상작동 / 하지만 npm start, 새로고침 하면 redux-persist 어쩌구 하면서 에러뜸 */}  
+                        {whatIPost.map((elem, index) => 
                             <ReviewCard
                                 key={index}
                                 title={elem.title}
-                                vaccine={elem.vaccine}
+                                vaccine={elem.vaccineType}
                                 previewImage={elem.previewImage}
                                 contents={elem.contents}
                             />

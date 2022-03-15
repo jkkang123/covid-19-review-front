@@ -23,6 +23,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
+import { Cookies } from 'react-cookie';
+
 // Login Component
 export default function Login() {
 
@@ -37,6 +39,18 @@ export default function Login() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
+    /*
+    const cookies = new Cookies();
+
+    const setCookie = (name: string, value: string, option?: any) => {
+        return cookies.set(name, value, {...option})
+    }
+
+    const getCookie = (name: string) => {
+        return cookies.get(name)
+    }
+    */
+
     // ===== 구글 소셜 로그인 start ===== //
     // 구글 클라이언트 ID / Secret
     const clientId = "676913540874-m3q98gj12mqu4ubak3noj6s1juqj4sha.apps.googleusercontent.com"; // 이건 tori@ryanlab.kr 로 받은 거
@@ -44,6 +58,16 @@ export default function Login() {
 
     // 구글 로그인 성공시
     const onSuccess = async(response) => {
+        /*
+        const jwtToken = await Signin(signInPayload)
+        if(jwtToken){
+            setCookie('myToken', token, {
+                path:'/',
+                secure:true,
+                sameSite:'none',
+            })
+        }
+        */
         const { code } = response;
         setLogin(true);
         console.log(response);
