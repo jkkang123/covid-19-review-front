@@ -171,9 +171,9 @@ const Review = () => {
 
   const onClickSavePost = async () => {
     const formdata = new FormData();
-    if (image.length !== 0) {
-      for (let i = 0; i < image.length; i++) {
-        formdata.append('multipartFile', image[i])
+    if (files.length !== 0) {
+      for (let i = 0; i < files.length; i++) {
+        formdata.append("multipartFileList", files[i])
       }
     }
     const model = {
@@ -205,7 +205,9 @@ const Review = () => {
             nickname={elem.writer}
             title={elem.title}
             vaccine={elem.vaccineType}
-            previewImage={elem.previewImage}
+            previewImage={elem.postImageUrl}
+            contents={elem.content}
+            profileImageUrl={elem.writerProfileImageUrl}
           />
         )}
       </div>
@@ -256,7 +258,7 @@ const Review = () => {
         <Button variant="contained" onClick={onClickSavePost}>저장</Button>
       </CommonDialog>
       {/* <Button variant="contained" onClick={openPostDialog}>글쓰기</Button> */}
-      <SpeedDial ariaLabel="open-post-speed-dial" sx={{ position: 'absolute', bottom: 50, right: 50 }} icon={<CreateIcon/>} onClick={openPostDialog}/>
+      <SpeedDial ariaLabel="open-post-speed-dial" sx={{ position: 'fixed', bottom: 50, right: 50 }} icon={<CreateIcon/>} onClick={openPostDialog}/>
     </div>
   )
 }

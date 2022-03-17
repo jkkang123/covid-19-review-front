@@ -4,6 +4,10 @@
     height: calc(100% - 94px);
     .review-card-list{
         display: flex;
+        flex-wrap: wrap;
+        .review-card{
+            margin: 10px
+        }
     }
 }
 

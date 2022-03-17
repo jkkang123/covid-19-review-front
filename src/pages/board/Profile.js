@@ -9,6 +9,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
+import qs from 'qs'
 
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
@@ -68,7 +69,7 @@ export default function Profile() {
     const [signup, setSignup] = useState(false);
     const [buttonState, setButtonState] = useState(true);
     const [disabledLookUp, setDisabledLookUp] = useState(true);
-    const [wantToChangeProfileImage, setWantToChangeProfileImage] = useState(true);
+    const [wantToChangeProfileImage, setWantToChangeProfileImage] = useState(false);
     const [whatIPost, setWhatIPost] = useState([]);
 
     const [Name, setName] = useState('이지은');
@@ -94,8 +95,15 @@ export default function Profile() {
             profileImageUrl: image,
         }
 
+        const model = {
+            nickname: nickName,
+            wantToChangeProfileImage
+        }
+
+        const params = qs.stringify(model)
+
         try { // statusCode === 200 
-            const { data } = await axios.patch('/user' + `?nickname=${nickName}&wantToChangeProfileImage=${wantToChangeProfileImage}`, formdata);
+            const { data } = await axios.patch(`/user?${params}`, formdata);
             window.localStorage.setItem('accessToken', data.accessToken)
              dispatch(saveUser({
                 nickname: body.nickname,
@@ -104,6 +112,7 @@ export default function Profile() {
         } catch (e) {
             console.log(e.response); 
         }
+        setWantToChangeProfileImage(false)
     }
 
     const getPost = async () => {
@@ -154,6 +163,7 @@ export default function Profile() {
         // 프로필 이미지 업로드
         if(e.target.files[0]){
             setFile(e.target.files[0])
+            setWantToChangeProfileImage(true)
         } 
         // 프로필 디폴트 이미지 
         else{  
