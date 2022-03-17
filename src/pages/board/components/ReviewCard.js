@@ -54,7 +54,7 @@ const ReviewCard = ({nickname, profileImageUrl, title, vaccine, previewImage, co
         : 
         <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
       }
-      {/* <CardContent>
+      { <CardContent>
         {
         contents ? 
           <Typography variant="body2" color="text.secondary">
@@ -67,7 +67,7 @@ const ReviewCard = ({nickname, profileImageUrl, title, vaccine, previewImage, co
             if you like.
           </Typography>
         }
-      </CardContent> */}
+      </CardContent> }
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />

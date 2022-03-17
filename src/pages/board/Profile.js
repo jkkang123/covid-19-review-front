@@ -96,7 +96,6 @@ export default function Profile() {
 
         try { // statusCode === 200 
             const { data } = await axios.patch('/user' + `?nickname=${nickName}&wantToChangeProfileImage=${wantToChangeProfileImage}`, formdata);
-            // setSignup(true);
             window.localStorage.setItem('accessToken', data.accessToken)
              dispatch(saveUser({
                 nickname: body.nickname,
@@ -112,6 +111,7 @@ export default function Profile() {
             const {data} = await axios.get('/post');
             const whatIPost = data.pagingPostList.filter(el => el.writer === nickName)            
             setWhatIPost(whatIPost)
+            console.log(whatIPost)
         } catch (e) {
             console.log(e.response); 
         }
@@ -478,8 +478,10 @@ export default function Profile() {
                                 key={index}
                                 title={elem.title}
                                 vaccine={elem.vaccineType}
-                                // previewImage={elem.vaccineType}
-                                // contents={elem.vaccineType}
+                                profileImageUrl={elem.writerProfileImageUrl}
+                                contents={elem.content}
+                                previewImage={elem.postImageUrl}
+                                nickname={elem.writer}
                             />
                         )}
                     </TabPanel>
