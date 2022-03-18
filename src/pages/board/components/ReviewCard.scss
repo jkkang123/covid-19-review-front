@@ -1,6 +1,8 @@
 @import '../../../App.scss';
 
 .review-card{
+    cursor: pointer;
+    
     .MuiCardHeader-root{
         .MuiCardHeader-content{
             .MuiCardHeader-title{

@@ -88,7 +88,8 @@ export default function TemporaryDrawer() {
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>
             <MenuRoundedIcon 
-              color="info"
+              color="info" 
+              sx={{ color:'#fff' }}
             />
           </Button>
           <Drawer

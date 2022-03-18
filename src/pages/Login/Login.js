@@ -165,7 +165,7 @@ export default function Login() {
 
     return (
         <form className="login">
-            <Button variant="outlined" style={{color: "#fff"}} onClick={handleClickOpen}>
+            <Button variant="outlined" sx={{ color: "#fff", borderColor: '#fff' }} onClick={handleClickOpen}>
                 Log in
             </Button>
 

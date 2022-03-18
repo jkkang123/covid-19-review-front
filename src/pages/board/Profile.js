@@ -4,6 +4,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import ReviewCard from './components/ReviewCard'
 import axios from '../../plugins/axios';
 import {useSelector} from "react-redux"
+import './Review.scss';
 
 import * as React from 'react';
 import Box from '@mui/material/Box';
@@ -473,27 +474,30 @@ export default function Profile() {
                         </Stack>
                     </TabPanel>
 
-                    {/* 내가 쓴 글 */}                        
-                    <TabPanel 
+                    {/* 내가 쓴 글 */}              
+                              
+                    <TabPanel
                         value="2"
                         sx={{
-                            display:'flex',
-                            alignItems:'center',
-                            width:1200, 
+                            width:1200,
                             margin:'0 auto'
                         }}
                     >
-                        {whatIPost.map((elem, index) => 
-                            <ReviewCard
-                                key={index}
-                                title={elem.title}
-                                vaccine={elem.vaccineType}
-                                profileImageUrl={elem.writerProfileImageUrl}
-                                contents={elem.content}
-                                previewImage={elem.postImageUrl}
-                                nickname={elem.writer}
-                            />
-                        )}
+                        <Grid container spacing={2}>
+                            {whatIPost.map((elem, index) => 
+                                <Grid item xs={12} md={6} lg={3}>
+                                    <ReviewCard
+                                        key={index}
+                                        title={elem.title}
+                                        vaccine={elem.vaccineType}
+                                        profileImageUrl={elem.writerProfileImageUrl}
+                                        contents={elem.content}
+                                        previewImage={elem.postImageUrl}
+                                        nickname={elem.writer}
+                                    />
+                                </Grid>
+                            )}
+                        </Grid>
                     </TabPanel>
 
                     {/* 내가 쓴 댓글 */}    

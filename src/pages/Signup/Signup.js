@@ -177,7 +177,7 @@ export default function Signup() {
     
     return (
         <form className="signin">
-            <Button variant="outlined" style={{color: "#fff"}} onClick={handleClickOpen}>
+            <Button variant="outlined" sx={{ color: "#fff", borderColor: '#fff' }} onClick={handleClickOpen}>
                 Sign up
             </Button>
 
