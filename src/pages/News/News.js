@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import React from 'react'
 import axios from 'axios';
 import Pagination from '@mui/material/Pagination';
-import Tags from '../../components/common/common-select'
+import Tags from 'components/common/common-select'
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';

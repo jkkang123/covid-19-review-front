@@ -17,7 +17,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import GoogleLogin from 'react-google-login';
-import axios from '../../plugins/axios';
+import axios from 'plugins/axios';
 import CommonDialog from 'components/common/common-dialog';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';

@@ -7,9 +7,10 @@ import CardActions from '@mui/material/CardActions';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import Skeleton from '@mui/material/Skeleton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { useNavigate } from 'react-router-dom'
 
 import {useSelector} from "react-redux"
 import Profile from 'Molecules/Profile';
@@ -17,8 +18,15 @@ import Profile from 'Molecules/Profile';
 import './ReviewCard.scss'
 
 
-const ReviewCard = ({nickname, profileImageUrl, title, vaccine, previewImage, contents}) => {
+const ReviewCard = ({postId, nickname, profileImageUrl, title, vaccine, previewImage, contents}) => {
   const [vaccineType, setVaccineType] = useState()
+
+  const navigate = useNavigate()
+
+  const onClickCard = () => {
+    navigate(`/review/${postId}`)
+  }
+
   useEffect(() => {
     if (vaccine === 'ASTRAZENECA'){
       setVaccineType('아스트라제네카')
@@ -32,7 +40,7 @@ const ReviewCard = ({nickname, profileImageUrl, title, vaccine, previewImage, co
     
   },[])
   return (
-    <Card sx={{ width: 345 }} className='review-card'>
+    <Card sx={{ width: 345 }} className='review-card' onClick={onClickCard}>
       <CardHeader
         style={{display: 'block'}}
         subheader={
@@ -73,7 +81,7 @@ const ReviewCard = ({nickname, profileImageUrl, title, vaccine, previewImage, co
           <FavoriteIcon />
         </IconButton>
         <IconButton aria-label="share">
-          <ShareIcon />
+          <VisibilityIcon />
         </IconButton>
       </CardActions>
     </Card>

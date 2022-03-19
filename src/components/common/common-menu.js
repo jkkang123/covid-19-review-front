@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Menu from '@mui/material/Menu';
 import { Button } from '@mui/material';
 
-const CommomMenu = ({openState, anchorEl, handleClick, handleClose, AnchorNode, children }) => {
+const CommonMenu = ({openState, anchorEl, handleClick, handleClose, AnchorNode, children }) => {
     return (
             <>  
             {
@@ -22,4 +22,4 @@ const CommomMenu = ({openState, anchorEl, handleClick, handleClose, AnchorNode, 
     )
 }
 
-export default CommomMenu;
+export default CommonMenu;

@@ -2,7 +2,7 @@ import './Signup.scss';
 import { useState, useRef, useEffect } from 'react';
 import { TextField, Button, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
-import axios from '../../plugins/axios';
+import axios from 'plugins/axios';
 
 import * as React from 'react';
 import PropTypes from 'prop-types';

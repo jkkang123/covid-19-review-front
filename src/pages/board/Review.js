@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useRef} from 'react'
 import ReviewCard from './components/ReviewCard'
 import './Review.scss'
-import axios from '../../plugins/axios'
+import axios from 'plugins/axios'
 import qs from 'qs'
 import Button from '@mui/material/Button';
 import DialogTitle from '@mui/material/DialogTitle';
@@ -201,6 +201,7 @@ const Review = () => {
         {postData.map((elem, index) => 
           <ReviewCard
             key={index}
+            postId={elem.id}
             nickname={elem.writer}
             title={elem.title}
             vaccine={elem.vaccineType}

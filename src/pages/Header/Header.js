@@ -7,8 +7,8 @@ import {Button} from '@mui/material';
 import Profile from 'Molecules/Profile';
 import Drawer from 'components/common/Drawer';
 import {useSelector} from "react-redux"
-import { isLogined } from "../../components/core/util";
-import CommonDialog  from '../../components/common/common-dialog'
+import { isLogined } from "components/core/util";
+import CommonDialog  from 'components/common/common-dialog'
 
 const emails = ['username@gmail.com', 'user02@gmail.com'];
 

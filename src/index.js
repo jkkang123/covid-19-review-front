@@ -13,6 +13,7 @@ import Header from './pages/header/Header.js';
 import News from './pages/news/News.js';
 import Home from './pages/home/Home.js';
 import Review from 'pages/board/Review';
+import Post from 'pages/board/Post'
 import Profile from 'pages/board/Profile';
 import Dialogs from 'Molecules/Dialogs';
 import './App.scss';
@@ -37,6 +38,11 @@ ReactDOM.render(
           <Route
             path="/review"
             element= {<Review/>}
+          />
+
+          <Route
+            path="/review/:id"
+            element= {<Post/>}
           />
 
           <Route

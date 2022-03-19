@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { TextField, Button, FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import ReviewCard from './components/ReviewCard'
-import axios from '../../plugins/axios';
+import axios from 'plugins/axios';
 import {useSelector} from "react-redux"
 import './Review.scss';
 

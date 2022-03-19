@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import CommomMenu from '../components/common/commom-menu';
+import CommonMenu from 'components/common/common-menu';
 import { Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import { useDispatch } from "react-redux";
@@ -41,7 +41,7 @@ export default function Profile({ nickName, size, profileImage }) {
 
     return (
         <Box>
-            <CommomMenu 
+            <CommonMenu 
                 AnchorNode={
                     <Button onClick={handleClick}>
                         {/* 프로필 사진 */}
@@ -81,7 +81,7 @@ export default function Profile({ nickName, size, profileImage }) {
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose}>My account</MenuItem>
                 <MenuItem onClick={clickLogout}>Logout</MenuItem>
-            </CommomMenu>
+            </CommonMenu>
 
             {/* 닉네임 */}
             <p

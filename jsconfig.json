@@ -1,17 +1,17 @@
 {
     "compilerOptions": {
-        "baseUrl": "src"
+        "baseUrl": "./src",
+        "paths": {
+            "@assets/*": [
+                "assets/*"
+            ],
+            "@components/*": [
+                "components/common/*"
+            ],
+            "@redux/*": [
+                "redux/*"
+            ]
+        }
     },
-    "include": ["src", "server"],
-    "paths": {
-        "@assets/*": [
-            "./src/assets/*"
-        ],
-        "@components/*": [
-            "./src/components/common/*"
-        ],
-        "@redux/*": [
-            "./src/redux/*"
-        ]
-    }
+    "include": ["src"]
 }
