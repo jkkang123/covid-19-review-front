@@ -40,7 +40,7 @@ const ReviewCard = ({postId, nickname, profileImageUrl, title, vaccine, previewI
     
   },[])
   return (
-    <Card sx={{ width: 345 }} className='review-card' onClick={onClickCard}>
+    <Card sx={{ width: 345 }} className='review-card' >
       <CardHeader
         style={{display: 'block'}}
         subheader={
@@ -54,15 +54,16 @@ const ReviewCard = ({postId, nickname, profileImageUrl, title, vaccine, previewI
       {
         previewImage ? 
         <CardMedia
+          onClick={onClickCard}
           component="img"
           height="190"
           image={previewImage}
           alt=""
         />
         : 
-        <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
+        <Skeleton onClick={onClickCard} sx={{ height: 190 }} animation="wave" variant="rectangular" />
       }
-      { <CardContent>
+      { <CardContent onClick={onClickCard}>
         {
         contents ? 
           <Typography variant="body2" color="text.secondary">
