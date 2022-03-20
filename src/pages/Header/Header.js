@@ -52,18 +52,17 @@ export default function Header() {
                       ? /* bell & profile */
                       <ul className="bell_profile_box"> 
                           <li>
+                              <Profile size={ 'big' } profileImage={userData.profileImageUrl}/>
+                          </li>
+                          <li>
                               <Button variant="none" onClick={handleClickOpen}>
-                                  <NotificationsIcon/>
+                                  <NotificationsIcon sx={{ 'color':'#fff' }}/>
                               </Button>
 
                               <CommonDialog
                                   openState={open}
                                   handleClose={handleClose}
                               />
-                          </li>
-                          <li>
-                              {/* 프로필 모듈 실험 */}
-                              <Profile nickName={ userData.nickname } size={ 'big' } profileImage={userData.profileImageUrl}/>
                           </li>
                       </ul>
 

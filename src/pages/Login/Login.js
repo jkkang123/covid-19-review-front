@@ -1,7 +1,6 @@
 import './Login.scss';
 import { useState, useEffect } from 'react';
 import { TextField, Button } from '@mui/material';
-import Signin from 'pages/signup/Signup';
 import { useDispatch } from "react-redux";
 import { saveUser } from 'redux/Actions';
 import { useNavigate } from 'react-router-dom';
@@ -52,9 +51,8 @@ export default function Login() {
     */
 
     // ===== 구글 소셜 로그인 start ===== //
-    // 구글 클라이언트 ID / Secret
+    // 구글 클라이언트 ID 
     const clientId = "676913540874-m3q98gj12mqu4ubak3noj6s1juqj4sha.apps.googleusercontent.com"; // 이건 tori@ryanlab.kr 로 받은 거
-    // const clientSecret = "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"; 구글 시크릿은 필요없는 듯. 이건 재규가 받은 거
 
     // 구글 로그인 성공시
     const onSuccess = async(response) => {
@@ -69,7 +67,6 @@ export default function Login() {
         }
         */
         const { code } = response;
-        setLogin(true);
         console.log(response);
         const { data } = await axios.get(`/login/GOOGLE/callback?code=${code}`)
         window.localStorage.setItem('accessToken', data.accessToken)
@@ -180,8 +177,7 @@ export default function Login() {
                         alignItems="center"
                         justifyContent="center"
                     >
-                        {/* 로고 박스 */}
-                        <Box sx={{ width:33 }}>
+                        <Box sx={{ width:33, height:33 }}>
                             <img 
                                 src="https://img.icons8.com/external-flatart-icons-solid-flatarticons/128/000000/external-covid-19-coronavirus-covid19-flatart-icons-solid-flatarticons.png"
                                 style={{ width:'100%' }}
@@ -232,10 +228,12 @@ export default function Login() {
                     </Stack>
 
                     {/* 소셜 로그인 박스( kakao & google ) */}
-                    <ul className="social_box">
+                    <ul className="social_box center">
+                        {/* 네이버 소셜로그인??
                         <li>
                             <img src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/48/000000/external-kakaotalk-or-katalk-is-a-free-mobile-instant-messaging-application-for-smartphones-logo-bold-tal-revivo.png"/>
                         </li>
+                        */}
                         <li>
                             <GoogleLogin
                                 clientId={clientId}
@@ -243,16 +241,6 @@ export default function Login() {
                                 onSuccess={onSuccess}
                                 onFailure={onFailure}
                             />
-                        </li>
-                    </ul>
-
-                    {/* 비밀번호 찾기 & Signin */}
-                    <ul className="findPass_signin">
-                        <li>
-                            비밀번호 찾기
-                        </li>
-                        <li>
-                            <Signin />
                         </li>
                     </ul>
                 </DialogContent>

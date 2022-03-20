@@ -6,6 +6,9 @@ import Tags from 'components/common/common-select'
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import ArrowRightAltRoundedIcon from '@mui/icons-material/ArrowRightAltRounded';
+import './News.scss';
 
 export default function News() {
 
@@ -40,7 +43,7 @@ export default function News() {
             query: query,
             display: display,
             start: page,
-            sort: 'date'
+            sort: 'date' 
         };
         
         try{
@@ -74,7 +77,7 @@ export default function News() {
     }, [query,page,total])
 
     return (
-        <div>
+        <div className="news">
             <Box 
                 sx={{ 
                     display:'flex',
@@ -94,12 +97,18 @@ export default function News() {
                     {
                         news.map((item, i) => {
                             return(
-                                <Grid item xs={12} lg={6} key={i}>
+                                <Grid item xs={12} lg={6} key={i} alignItems="stretch">
                                     <a href={ item.link }>
-                                        <Paper className="popular paper" elevation={2}>
+                                        <Paper className="paper" elevation={2}>
                                             <h1 className="subtitle">{ cleanString(item.title) }</h1>
                                             <p className="body">{ cleanString(item.description) }</p>
-                                            <span className="date">{ moment(item.pubDate).format('YYYY. MM. DD.') }</span>
+                                            <div className="split">   
+                                                <Button variant="outlined" size="small">
+                                                    View
+                                                    <ArrowRightAltRoundedIcon className="arrow"/>
+                                                </Button>
+                                                <span className="date">{ moment(item.pubDate).format('YYYY. MM. DD.') }</span>
+                                            </div>   
                                         </Paper>
                                     </a>
                                 </Grid>

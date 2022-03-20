@@ -3,6 +3,7 @@ import Chip from '@mui/material/Chip';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
+import './common-select.scss';
 
 export default function Tags({ onChange }) {
     // 백신 옵션
@@ -23,10 +24,12 @@ export default function Tags({ onChange }) {
           isOptionEqualToValue={(option, value) => option.title === value.title}
           filterSelectedOptions
           onChange = {onChange}
+          sx={{
+            maxWidth:'33.33%',
+          }}
           renderTags={(value, getTagProps) =>
             value.map((option, index) => (
               <Chip
-                style={{backgroundColor: 'lightpink', color: '#fff', borderRadius:20}}
                 color="primary"
                 variant="filled"
                 label={option.title}
@@ -37,6 +40,7 @@ export default function Tags({ onChange }) {
           renderInput={(params) => (
             <TextField
               {...params}
+              variant="standard"
             />
           )}
         />

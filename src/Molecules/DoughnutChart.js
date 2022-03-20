@@ -5,6 +5,7 @@ import 'chart.js/auto';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import './DoughnutChart.scss';
 
 const DoughnutChart = () => {
 
@@ -132,8 +133,14 @@ const DoughnutChart = () => {
                     <Paper className="chart paper" elevation={2}>
                       <h1 className="subtitle">국내 1차 접종 현황</h1>
                       <Doughnut data={data1} options={options} height={250}/>
-                      <p className="body">누적 {totalFirstCnt}</p>
-                      <p className="body">신규 {firstCnt}</p>
+                      <div className="center">
+                        <p className="body">
+                          <b>신규</b> {firstCnt}
+                        </p>
+                        <p className="body">
+                          <b>누적</b> {totalFirstCnt}
+                        </p>
+                      </div>
                     </Paper>
                   </Grid>
 
@@ -142,8 +149,14 @@ const DoughnutChart = () => {
                     <Paper className="chart paper" elevation={2}>
                       <h1 className="subtitle">국내 2차 접종 현황</h1>
                       <Doughnut data={data2} options={options} height={250} />
-                      <p className="body">누적 {totalSecondCnt}</p>
-                      <p className="body">신규 {secondCnt}</p>
+                      <div className="center">
+                        <p className="body">
+                          <b>신규</b> {secondCnt}
+                        </p>
+                        <p className="body">
+                          <b>누적</b> {totalSecondCnt}
+                        </p>
+                      </div>
                     </Paper>
                   </Grid>
 
@@ -152,8 +165,14 @@ const DoughnutChart = () => {
                     <Paper className="chart paper" elevation={2}>
                       <h1 className="subtitle">국내 3차 접종 현황</h1>
                       <Doughnut data={data3} options={options} height={250} />
-                      <p className="body">누적 {totalThirdCnt}</p>
-                      <p className="body">신규 {thirdCnt}</p>
+                      <div className="center">
+                        <p className="body">
+                          <b>신규</b> {thirdCnt}
+                        </p>
+                        <p className="body">
+                          <b>누적</b> {totalThirdCnt}
+                        </p>
+                      </div>
                     </Paper>
                   </Grid>
               </Grid>

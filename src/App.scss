@@ -1,11 +1,11 @@
 /* ===== color ===== */
-$black:#4a4646;
+$black:#333;
 $main:#1976d2;
 $pink:#E9ACE3;
 $purple:#C6ACE9;
 $lightBlue:#ACBDE9;
-$darkGray:#666;
-$lightGray:#666;
+$darkGray:#7C7C7C;
+$lightGray:#999;
 
 /* ===== reset ===== */
 ul{
@@ -32,11 +32,12 @@ html{
     font-size:16px;
   }
 }
+
 body{
   width:100%;
-  height:100vh;
+  padding-bottom:100px;
   overflow-x: hidden;
-  background:#fafafa;
+  background:#EEF1F5;
 }
 
 #root{
@@ -52,14 +53,15 @@ body{
 
 /* ===== paper ===== */
 .paper{
-  padding:1.5em 1.8em;
+  padding:29px 33px;
 }
 
 /* ====== font ====== */
 .subtitle{
-  margin:0 0 10px;
-  font-size: 1.2rem;
+  margin:0 0 25px;
   font-weight: 700;
+  font-size: 1.1rem;
+  line-height: 20px;
   color:$black;
   letter-spacing: -0.02em;
   overflow: hidden;
@@ -67,9 +69,14 @@ body{
   white-space: nowrap;
 }
 
+.body b{
+  font-size: 0.9rem;
+  color:#111;
+}
+
 .body{
-  margin:8px 0;
-  font-size: 1rem;
+  margin:18px 0;
+  font-size: 0.9rem;
   color:$darkGray;
   line-height: 1.5em;
 }
@@ -79,7 +86,21 @@ body{
   color:$lightGray;
 }
 
-/* 페이지네이션 가운데 정렬 --> stylus로 할 수 있는 방법?? */
+/* ====== 정렬 ====== */
+.split{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ===== 페이지네이션 ===== */
 .css-wjh20t-MuiPagination-ul{
+  margin-top:20px !important;
   justify-content: center;
 }
