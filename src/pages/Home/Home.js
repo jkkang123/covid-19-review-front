@@ -11,13 +11,13 @@ export default function Home() {
             <Box sx={{ maxWidth:1200, margin:'20px auto' }}>
                 <Grid container spacing={2}>
                     {/* 인기글 & 국내 신규 확진자 */}
-                    <Grid item xs={12} lg={6}>
+                    <Grid item xs={12} lg={6} alignSelf="stretch">
                         <Paper className="popular paper" elevation={2}>
                             <Popular />
                         </Paper>
                     </Grid>
 
-                    <Grid item xs={12} lg={6}>
+                    <Grid item xs={12} lg={6} alignSelf="stretch">
                         <Paper className="barLine paper" elevation={2}>
                             <BarLineChart />
                         </Paper>
