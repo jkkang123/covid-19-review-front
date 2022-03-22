@@ -226,6 +226,7 @@ const Review = () => {
             <MenuItem value={'JANSSEN'}>얀센</MenuItem>
             <MenuItem value={'MODERNA'}>모더나</MenuItem>
             <MenuItem value={'PFIZER'}>화이자</MenuItem>
+            <MenuItem value={'BOOSTER'}>부스터</MenuItem>
           </Select>
         </FormControl>
         <TextField id="post-title" label="제목" placeholder='제목을 입력해 주세요' variant="outlined" value={titleValue} onChange={(e) => setTitleValue(e.target.value)}/>

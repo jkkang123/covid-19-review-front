@@ -1,11 +1,13 @@
 import React from 'react'
 import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'plugins/axios';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import './Popular.scss';
 
 export default function Popular() {
+    const moment = require('moment');
     const [popularPost, setPopularPost] = useState([])
 
     const getPopularPost = async () => {
@@ -29,17 +31,20 @@ export default function Popular() {
             {
                 popularPost.map((el, i) => {
                     return(
-                        <div className="popular_list split" key={i}>
-                            <div className="img_body_box">
-                                <img src="img/profile.jpg" alt="이미지" />
-                                <p className="body">
-                                    <b>타이틀</b><br/>
-                                    <VisibilityRoundedIcon /> <span className="date">1</span> 
-                                    <FavoriteRoundedIcon /> <span className="date">2</span>
-                                </p>
+                        <Link to={`/review/${el.id}`} key={i}>
+                            <div className="popular_list split">
+                                <div className="img_body_box">
+                                    <img src={el.postImageUrl} alt="이미지" />
+                                    <p className="body">
+                                        <b>{el.title}</b><br/>
+                                        <VisibilityRoundedIcon className="eye"/> <span className="date">{el.viewCount}</span> 
+                                        <FavoriteRoundedIcon className="heart"/> <span className="date">{el.likeCount}</span>
+                                    </p>
+                                </div>
+                                <span className="date">{moment(el.dateCreated).format('YYYY. MM. DD.')}</span>
+                                <span className={`vaccine ${el.vaccineType}`}>{el.vaccineType}</span>
                             </div>
-                            <span className="date">2022.01.22.</span>
-                        </div>
+                        </Link>
                     )
                 })
             }

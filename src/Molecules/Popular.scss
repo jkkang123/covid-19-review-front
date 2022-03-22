@@ -1,7 +1,10 @@
+@import '../App.scss';
+
 .popular{
     .popular_list{
+        position: relative;
         padding:12px 18px;
-        margin-bottom:15px;
+        margin-bottom:15px !important;
         border-radius: 5px;
         box-shadow:0px 8px 10px rgba(24, 81, 159, 0.04);
         cursor: pointer;
@@ -26,6 +29,12 @@
                     margin-top:5px;
                     width:18px;
                 }
+                svg.eye{
+                    color:rgb(182, 199, 248);
+                }
+                svg.heart{
+                    color:rgb(248, 184, 184);
+                }
 
                 span.date{
                     display: inline-block;
@@ -38,6 +47,34 @@
         .date{
             align-self:flex-end;
             margin-bottom:5px;
+        }
+
+        .vaccine{
+            position: absolute;
+            top:12px;
+            right:18px;
+            display: inline-block;
+            padding:6px 8px;
+            font-size: 8px;
+            letter-spacing: -0.3px;
+            border-radius: 3px;
+            font-weight: 700;
+        }
+        .vaccine.ASTRAZENECA{
+            color:$astrazeneca;
+            background:$astrazenecaBg;
+        }
+        .vaccine.MODERNA{
+            color:$moderna;
+            background:$modernaBg;
+        }
+        .vaccine.PFIZER{
+            color:$pfizer;
+            background:$pfizerBg;
+        }
+        .vaccine.JANSSEN{
+            color:$janssen;
+            background:$janssenBg;
         }
     }
 
