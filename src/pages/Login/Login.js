@@ -229,11 +229,10 @@ export default function Login() {
 
                     {/* 소셜 로그인 박스( kakao & google ) */}
                     <ul className="social_box center">
-                        {/* 카카오 소셜로그인
+                        {/* 카카오 소셜로그인 */}
                         <li>
-                            <img src="https://img.icons8.com/external-tal-revivo-bold-tal-revivo/48/000000/external-kakaotalk-or-katalk-is-a-free-mobile-instant-messaging-application-for-smartphones-logo-bold-tal-revivo.png"/>
+                            카카오
                         </li>
-                        */}
                         <li>
                             <GoogleLogin
                                 clientId={clientId}

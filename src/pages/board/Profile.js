@@ -116,12 +116,23 @@ export default function Profile() {
         setWantToChangeProfileImage(false)
     }
 
-    const getPost = async () => {
+    const getWhatIPost = async () => {
         try {
             const {data} = await axios.get('/post');
             const whatIPost = data.pagingPostList.filter(el => el.writer === nickName)            
             setWhatIPost(whatIPost)
-            console.log(whatIPost)
+           
+        } catch (e) {
+            console.log(e.response); 
+        }
+    }
+
+    const getWhatIComment = async () => {
+        try {
+            const {data} = await axios.get(`/post/3/comment`);
+            const whatIComment = data     
+            //setWhatIPost(whatIPost)
+           console.log(whatIComment)
         } catch (e) {
             console.log(e.response); 
         }
@@ -267,7 +278,8 @@ export default function Profile() {
     },[idValid])
 
     useEffect(()=> {
-        getPost()
+        getWhatIPost()
+        getWhatIComment()
     },[])
 
     return (

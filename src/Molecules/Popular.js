@@ -6,33 +6,30 @@ import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import './Popular.scss';
 
 export default function Popular() {
-    const [whatIPost, setWhatIPost] = useState([1, 2, 3, 4])
+    const [popularPost, setPopularPost] = useState([])
 
-    /*
-    const getPost = async () => {
+    const getPopularPost = async () => {
         try {
             const {data} = await axios.get('/post');
-            const whatIPost = data.pagingPostList       
-            setWhatIPost(whatIPost)
-            console.log(whatIPost)
+            const popularPost = data.pagingPostList.sort((a, b) => b.viewCount - a.viewCount).splice(0, 4);
+            setPopularPost(popularPost);
         } catch (e) {
             console.log(e.response); 
         }
     }
 
     useEffect(() => {
-        getPost();
+        getPopularPost();
     }, [])
-    */
 
     return (
         <div className="popular">
             <h1 className="subtitle">인기글</h1>
 
             {
-                whatIPost.map((el, i) => {
+                popularPost.map((el, i) => {
                     return(
-                        <div className="popular_list split">
+                        <div className="popular_list split" key={i}>
                             <div className="img_body_box">
                                 <img src="img/profile.jpg" alt="이미지" />
                                 <p className="body">
