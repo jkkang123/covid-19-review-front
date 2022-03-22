@@ -4,10 +4,11 @@
     .popular_list{
         position: relative;
         padding:12px 18px;
-        margin-bottom:15px !important;
+        margin-bottom:15px;
         border-radius: 5px;
         box-shadow:0px 8px 10px rgba(24, 81, 159, 0.04);
         cursor: pointer;
+        transition: 0.2s;
 
         .img_body_box{
             display: flex;
@@ -78,7 +79,11 @@
         }
     }
 
-    .popular_list:last-child{
+    a:last-child .popular_list{
         margin:0;
+    }
+
+    .popular_list:hover{
+        box-shadow:0px 8px 10px rgba(24, 81, 159, 0.07);
     }
 }

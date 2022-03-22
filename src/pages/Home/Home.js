@@ -19,7 +19,7 @@ export default function Home() {
 
                     <Grid item xs={12} lg={6} alignSelf="stretch">
                         <Paper className="barLine paper" elevation={2}>
-                            <BarLineChart />
+                            <BarLineChart/>
                         </Paper>
                     </Grid>
 

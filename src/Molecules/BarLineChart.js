@@ -14,7 +14,6 @@ const BarLineChart = () => {
     const format = today.format('YYYYMMDD');
     const sevenDaysAgoFormat = moment().subtract(7, 'days').format('YYYYMMDD');
 
-    
     const oneDayAgo = moment().subtract(1, 'days').format('MM.DD');
     const twoDaysAgo = moment().subtract(2, 'days').format('MM.DD');
     const threeDaysAgo = moment().subtract(3, 'days').format('MM.DD');
@@ -90,19 +89,15 @@ const BarLineChart = () => {
             display: true,
             position:'bottom',
           },
-          labels: {
-            position: 'bottom'
-          },
         },
     };
 
     return(
         <div>
           <h1 className="subtitle">국내 신규 확진자</h1>
-          <Box
-            
-          >
-            <Bar data={data} options={options} height="210rem" />
+
+          <Box>
+            <Bar data={data} options={options} height="230rem" />
           </Box>
         </div>
     )
