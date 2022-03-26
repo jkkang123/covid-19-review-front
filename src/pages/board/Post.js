@@ -21,6 +21,7 @@ const Post = () => {
     thisUserLike: false,
     title: "",
     viewCount: 0,
+    vaccineType: '',
     writer: "",
     writerProfileImageUrl: "",
   })
@@ -37,9 +38,23 @@ const Post = () => {
       const { data } = await axios.get(`post/${id}`)
       console.log(data)
       setPostData(data)
-    }catch (error) {
+    } catch (error) {
       console.error(error)
     }
+  }
+
+  const sortOutVaccineType = (vaccine) => {
+    let vaccineType = ''
+    if (vaccine === 'ASTRAZENECA'){
+      vaccineType = '아스트라제네카'
+    } else if (vaccine === 'JANSSEN') {
+      vaccineType = '얀센'
+    } else if (vaccine === 'MODERNA') {
+      vaccineType = '모더나'
+    } else {
+      vaccineType = '화이자'
+    }
+    return vaccineType
   }
 
   const getComment = async () => {
@@ -91,6 +106,7 @@ const Post = () => {
     }
   }
 
+
   useEffect(()=> {
     getPost()
     getComment()
@@ -101,7 +117,7 @@ const Post = () => {
       <div className='post-header'>
         <Profile nickName={ postData.writer } size={ 'small' } profileImage={postData.writerProfileImageUrl}/>
         <div className='post-header-content'>
-          <span className='post-vaccine-type'>{'모더나'}</span>
+          <span className='post-vaccine-type'>{sortOutVaccineType(postData.vaccineType)}</span>
           <span className='post-title'>{postData.title}</span>
           <div className='post-header-right-content'>
             <div className='post-like'>
