@@ -24,7 +24,6 @@ import Stack from '@mui/material/Stack';
 
 import { Cookies } from 'react-cookie';
 
-// Login Component
 export default function Login() {
 
     const [id, setId] = useState("");
@@ -38,36 +37,10 @@ export default function Login() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
-    /*
-    const cookies = new Cookies();
-
-    const setCookie = (name: string, value: string, option?: any) => {
-        return cookies.set(name, value, {...option})
-    }
-
-    const getCookie = (name: string) => {
-        return cookies.get(name)
-    }
-    */
-
-    // ===== 구글 소셜 로그인 start ===== //
-    // 구글 클라이언트 ID 
+    // 구글 소셜 로그인 
     const clientId = "676913540874-m3q98gj12mqu4ubak3noj6s1juqj4sha.apps.googleusercontent.com"; // 이건 tori@ryanlab.kr 로 받은 거
-
-    // 구글 로그인 성공시
     const onSuccess = async(response) => {
-        /*
-        const jwtToken = await Signin(signInPayload)
-        if(jwtToken){
-            setCookie('myToken', token, {
-                path:'/',
-                secure:true,
-                sameSite:'none',
-            })
-        }
-        */
         const { code } = response;
-        console.log(response);
         const { data } = await axios.get(`/login/GOOGLE/callback?code=${code}`)
         window.localStorage.setItem('accessToken', data.accessToken)
         dispatch(saveUser({
@@ -77,11 +50,9 @@ export default function Login() {
         setLogin(true);
         navigate(0)
     }
-    // 구글 로그인 실패시
     const onFailure = (error) => {
         console.log(error);
     }
-    // ===== 구글 소셜 로그인 end ===== //
 
     // 텍스트 인풋 이벤트 핸들러
     const onIdHandler = (e) => {
@@ -227,11 +198,11 @@ export default function Login() {
                         />
                     </Stack>
 
-                    {/* 소셜 로그인 박스( kakao & google ) */}
+                    {/* 소셜 로그인 박스( naver & google ) */}
                     <ul className="social_box center">
-                        {/* 카카오 소셜로그인 */}
+                        {/* 네이버 소셜로그인 */}
                         <li>
-                            카카오
+                            
                         </li>
                         <li>
                             <GoogleLogin

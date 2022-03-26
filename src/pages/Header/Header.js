@@ -28,8 +28,16 @@ export default function Header() {
         setSelectedValue(value);
     };
 
+    console.log(userData)
+
     useEffect(() => {
-      if (isLogined()) {
+      if(isLogined()) {
+        setLogin(true)
+      } else {
+        setLogin(false)
+      }
+        
+      if(userData.nickname !== '') {
         setLogin(true)
       } else {
         setLogin(false)

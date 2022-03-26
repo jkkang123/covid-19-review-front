@@ -6,8 +6,7 @@ import { Button } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import { useDispatch } from "react-redux";
 import { logout } from 'redux/Actions';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 
 let Box = styled.div`
     display:flex;
@@ -78,8 +77,9 @@ export default function Profile({ nickName, size, profileImage }) {
                 handleClick={handleClick}
                 handleClose={handleClose}
             >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
+                <MenuItem onClick={handleClose}>
+                    <Link to="/profile">Profile</Link>
+                </MenuItem>
                 <MenuItem onClick={clickLogout}>Logout</MenuItem>
             </CommonMenu>
 

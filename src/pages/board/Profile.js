@@ -72,12 +72,7 @@ export default function Profile() {
     const [disabledLookUp, setDisabledLookUp] = useState(true);
     const [wantToChangeProfileImage, setWantToChangeProfileImage] = useState(false);
     const [whatIPost, setWhatIPost] = useState([]);
-
-    const [Name, setName] = useState('이지은');
-    const [Email, setEmail] = useState('tori@ryanlab.kr');
-    const [Subject, setSubject] = useState('테스트');
-    const [Message, setMessage] = useState('테스트 입니다.');
-    const [result, setResult] = useState(false);
+    const [post, setPost] = useState([]);
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -104,7 +99,7 @@ export default function Profile() {
         const params = qs.stringify(model)
 
         try { // statusCode === 200 
-            const { data } = await axios.patch(`/user?${params}`, formdata);
+            const {data} = await axios.patch(`/user?${params}`, formdata);
             window.localStorage.setItem('accessToken', data.accessToken)
              dispatch(saveUser({
                 nickname: body.nickname,
@@ -119,9 +114,10 @@ export default function Profile() {
     const getWhatIPost = async () => {
         try {
             const {data} = await axios.get('/post');
-            const whatIPost = data.pagingPostList.filter(el => el.writer === nickName)            
+            const post = data.pagingPostList
+            const whatIPost = post.filter(el => el.writer === nickName)
+            setPost(post)            
             setWhatIPost(whatIPost)
-           
         } catch (e) {
             console.log(e.response); 
         }
@@ -129,45 +125,17 @@ export default function Profile() {
 
     const getWhatIComment = async () => {
         try {
-            const {data} = await axios.get(`/post/3/comment`);
-            const whatIComment = data     
+            let comment = [];
+            for(let i=0; i<post.length; i++){
+                const {data} = await axios.get(`/post/${i}/comment`);
+            }
+            const WhatIComment = comment.filter(el => el.writer === nickName)
             //setWhatIPost(whatIPost)
-           console.log(whatIComment)
+            //console.log(comment[2][0].writer)
+            console.log(comment)
         } catch (e) {
             console.log(e.response); 
         }
-    }
-
-    /*
-    const clickLookUpBtn = async (e) => {
-        const obj = { user_id : id, user_email : id }
-        const res = await axios('/search/pw', {
-          method : 'POST',
-          data : obj,
-          headers: new Headers()
-        })
-        
-        if(res.data.length === 0) {
-          return alert('일치하는 데이터가 없습니다 \n다시 확인해주세요.');
-        }
-        return setResult(true);
-    }
-    */
-
-    const submitHandler = async (e) => {
-        e.preventDefault();
-
-        axios.post('/mail/', {
-            data: {
-            yourname: Name,
-            youremail: Email,
-            yoursubject: Subject,
-            yourmessage: Message
-            }
-        }).then((response) => {
-            // 전송 뒤에 실행할 코드 작성
-            console.log(response.data);
-        })
     }
 
     // 이미지 인풋 이벤트 핸들러
@@ -412,7 +380,7 @@ export default function Profile() {
                                 variant="contained"
                                 color="primary"
                                 size="large"
-                                onClick={handleClickOpen}
+                                // onClick={sendMail}
                                 // disabled={ buttonState }
                             >
                                 비밀번호 찾기
@@ -497,9 +465,8 @@ export default function Profile() {
                     >
                         <Grid container spacing={2}>
                             {whatIPost.map((elem, index) => 
-                                <Grid item xs={12} md={6} lg={3}>
+                                <Grid item xs={12} md={6} lg={3} key={index}>
                                     <ReviewCard
-                                        key={index}
                                         title={elem.title}
                                         vaccine={elem.vaccineType}
                                         profileImageUrl={elem.writerProfileImageUrl}
