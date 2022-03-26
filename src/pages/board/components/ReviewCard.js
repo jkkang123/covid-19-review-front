@@ -67,7 +67,7 @@ const ReviewCard = ({postId, nickname, profileImageUrl, title, vaccine, previewI
       { <CardContent onClick={onClickCard}>
         {
         contents ? 
-          <Typography variant="body2" color="text.secondary">
+          <Typography variant="body2" color="text.secondary" className='review-card-content'>
             {contents}
           </Typography>
           : 
