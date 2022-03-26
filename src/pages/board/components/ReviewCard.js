@@ -6,8 +6,9 @@ import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import Skeleton from '@mui/material/Skeleton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom'
@@ -18,7 +19,7 @@ import Profile from 'Molecules/Profile';
 import './ReviewCard.scss'
 
 
-const ReviewCard = ({postId, nickname, profileImageUrl, title, vaccine, previewImage, contents}) => {
+const ReviewCard = ({postId, nickname, profileImageUrl, title, vaccine, previewImage, contents, onClickLike, thisUserLike, likeCount, viewCount}) => {
   const [vaccineType, setVaccineType] = useState()
 
   const navigate = useNavigate()
@@ -78,12 +79,20 @@ const ReviewCard = ({postId, nickname, profileImageUrl, title, vaccine, previewI
         }
       </CardContent> }
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+        {
+          thisUserLike ? 
+          <IconButton aria-label="thumbsUp">
+            <ThumbUpAltIcon />
+          </IconButton> :
+          <IconButton aria-label="thumbsUp" onClick={onClickLike}>
+            <ThumbUpOffAltIcon />
         </IconButton>
-        <IconButton aria-label="share">
+        }
+        <span className='likeCount'>{likeCount}</span>
+        <IconButton aria-label="thumbsUp">
           <VisibilityIcon />
         </IconButton>
+        <span className='viewCount'>{viewCount}</span>
       </CardActions>
     </Card>
   )

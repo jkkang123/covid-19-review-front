@@ -15,85 +15,6 @@ import CreateIcon from '@mui/icons-material/Create';
 import Box from '@mui/material/Box';
 import { SpeedDial } from '@mui/material';
 
-const MockData = [
-    {
-        title: '모더나 접종 후기글!',
-        vaccine: '모더나',
-        previewImage: '',
-        contents: '모더나 1차 금요일 17시 접종 당시 컨디션 굉장히 피곤하네요...'
-    },
-    {
-        title: '모더나 접종 후기글!',
-        vaccine: '모더나',
-        previewImage: '',
-        contents: '모더나 1차 금요일 17시 접종 당시 컨디션 굉장히 피곤하네요...'
-    },
-    {
-        title: '모더나 접종 후기글!',
-        vaccine: '모더나',
-        previewImage: '',
-        contents: '모더나 1차 금요일 17시 접종 당시 컨디션 굉장히 피곤하네요...'
-    },
-    {
-        title: '모더나 접종 후기글!',
-        vaccine: '모더나',
-        previewImage: '',
-        contents: '모더나 1차 금요일 17시 접종 당시 컨디션 굉장히 피곤하네요...'
-    }
-]
-
-const MockPostData = [
-  {
-    id: 0,
-    likeCount: 0,
-    ordinalNumber: 1,
-    thisUserLike: true,
-    title: '모더나 접종 후기글1',
-    vaccineType: 'MODERNA',
-    viewCount: 0,
-    writer: '강재규1'
-  },
-  {
-    id: 0,
-    likeCount: 0,
-    ordinalNumber: 1,
-    thisUserLike: true,
-    title: '모더나 접종 후기글2',
-    vaccineType: 'MODERNA',
-    viewCount: 0,
-    writer: '강재규2'
-  },
-  {
-    id: 0,
-    likeCount: 0,
-    ordinalNumber: 1,
-    thisUserLike: true,
-    title: '모더나 접종 후기글3',
-    vaccineType: 'MODERNA',
-    viewCount: 0,
-    writer: '강재규3'
-  },
-  {
-    id: 0,
-    likeCount: 0,
-    ordinalNumber: 1,
-    thisUserLike: true,
-    title: '모더나 접종 후기글4',
-    vaccineType: 'MODERNA',
-    viewCount: 0,
-    writer: '강재규4'
-  },
-  {
-    id: 0,
-    likeCount: 0,
-    ordinalNumber: 1,
-    thisUserLike: true,
-    title: '모더나 접종 후기글5',
-    vaccineType: 'MODERNA',
-    viewCount: 0,
-    writer: '강재규5'
-  }
-]
 
 const Review = () => {
   const [postData, setPostData] = useState([])
@@ -109,7 +30,15 @@ const Review = () => {
     try {
       const { data } = await axios.get('/post')
       setPostData(data?.pagingPostList)
-      console.log(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const onClickLikeButton = async (postId) => {
+    try{
+      await axios.patch(`/post/${postId}/like`)
+      getPost()
     } catch (error) {
       console.error(error)
     }
@@ -208,6 +137,10 @@ const Review = () => {
             previewImage={elem.postImageUrl}
             contents={elem.content}
             profileImageUrl={elem.writerProfileImageUrl}
+            likeCount={elem.likeCount}
+            viewCount={elem.viewCount}
+            thisUserLike={elem.thisUserLike}
+            onClickLike={() => {onClickLikeButton(elem.id)}}
           />
         )}
       </div>
