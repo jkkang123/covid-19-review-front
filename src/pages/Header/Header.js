@@ -37,7 +37,7 @@ export default function Header() {
         setLogin(false)
       }
         
-      if(userData.nickname !== '') {
+      if(userData.nickname) {
         setLogin(true)
       } else {
         setLogin(false)

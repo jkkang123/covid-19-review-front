@@ -3,6 +3,7 @@ import reducer from './commonReducer'
 
 import Cookies from 'js-cookie';
 import { persistReducer } from "redux-persist";
+import {removeCookies} from "components/core/util"
 import { transformCircular } from './ref/transformCircular'
 import { CookieStorage } from 'redux-persist-cookie-storage'
 
@@ -28,9 +29,7 @@ const reducers = combineReducers({
 const commonReducer = (state, action) => {
   if (action.type === 'LOGOUT') {
     window.localStorage.clear();
-    Cookies.remove('persist:root');
-    Cookies.remove('persist:common');
-    Cookies.remove('reduxPersistIndex');
+    removeCookies()
     return reducers(undefined, action)
   }
   return reducers(state, action)
