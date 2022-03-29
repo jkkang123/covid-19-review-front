@@ -35,6 +35,7 @@ export default function Profile({ nickName, size, profileImage }) {
 
     const clickLogout = () => {
         dispatch(logout())
+        navigate('/')
         navigate(0)
     }
 

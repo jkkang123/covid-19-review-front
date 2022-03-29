@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import axios from 'plugins/axios';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+import { isLogined } from "components/core/util";
 import './Popular.scss';
 
 export default function Popular() {
     const moment = require('moment');
     const [popularPost, setPopularPost] = useState([])
+    const [isLogin, setIsLogin] = useState(false)
 
     const getPopularPost = async () => {
         try {
@@ -21,6 +23,11 @@ export default function Popular() {
     }
 
     useEffect(() => {
+        if (isLogined()) {
+            setIsLogin(true)
+        } else {
+            setIsLogin(false)
+        }
         getPopularPost();
     }, [])
 
@@ -31,7 +38,7 @@ export default function Popular() {
             {
                 popularPost.map((el, i) => {
                     return(
-                        <Link to={`/review/${el.id}`} key={i}>
+                        <Link to={isLogin ? `/review/${el.id}` : '/'} key={i}>
                             <div className="popular_list split">
                                 <div className="img_body_box">
                                     <img src={el.postImageUrl} alt="이미지" />

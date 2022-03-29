@@ -10,13 +10,10 @@ import {useSelector} from "react-redux"
 import { isLogined } from "components/core/util";
 import CommonDialog  from 'components/common/common-dialog'
 
-const emails = ['username@gmail.com', 'user02@gmail.com'];
-
 export default function Header() {
     const [login, setLogin] = useState(true);
     const [open, setOpen] = useState(false);
-    const [user, setUser] = useState();
-    const [selectedValue, setSelectedValue] = useState(emails[1]);
+    const [selectedValue, setSelectedValue] = useState([]);
     const userData = useSelector((state) => state.common.user)
 
     // bell 클릭 이벤트 리스너
@@ -27,8 +24,6 @@ export default function Header() {
         setOpen(false);
         setSelectedValue(value);
     };
-
-    console.log(userData)
 
     useEffect(() => {
       if(isLogined()) {
@@ -48,8 +43,8 @@ export default function Header() {
         <div className="header">
             <div className="inner">
                 {/* 로고 박스 */}
-                <div className="logo_box">
-                    <img src="https://img.icons8.com/external-flatart-icons-solid-flatarticons/128/000000/external-covid-19-coronavirus-covid19-flatart-icons-solid-flatarticons.png"/>
+                <div className="logo_box" >
+                    <img alt='' src="https://img.icons8.com/external-flatart-icons-solid-flatarticons/128/000000/external-covid-19-coronavirus-covid19-flatart-icons-solid-flatarticons.png"/>
                 </div>
 
                 {/* 헤더 오른쪽 */}
@@ -86,7 +81,11 @@ export default function Header() {
                   }
 
                   {/* 네비게이션 바 */}
-                  <Drawer />
+                  {
+                      login === true ?
+                        <Drawer />
+                      : null
+                  }
                 </div>
             </div>
         </div>
