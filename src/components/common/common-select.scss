@@ -1,0 +1,29 @@
+@import '../../App.scss';
+
+.css-x6cekf-MuiAutocomplete-root .MuiInput-root{
+    padding:10px 0 !important;
+
+    // 칩
+    .css-8ow8ko-MuiButtonBase-root-MuiChip-root{
+        color:#fff;
+        border-radius:20px;
+    }
+    // 칩 1
+    .css-8ow8ko-MuiButtonBase-root-MuiChip-root:nth-child(1){
+        background-color: $pfizer;
+    }
+    // 칩 2
+    .css-8ow8ko-MuiButtonBase-root-MuiChip-root:nth-child(2){
+        background-color: $moderna;
+    }
+    // 칩 3
+    .css-8ow8ko-MuiButtonBase-root-MuiChip-root:nth-child(3){
+        background-color: $booster;
+    }
+}
+
+// 셀렉박스 호버 & 클릭
+.css-ghsjzk-MuiInputBase-root-MuiInput-root:after{
+    border-bottom: 2px solid $black !important;
+}
+

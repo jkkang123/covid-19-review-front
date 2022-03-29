@@ -1,0 +1,101 @@
+.post-wrapper{
+    .profile-wrapper{
+        display: inline-block;
+    }
+    .post-header{
+        border-bottom: 2px solid #E5E5E5;
+        .post-header-content{
+            padding: 20px;
+            .post-vaccine-type{
+                display: inline-block;
+                background-color: #FFCFD8;
+                width: 100px;
+                height: 20px;
+                padding: 5px 0;
+                text-align: center;
+                margin-right: 15px;
+            }
+            .post-title {
+                font-size: 20px;
+                font-weight: bold;
+            }
+            .post-header-right-content{
+                float: right;
+                .post-like {
+                    display: inline-block;
+                    .post-like-text {
+                        font-size: 18px;
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+    .post-contents{
+        padding: 20px;
+        border-bottom: 2px solid #E5E5E5;
+        .content {
+            padding: 20px 0;
+            white-space: pre-wrap;
+       }
+    }
+    .post-comment{
+        .comment-title{
+            padding: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .comment{
+            border-bottom: 2px solid #E5E5E5;
+        }
+        .comment,
+        .reply-comment{
+            padding: 20px;
+            .comment-right-cotent{
+                float: right;
+                .comment-icons{
+                    position: relative;
+                    top: 30px;
+                    left: 70px;
+                }
+            }
+            .comment-content{
+                padding: 10px 0 0 70px;
+                font-size: 18px;
+                white-space: pre-wrap;
+            }
+            .write-reply-comment{
+                padding: 20px;
+                .write-comment-content{
+                    .write-comment-text-field{
+                        width: 100%;
+                    }
+                    .write-comment-button{
+                        margin: 10px 0 ;
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+                }
+            }
+            .reply-comment-content {
+                position: relative;
+                left: 105px;
+                font-size: 18px;
+                white-space: pre-wrap;
+            }
+        }
+        .write-comment{
+            padding: 20px;
+            .write-comment-content{
+                .write-comment-text-field{
+                    width: 100%;
+                }
+                .write-comment-button{
+                    margin: 10px 0 ;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+        }
+    }
+}

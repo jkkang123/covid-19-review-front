@@ -1,0 +1,27 @@
+.doughnutCharts{
+    // 신규 & 누적
+    .center{
+        gap:30px;
+        margin-top:20px;
+
+        .body{
+            position: relative;
+
+            b{
+                margin-right:11px;
+            }
+        }
+
+        .body:after{
+            content: '';
+            position: absolute;
+            top:50%;
+            left:32px;
+            transform: translateY(-50%);
+            display: block;
+            width:1px;
+            height:10px;
+            background:#dbdbdb;
+        }
+    }
+}

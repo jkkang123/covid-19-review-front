@@ -1,0 +1,54 @@
+@import '../../App.scss';
+
+.header{
+    height:90px;
+    background:$main;
+
+    .inner{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height:100%;
+        padding:0;
+
+        /* 로고 박스 */
+        .logo_box{
+            width:50px;
+
+            img{
+                width:100%;
+            }
+        }
+
+        .header_right_box{
+            display: flex;
+            align-items: center;
+            
+            /* bell & profile */
+            .bell_profile_box{
+                display: flex;
+                align-items: center;
+                gap:20px;
+                
+                li{
+                    button > div{
+                        border-radius: 50%;
+                        border:1px solid #fff;
+                        box-shadow: 0 0 20px rgba(0,0,0,0.2);
+                    }
+                }
+            }
+
+            /* signin & login */
+            .signup_login_box{
+                display: flex;
+                align-items: center;
+                gap:20px;
+
+                li{
+
+                }
+            }
+        }
+    }
+}

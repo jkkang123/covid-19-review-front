@@ -1,17 +1,9 @@
-let nextTodoId = 0
-export const addTodo = text => ({
-  type: 'ADD_TODO',
-  id: nextTodoId++,
-  text
+export const saveUser = user => ({
+  type : "SAVE_USER",
+  payload: user
 })
 
-export const toggleTodo = id => ({
-  type: 'TOGGLE_TODO',
-  id
-})
+export const logout = () => ({
+  type : "LOGOUT"
+}) 
 
-export const VisibilityFilters = {
-  SHOW_ALL: 'SHOW_ALL',
-  SHOW_COMPLETED: 'SHOW_COMPLETED',
-  SHOW_ACTIVE: 'SHOW_ACTIVE'
-}

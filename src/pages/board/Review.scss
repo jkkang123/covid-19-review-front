@@ -1,0 +1,18 @@
+@import '../../App.scss';
+
+.review-page{
+    height: calc(100% - 94px);
+    .review-card-list{
+        display: flex;
+        flex-wrap: wrap;
+        .review-card{
+            margin: 10px
+        }
+    }
+}
+
+.common-dialog{
+    .MuiDialog-paper{
+        width: 600px
+    }
+}

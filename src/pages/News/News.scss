@@ -1,0 +1,26 @@
+@import '../../App.scss';
+
+.news{
+    .paper{
+        position: relative;
+        height:180px;
+
+        .subtitle{
+            padding-bottom:18px;
+            margin-bottom:18px;
+            border-bottom:1px solid #eee;
+        }
+
+        .split{
+            position: absolute;
+            bottom:25px;
+            left:33px;
+            width:88%;
+            margin-top:50px;
+
+            .arrow{
+                margin-left:5px;
+            }
+        }
+    }
+}

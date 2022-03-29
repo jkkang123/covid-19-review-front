@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from 'redux-thunk'
-import reducers from './reducers'
+import reducers from './Reducers'
 import { createLogger } from "redux-logger";
 import { persistStore } from "redux-persist";
 
@@ -17,5 +17,3 @@ if (env !== 'development') {
 export const store = tempStore;
 
 export const persistor = persistStore(store);
-
-export default { store, persistor };
