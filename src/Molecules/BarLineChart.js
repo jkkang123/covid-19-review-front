@@ -40,7 +40,7 @@ const BarLineChart = () => {
                 let decideCntArr = [];
                 let deathCntArr = [];
                 let newDecideCntArr = [];
-                for(let i=0; i<8; i++){
+                for(let i=0; i<xml.children[1].children[0].children.length; i++){
                   decideCntArr.unshift(xml.children[1].children[0].children[i].children[2].value);
                   deathCntArr.unshift(xml.children[1].children[0].children[i].children[1].value);
                 }
