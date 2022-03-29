@@ -41,6 +41,8 @@ export default function TemporaryDrawer() {
         return '/chat'
       case '백신패스 Q & A':
         return '/faq'
+      default :
+        return true
     }
   }
 
@@ -57,6 +59,8 @@ export default function TemporaryDrawer() {
         return <ChatBubbleRoundedIcon color="primary"/>
       case '백신패스 Q & A':
         return <LiveHelpRoundedIcon color="primary"/>
+      default :
+        return true
     }
   }
 

@@ -134,7 +134,7 @@ export default function Signup() {
         }
     }
     const passValidation = (newValue) => {
-        let check = /^(?:(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])|(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-])|(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])).{8,16}$/; 
+        let check = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^*()_+~`=\{\}\[\]|\:;"',.?/\-<>\&\\])(?!.*?[\sㄱ-ㅎㅏ-ㅣ가-힣]).{1,}$/; 
         if (check.test(newValue)) {
             setPasswordValid(false);
         } else{
@@ -331,24 +331,6 @@ export default function Signup() {
                                     error={ passConfirmValid }  
                                     helperText={ passConfirmValid ? "비밀번호와 다릅니다." : "" } 
                                 />
-
-                                {/* 백신 정보 인증 버튼 */}
-                                <Button
-                                    href="#"
-                                    variant="contained"
-                                    color="primary"
-                                    size="large"
-                                    style={{
-                                        marginTop:'20px',
-                                    }}
-                                >
-                                    백신 정보 인증
-                                </Button>
-
-                                {/* 이메일 수신 동의 체크박스 */}
-                                <FormGroup>
-                                    <FormControlLabel control={<Checkbox defaultChecked />} label="이메일 수신 동의" />
-                                </FormGroup>
                             </Grid>
                         </Grid>
                     </DialogContent>
