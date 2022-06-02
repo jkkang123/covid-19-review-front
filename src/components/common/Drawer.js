@@ -37,6 +37,10 @@ export default function TemporaryDrawer() {
         return '/review'
       case '뉴스':
         return '/news'
+      case '채팅':
+        return '/chat'
+      case '백신패스 Q & A':
+        return '/faq'
       default :
         return true
     }
@@ -51,6 +55,10 @@ export default function TemporaryDrawer() {
         return <RateReviewRoundedIcon color="primary"/>
       case '뉴스':
         return <ArticleRoundedIcon color="primary"/>
+      case '채팅':
+        return <ChatBubbleRoundedIcon color="primary"/>
+      case '백신패스 Q & A':
+        return <LiveHelpRoundedIcon color="primary"/>
       default :
         return true
     }
@@ -64,7 +72,7 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['홈', '접종 후기', '뉴스'].map((text, index) => (
+        {['홈', '접종 후기', '뉴스', '채팅', '백신패스 Q & A'].map((text, index) => (
           <Link to={ linkToSelector(text) } key={index} className="link">
             <ListItem button key={text}>
               <ListItemIcon>

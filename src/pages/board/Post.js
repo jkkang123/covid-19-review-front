@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'plugins/axios'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Profile from 'Molecules/Profile';
-import UploadReview from './components/UploadReview';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ReplyIcon from '@mui/icons-material/Reply';
 import ReplyIconPng from 'assets/icons/reply-icon.png'
 import {useSelector} from "react-redux"
@@ -34,10 +31,7 @@ const Post = () => {
   const [repleyTextVal, setReplyTextVal] = useState('')
   const [isClickedReply, setIsClickedReply] = useState(false)
   const [replyCommentId, setReplyCommentId] = useState('')
-  const [isModify, setIsModify] = useState(false)
   const userData = useSelector((state) => state.common.user)
-
-  const navigate = useNavigate()
 
   const getPost = async () => {
     try {
@@ -47,24 +41,6 @@ const Post = () => {
     } catch (error) {
       console.error(error)
     }
-  }
-
-  const isPostModify = (state) => {
-    setIsModify(state)
-  }
-
-  const deletePost = async () => {
-    try {
-      await axios.delete(`/post/${getPostId()}`)
-      navigate('/review')
-    } catch (error){
-      console.log(error)
-    }
-  }
- 
-  const getPostId = () => {
-    const arr = window.location.href.split('/')
-    return Number(arr[arr.length-1])
   }
 
   const sortOutVaccineType = (vaccine) => {
@@ -102,15 +78,6 @@ const Post = () => {
       setCommentTextVal('')
     } catch (error){
       console.error(error)
-    }
-  }
-
-  const deleteComment = async (commentId) => {
-    try {
-      await axios.delete(`/post/${getPostId()}/comment/${commentId}`)
-      getComment()
-    } catch(error) {
-      console.log(error)
     }
   }
 
@@ -163,7 +130,6 @@ const Post = () => {
           </div>
         </div>
       </div>
-      <UploadReview isDialog={isModify} postId={getPostId} isModify={true} changeDialogState={isPostModify} title={postData.title} content={postData.content}/>
       <div className='post-contents'>
         <div className='content'>{postData.content}</div>
         <div className='images'>
@@ -172,14 +138,6 @@ const Post = () => {
             <img src={elem} key={index} style={{width:200, height:200, objectFit:'cover'}} alt=''/>
           )}
         </div>
-        {
-          userData.nickname === postData.writer ?
-          <div className='post-modify'>
-            <IconButton aria-label="edit" onClick={() => setIsModify(true)}><EditIcon/></IconButton>
-            <IconButton aria-label="DeleteForever" onClick={deletePost}><DeleteForeverIcon/></IconButton>
-          </div>
-          : null
-        }
       </div>
       <div className='post-comment'>
         <div className='comment-title'>{`댓글(${commentData?.children ? commentData?.children + commentData?.length : commentData?.length})`}</div>
@@ -200,13 +158,6 @@ const Post = () => {
                 <IconButton aria-label="reply" onClick={() => {setIsClickedReply(!isClickedReply); setReplyCommentId(elem.id)}}>
                   <ReplyIcon/>
                 </IconButton>
-                {
-                  userData.nickname === elem.writer ?
-                  <>
-                    <IconButton aria-label="DeleteForever" onClick={() => deleteComment(elem.id)}><DeleteForeverIcon/></IconButton>
-                  </>
-                  : null
-                }
               </div>
             </div>
             <div className='comment-content'>{elem.content}</div>
@@ -226,13 +177,6 @@ const Post = () => {
                       : <IconButton aria-label="thumbUpOff" onClick={() => likeComment(item.id)}><ThumbUpOffAltIcon/></IconButton>
                       }
                       <span>{item.likeCount ? item.likeCount : ''}</span>
-                      {
-                        userData.nickname === item.writer ?
-                        <>
-                          <IconButton aria-label="DeleteForever" onClick={() => deleteComment(item.id)}><DeleteForeverIcon/></IconButton>
-                        </>
-                        : null
-                      }
                     </div>
                   </div>
                   <div className='reply-comment-content'>{item.content}</div>
